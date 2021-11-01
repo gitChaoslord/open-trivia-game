@@ -22,16 +22,16 @@ const quizSlice = createSlice({
     name: 'quiz',
     initialState,
     reducers: {
-        fetchQuestionsSuccess(state, action) {
+        fetchQuestionsSuccess(state, action): void {
             state.questions = action.payload;
             state.score = 0;
             state.currentQuestionIndex = 0;
             state.answers = [];
         },
-        fetchQuestionsFail(state, action) {
+        fetchQuestionsFail(state, action): void {
             state.error = action.payload;
         },
-        answerQuestion(state, action) {
+        answerQuestion(state, action): void {
             const currentQuestion = state.questions[state.currentQuestionIndex];
 
             state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
@@ -43,7 +43,7 @@ const quizSlice = createSlice({
                 is_correct: action.payload.answer === currentQuestion.correct_answer
             });
         },
-        nextQuestion(state, action) {
+        nextQuestion(state, action): void {
             state.currentQuestionIndex += 1;
         }
     },

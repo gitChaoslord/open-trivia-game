@@ -3,7 +3,6 @@ import createSagaMiddleware from "@redux-saga/core";
 import rootReducer from './reducer';
 import rootSaga from './saga';
 
-// TODO: add interface if needed
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({

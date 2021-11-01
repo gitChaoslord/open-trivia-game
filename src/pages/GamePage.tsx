@@ -37,9 +37,9 @@ const GamePage: FC = () => {
     return (
         <>
             <div className="flex flex-col items-center relative">
-                <p className="h-20 w-20 flex justify-center items-center border-8 border-purple-500 rounded-full my-4 text-3xl text-purple-500">{timeLeft}</p>
-                <p className="absolute top-4 left-4 text-2xl text-purple-500">{score}</p>
-                <p className="absolute top-4 right-4 text-2xl text-purple-500">{currentQuestionIndex}/10 </p>
+                <p className="h-20 w-20 flex justify-center items-center border-8 border-indigo-500 rounded-full my-4 text-3xl text-indigo-500">{timeLeft}</p>
+                <p className="absolute top-4 left-4 text-2xl text-indigo-500">{score}</p>
+                <p className="absolute top-4 right-4 text-2xl text-indigo-500">{currentQuestionIndex}/10 </p>
                 <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="p-7 bg-white rounded shadow"></p>
                 <div className="flex justify-between w-96 mt-8">
                     <Button onClick={() => {
