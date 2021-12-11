@@ -1,16 +1,16 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { RootStateOrAny } from 'react-redux'
 import { useDispatch, useSelector } from 'react-redux';
-import { restartGame } from '../store/slices/gameInit';
+// import { restartGame } from '../store/slices/gameInit';
 import Button from '../components/Button';
 import { Answer } from '../models/Answer';
 
-const EndGamePage: FC = () => {
+const ScorePage: React.FC = () => {
     const dispatch = useDispatch();
     const answers: Answer[] = useSelector((state: RootStateOrAny) => state.quiz.answers);
     const score: number = useSelector((state: RootStateOrAny) => state.quiz.score);
     const restartHandler = (): void => {
-        dispatch(restartGame({}));
+        // dispatch(restartGame({}));
     };
 
     return (
@@ -30,4 +30,4 @@ const EndGamePage: FC = () => {
         </div>
     )
 }
-export default EndGamePage
+export default ScorePage

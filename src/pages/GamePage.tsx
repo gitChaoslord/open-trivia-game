@@ -2,8 +2,8 @@ import React, { useState, useEffect, FC } from 'react';
 import { RootStateOrAny } from 'react-redux';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { answerQuestion } from '../store/slices/game';
-import { finishGame } from '../store/slices/gameInit';
+// import { answerQuestion } from '../store/slices/game';
+// import { finishGame } from '../store/slices/gameInit';
 import Button from '../components/Button';
 
 const GamePage: FC = () => {
@@ -18,11 +18,11 @@ const GamePage: FC = () => {
     const currentQuestionIndex: number = useSelector((state: RootStateOrAny) => state.quiz.currentQuestionIndex);
 
     const answerHandler = (answer: 'True' | 'False'): void => {
-        dispatch(answerQuestion({ answer }));
+        // dispatch(answerQuestion({ answer }));
     }
 
     const endGameHandler = (): void => {
-        dispatch(finishGame({}));
+        // dispatch(finishGame({}));
     }
 
     useEffect(() => {
