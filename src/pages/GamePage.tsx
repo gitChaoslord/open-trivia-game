@@ -1,6 +1,5 @@
 import React from 'react';
 import { RootStateOrAny } from 'react-redux';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { answerQuestion, nextQuestion } from '../store/features/quiz';
 import Button from '../components/Button';
@@ -30,15 +29,12 @@ const GamePage: React.FC = () => {
     React.useEffect(() => {
         const interval = setInterval(() => {
             // TODO: Dynamic Time in future
-            setTimeLeft(prev => prev - 1);
-            if (timeLeft <= 0) {
-                dispatch(finishGame({}));
-            }
+            timeLeft <= 0 ? dispatch(finishGame({})) : setTimeLeft(prev => prev - 1);
         }, 1000);
         return () => {
             clearInterval(interval);
         }
-    }, []);
+    }, [timeLeft]);
 
     return (
         <React.Fragment>

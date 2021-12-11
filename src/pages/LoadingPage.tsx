@@ -8,8 +8,6 @@ import { fetchQuestionsFail, fetchQuestionsSuccess } from '../store/features/qui
 const LoadingPage: React.FC = () => {
     const apiUrl = 'https://opentdb.com/api.php?amount=10&type=boolean';
     const dispatch = useDispatch();
-    const [loading, setLoading] = React.useState<Boolean>(true);
-
 
     const getQuestionsFromApi = async () => {
         await fetch(apiUrl).then(res => res.json()).then(
@@ -23,26 +21,21 @@ const LoadingPage: React.FC = () => {
                 dispatch(fetchQuestionsFail({ error: 'Something went wrong' }));
             }
         );
-        setLoading(false);
     }
 
-    // TODO: Incorrent logic here
     React.useEffect(() => {
-        if (loading) {
-            getQuestionsFromApi();
-        }
+        getQuestionsFromApi();
     }, [])
 
+    // TODO: bug, pressing cancel doesnt cancel the promise aka, you get transfered to game page when it completes
     return (
         <div className="flex flex-col justify-center items-center mt-80">
-            {loading ? <div className="w-16 h-16 bg-indigo-500 rounded-full flex justify-center items-center mb-12">
+            <div className="w-16 h-16 bg-indigo-500 rounded-full flex justify-center items-center mb-12">
                 <div className=" w-12 h-12 bg-indigo-200 rounded-full animate-bounce"></div>
-            </div> : null}
-
+            </div>
             <Button onClick={() => {
-                dispatch(cancelGame({})); // TODO: feels wrong to pass empty object
+                dispatch(cancelGame({}));
             }}>Cancel</Button>
-
         </div>
     )
 }
