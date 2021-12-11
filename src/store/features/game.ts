@@ -9,6 +9,7 @@ interface GameState {
   }
 }
 
+// TODO: rename and consolidate functions 
 const initialState: GameState = {
   value: {
     stage: 'START_GAME',
@@ -24,6 +25,9 @@ const gameSlice: Slice = createSlice({
     },
     cancelGame: (state, action) => {
       state.value.stage = 'START_GAME';
+    },
+    moveToGame: (state, action) => {
+      state.value.stage = 'GAME';
     },
     finishGame: (state, action) => {
       state.value.stage = 'END_GAME';
@@ -43,5 +47,5 @@ const gameSlice: Slice = createSlice({
   }
 });
 
-export const { startGame, cancelGame, restartGame, finishGame } = gameSlice.actions;
+export const { startGame, cancelGame, restartGame, finishGame, moveToGame } = gameSlice.actions;
 export default gameSlice.reducer;

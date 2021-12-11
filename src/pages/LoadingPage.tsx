@@ -1,19 +1,35 @@
 import React from 'react';
-import { cancelGame } from '../store/features/game';
+import { cancelGame, moveToGame } from '../store/features/game';
 import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
+import { fetchQuestionsFail, fetchQuestionsSuccess } from '../store/features/quiz';
+
 
 const LoadingPage: React.FC = () => {
-
+    const apiUrl = 'https://opentdb.com/api.php?amount=10&type=boolean';
     const dispatch = useDispatch();
-    const [loading, isLoading] = React.useState<Boolean>(true);
+    const [loading, setLoading] = React.useState<Boolean>(true);
+
+
+    const getQuestionsFromApi = async () => {
+        await fetch(apiUrl).then(res => res.json()).then(
+            questions => {
+                dispatch(fetchQuestionsSuccess({ ...questions.results }));
+                dispatch(moveToGame({}));
+            }
+        ).catch(
+            error => {
+                Promise.reject(error)
+                dispatch(fetchQuestionsFail({ error: 'Something went wrong' }));
+            }
+        );
+        setLoading(false);
+    }
 
     React.useEffect(() => {
-
         if (loading) {
-            console.log(loading);
+            getQuestionsFromApi();
         }
-
     }, [loading])
 
     return (
