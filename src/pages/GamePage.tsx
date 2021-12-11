@@ -13,11 +13,9 @@ const GamePage: React.FC = () => {
 
     const answerHandler = (answer: 'True' | 'False'): void => {
         // TODO: Dynamic index
-        if (currentQuestionIndex < 9) {
-            dispatch(answerQuestion({ answer }));
-            dispatch(nextQuestion({}));
-        }
-        else {
+        dispatch(answerQuestion({ answer }));
+        dispatch(nextQuestion({}));
+        if (currentQuestionIndex === 9) {
             dispatch(finishGame({}));
         }
     }
@@ -41,7 +39,7 @@ const GamePage: React.FC = () => {
         <React.Fragment>
             <div className="flex flex-col items-center relative">
                 <p className="h-20 w-20 flex justify-center items-center border-8 border-indigo-500 rounded-full my-4 text-3xl text-indigo-500">{timeLeft}</p>
-                <p className="absolute top-4 right-4 text-2xl text-indigo-500">{currentQuestionIndex}/10 </p>
+                <p className="absolute top-4 right-4 text-2xl text-indigo-500">{currentQuestionIndex + 1}/10 </p>
                 <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="mx-2 p-7 bg-white rounded shadow"></p>
                 <div className="flex justify-between w-96 mt-8">
                     <Button onClick={() => {
