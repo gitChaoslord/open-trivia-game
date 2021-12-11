@@ -7,7 +7,7 @@ const InitialPage: React.FC = () => {
     const dispatch = useDispatch();
 
     // TODO: add more api Options for trivia
-    const startGameHandler = (): void => {
+    const startGameHandler = (e: React.MouseEvent): void => {
         dispatch(startGame({ stage: "FETCHING_GAME" }));
     }
 

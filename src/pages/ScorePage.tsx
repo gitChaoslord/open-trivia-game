@@ -9,7 +9,7 @@ const ScorePage: React.FC = () => {
     const dispatch = useDispatch();
     const answers: Answer[] = useSelector((state: RootStateOrAny) => state.quiz.value.answers);
     const score: number = useSelector((state: RootStateOrAny) => state.quiz.value.score);
-    const restartHandler = (): void => {
+    const restartHandler = (e: React.MouseEvent): void => {
         dispatch(restartGame({}));
     };
 
