@@ -47,7 +47,10 @@ const quizSlice: Slice = createSlice({
       });
     },
     nextQuestion: (state, action) => {
-      state.value.currentQuestionIndex += 1;
+      // TODO: Dynamic index
+      if (state.value.currentQuestionIndex < 9) {
+        state.value.currentQuestionIndex += 1;
+      }
     }
   }
 });

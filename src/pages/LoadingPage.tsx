@@ -26,11 +26,12 @@ const LoadingPage: React.FC = () => {
         setLoading(false);
     }
 
+    // TODO: Incorrent logic here
     React.useEffect(() => {
         if (loading) {
             getQuestionsFromApi();
         }
-    }, [loading])
+    }, [])
 
     return (
         <div className="flex flex-col justify-center items-center mt-80">
