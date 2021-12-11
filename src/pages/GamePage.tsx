@@ -26,6 +26,7 @@ const GamePage: React.FC = () => {
         dispatch(finishGame({}));
     }
 
+    // TODO: save timer to state
     React.useEffect(() => {
         const interval = setInterval(() => {
             // TODO: Dynamic Time in future

@@ -5,7 +5,7 @@ import Button from '../components/Button';
 
 const InitialPage: React.FC = () => {
     const dispatch = useDispatch();
-
+    // TODO: localstorage update, when you visit the initial link, you should be able to start a new game instead of loading the storage
     // TODO: add more api Options for trivia
     const startGameHandler = (e: React.MouseEvent): void => {
         dispatch(startGame({ stage: "FETCHING_GAME" }));

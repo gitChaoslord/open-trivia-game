@@ -11,7 +11,7 @@ export const loadState = () => {
     }
 }
 
-
+// TODO: add a throttle function from lodash to limit localstorage actions or look for alternatives
 export const saveState = (state: any) => {
     try {
         const serializedState = JSON.stringify(state);

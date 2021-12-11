@@ -27,7 +27,7 @@ const LoadingPage: React.FC = () => {
         getQuestionsFromApi();
     }, [])
 
-    // TODO: bug, pressing cancel doesnt cancel the promise aka, you get transfered to game page when it completes
+    // TODO: bug, pressing cancel transfers you to the game page when the promise is completed
     return (
         <div className="flex flex-col justify-center items-center mt-80">
             <div className="w-16 h-16 bg-indigo-500 rounded-full flex justify-center items-center mb-12">
