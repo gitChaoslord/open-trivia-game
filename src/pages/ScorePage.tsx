@@ -14,7 +14,7 @@ const ScorePage: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="page-content">
             <h1 className="text-4xl text-indigo-500 my-4">Game Over</h1>
             <p className="text-2xl mb-4 ">Your score was <span className="text-indigo-400">{score}</span>/10</p>
             <Button onClick={restartHandler}>Restart game</Button>

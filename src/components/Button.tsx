@@ -1,13 +1,13 @@
-import React, { FC, MouseEventHandler } from 'react';
+import React from 'react';
 
 interface ButtonProps {
     children: React.ReactNode;
-    onClick: MouseEventHandler;
+    onClick: React.MouseEventHandler;
     type?: string;
     addClassNames?: string;
 };
 
-const Button: FC<ButtonProps> = ({ children, onClick, type, addClassNames }) => {
+const Button: React.FC<ButtonProps> = ({ children, onClick, type, addClassNames }) => {
     let color = 'indigo';
     if (type === 'error') color = 'red';
     return (

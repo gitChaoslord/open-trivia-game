@@ -37,11 +37,11 @@ const GamePage: React.FC = () => {
 
     return (
         <React.Fragment>
-            <div className="flex flex-col items-center relative">
-                <p className="h-20 w-20 flex justify-center items-center border-8 border-indigo-500 rounded-full my-4 text-3xl text-indigo-500">{timeLeft}</p>
-                <p className="absolute top-4 right-4 text-2xl text-indigo-500">{currentQuestionIndex + 1}/10 </p>
+            <div className="page-content relative">
+                <p className="timer-container">{timeLeft}</p>
+                <p className="question-counter">{currentQuestionIndex + 1}/10 </p>
                 <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="mx-2 p-7 bg-white rounded shadow"></p>
-                <div className="flex justify-between w-96 mt-8">
+                <div className="action-container-boolean mt-8">
                     <Button onClick={() => {
                         answerHandler('True');
                     }}>True</Button>

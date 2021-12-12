@@ -29,9 +29,9 @@ const LoadingPage: React.FC = () => {
 
     // TODO: bug, pressing cancel transfers you to the game page when the promise is completed
     return (
-        <div className="flex flex-col justify-center items-center mt-80">
-            <div className="w-16 h-16 bg-indigo-500 rounded-full flex justify-center items-center mb-12">
-                <div className=" w-12 h-12 bg-indigo-200 rounded-full animate-bounce"></div>
+        <div className="page-content mt-80">
+            <div className="loading-container mb-12">
+                <div className="loading-indicator"></div>
             </div>
             <Button onClick={() => {
                 dispatch(cancelGame({}));

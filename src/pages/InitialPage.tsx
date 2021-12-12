@@ -12,7 +12,7 @@ const InitialPage: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center mt-80">
+        <div className="page-content mt-80">
             <span> select values yada yada</span>
             <Button onClick={startGameHandler}>Start Game</Button>
         </div>
