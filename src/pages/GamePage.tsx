@@ -37,7 +37,7 @@ const GamePage: React.FC = () => {
 
     return (
         <React.Fragment>
-            <div className="page-content relative">
+            <div className="page-content relative flex-grow overflow-hidden">
                 <p className="timer-container">{timeLeft}</p>
                 <p className="question-counter">{currentQuestionIndex + 1}/10 </p>
                 <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="mx-2 p-7 bg-white rounded shadow"></p>
@@ -50,7 +50,7 @@ const GamePage: React.FC = () => {
                     }}>False</Button>
                 </div>
             </div>
-            <div className="absolute bottom-4 right-4">
+            <div className="absolute bottom-16 right-4">
                 <Button onClick={endGameHandler} type='error'>Quit game</Button>
             </div>
         </React.Fragment>

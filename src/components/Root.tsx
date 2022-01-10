@@ -1,10 +1,11 @@
 import React from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import InitialPage from '../pages/InitialPage';
 import ScorePage from '../pages/ScorePage';
 import GamePage from '../pages/GamePage';
 import LoadingPage from '../pages/LoadingPage';
+import MainLayout from '../layouts/Main';
 
 
 export const Root: React.FC = () => {
@@ -32,7 +33,7 @@ export const Root: React.FC = () => {
 
   return <React.Fragment>
     <Routes>
-      <Route path='' element={<GameComponent />}>
+      <Route path='' element={<MainLayout />}>
         <Route path='' element={<InitialPage />} />
         <Route path='/loading' element={<LoadingPage />} />
         <Route path='/play' element={<GamePage />} />
@@ -40,8 +41,4 @@ export const Root: React.FC = () => {
       </Route>
     </Routes>
   </React.Fragment>
-}
-
-const GameComponent = () => {
-  return <Outlet />
 }

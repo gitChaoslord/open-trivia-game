@@ -12,7 +12,7 @@ const InitialPage: React.FC = () => {
     }
 
     return (
-        <div className="page-content mt-20">
+        <div className="page-content">
             <h1 className="text-4xl text-indigo-500 text-center">Current settings</h1>
             <div className="lg:w-auto  border-b-2 text-lg border-indigo-500 flex justify-between bg-white my-6 rounded ">
                 <ul className="p-5">

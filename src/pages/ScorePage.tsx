@@ -14,11 +14,11 @@ const ScorePage: React.FC = () => {
     };
 
     return (
-        <div className="page-content">
+        <div className="page-content overflow-y-hidden">
             <h1 className="text-4xl text-indigo-500 my-4">Game Over</h1>
             <p className="text-2xl mb-4 ">Your score was <span className="text-indigo-400">{score}</span>/10</p>
             <Button onClick={restartHandler}>Restart game</Button>
-            <div className="mt-4 p-4">
+            <div className="mt-4 p-4 block overflow-y-scroll">
                 {answers.map((answer: Answer, index: number) => (
                     <div key={`question-${index}`} className="border-b-2 text-lg border-indigo-500 flex justify-between bg-white mb-2 rounded px-1">
                         <p className="p-3 mr-2" dangerouslySetInnerHTML={{ __html: answer.question }}></p>

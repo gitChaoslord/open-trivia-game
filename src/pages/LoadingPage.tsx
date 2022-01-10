@@ -29,7 +29,7 @@ const LoadingPage: React.FC = () => {
 
     // TODO: bug, pressing cancel transfers you to the game page when the promise is completed
     return (
-        <div className="page-content mt-80">
+        <div className="page-content">
             <div className="loading-container mb-12">
                 <div className="loading-indicator"></div>
             </div>
