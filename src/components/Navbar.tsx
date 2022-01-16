@@ -1,6 +1,5 @@
 import React from 'react';
 
-// TODO: make fixed for mobile phones
 export const Navbar: React.FC = () => {
     return (
         <header className="bg-indigo-500 sticky top-0">

@@ -1,7 +1,6 @@
 import React from 'react';
-import { cancelGame, moveToGame } from '../store/features/game';
+import { moveToGame } from '../store/features/game';
 import { useDispatch } from 'react-redux';
-import Button from '../components/Button';
 import { fetchQuestionsFail, fetchQuestionsSuccess } from '../store/features/quiz';
 
 
@@ -33,9 +32,6 @@ const LoadingPage: React.FC = () => {
             <div className="loading-container mb-12">
                 <div className="loading-indicator"></div>
             </div>
-            <Button onClick={() => {
-                dispatch(cancelGame({}));
-            }}>Cancel</Button>
         </div>
     )
 }
