@@ -17,7 +17,7 @@ const ScorePage: React.FC = () => {
         <div className="page-content overflow-y-hidden">
             <h1 className="text-4xl text-indigo-500 my-4">Game Over</h1>
             <p className="text-2xl mb-4 ">Your score was <span className="text-indigo-400">{score}</span>/10</p>
-            <Button onClick={restartHandler}>Restart game</Button>
+            <Button addClassNames="btn-primary" onClick={restartHandler}>Restart game</Button>
             {answers.length !== 0 && (
                 <div className="mt-4 p-4 block overflow-y-scroll">
                     {answers.map((answer: Answer, index: number) => (

@@ -32,4 +32,16 @@
   .action-container-multi {
 
   }
+
+  .btn {
+   @apply focus:outline-none py-3 px-6 text-white shadow rounded
+  }
+
+  .btn-primary {
+    @apply bg-indigo-500 hover:bg-indigo-700;
+  }
+
+  .btn-error {
+    @apply bg-red-500 hover:bg-red-700;
+  }
 }

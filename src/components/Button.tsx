@@ -3,15 +3,14 @@ import React from 'react';
 interface ButtonProps {
     children: React.ReactNode;
     onClick: React.MouseEventHandler;
-    type?: string;
+    type?: 'submit' | 'button';
     addClassNames?: string;
+    disabled?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, type, addClassNames }) => {
-    let color = 'indigo';
-    if (type === 'error') color = 'red';
+const Button: React.FC<ButtonProps> = ({ children, onClick, type, addClassNames, disabled }) => {
     return (
-        <button onClick={onClick} className={`bg-${color}-500 hover:bg-${color}-700 focus:outline-none py-3 px-6 text-white shadow rounded ${addClassNames}`}>
+        <button onClick={onClick} type={type ? type : 'button'} disabled={disabled} className={`btn ${addClassNames}`}>
             {children}
         </button>
     );

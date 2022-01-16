@@ -42,16 +42,16 @@ const GamePage: React.FC = () => {
                 <p className="question-counter">{currentQuestionIndex + 1}/10 </p>
                 <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="mx-2 p-7 bg-white rounded shadow"></p>
                 <div className="action-container-boolean mt-8">
-                    <Button onClick={() => {
+                    <Button addClassNames="btn-primary" onClick={() => {
                         answerHandler('True');
                     }}>True</Button>
-                    <Button onClick={() => {
+                    <Button addClassNames="btn-primary" onClick={() => {
                         answerHandler('False');
                     }}>False</Button>
                 </div>
             </div>
             <div className="absolute bottom-16 right-4">
-                <Button onClick={endGameHandler} type='error'>Quit game</Button>
+                <Button addClassNames="btn-error" onClick={endGameHandler}>Quit game</Button>
             </div>
         </React.Fragment>
     )

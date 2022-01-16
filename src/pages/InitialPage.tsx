@@ -23,7 +23,7 @@ const InitialPage: React.FC = () => {
                     <li>Time: <span className="text-indigo-500">60 sec.</span></li>
                 </ul>
             </div>
-            <Button onClick={startGameHandler}>Start Game</Button>
+            <Button onClick={startGameHandler} addClassNames="btn-primary">Start Game</Button>
         </div>
     )
 }
