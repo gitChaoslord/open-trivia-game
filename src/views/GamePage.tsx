@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import { RootState, useAppSelector } from '../store';
-import { finishGame } from '../store/features/game';
+import { setStage } from '../store/features/game';
 import { answerQuestion, nextQuestion } from '../store/features/quiz';
 
 const GamePage: React.FC = () => {
@@ -15,23 +15,23 @@ const GamePage: React.FC = () => {
         dispatch(answerQuestion({ answer }));
         dispatch(nextQuestion({}));
         if (currentQuestionIndex === 9) {
-            dispatch(finishGame({}));
+            dispatch(setStage('END'));
         }
     }
 
     const endGameHandler = (e: React.MouseEvent): void => {
-        dispatch(finishGame({}));
+        dispatch(setStage('END'));
     }
 
     // TODO: save timer to state
     React.useEffect(() => {
         const interval = setInterval(() => {
-            timeLeft <= 0 ? dispatch(finishGame({})) : setTimeLeft(prev => prev - 1);
+            timeLeft <= 0 ? dispatch(setStage('END')) : setTimeLeft(prev => prev - 1);
         }, 1000);
         return () => {
             clearInterval(interval);
         }
-    }, [timeLeft]);
+    }, [timeLeft, dispatch]);
 
     return (
         <React.Fragment>

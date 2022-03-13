@@ -3,13 +3,14 @@ import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import { Answer } from '../models/Quiz';
 import { RootState, useAppSelector } from '../store';
-import { restartGame } from '../store/features/game';
+import { setStage } from '../store/features/game';
+
 
 const ScorePage: React.FC = () => {
     const dispatch = useDispatch();
     const { answers, score } = useAppSelector((state: RootState) => state.quiz);
     const restartHandler = (e: React.MouseEvent): void => {
-        dispatch(restartGame({}));
+        dispatch(setStage('INIT'));
     };
 
     return (

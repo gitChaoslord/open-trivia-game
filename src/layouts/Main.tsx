@@ -1,13 +1,19 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer';
 import { Navbar } from '../components/Navbar';
+import { RootState, useAppSelector } from '../store';
+import GamePage from '../views/GamePage';
+import InitialPage from '../views/InitialPage';
+import ScorePage from '../views/ScorePage';
 
 const MainLayout: React.FC = () => {
+  const { stage } = useAppSelector((state: RootState) => state.game);
   return (
     <React.Fragment>
       <Navbar />
-      <Outlet />
+      {stage === 'INIT' && <InitialPage />}
+      {stage === 'GAME' && <GamePage />}
+      {stage === 'END' && <ScorePage />}
       <Footer />
     </React.Fragment>
   )

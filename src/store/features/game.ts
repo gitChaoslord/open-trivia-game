@@ -1,16 +1,13 @@
-import { createSlice, Slice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { GameSettings, Stage } from "../../models/Game";
-import { fetchQuestionsFail, fetchQuestionsSuccess } from "./quiz";
-
 
 export interface GameState {
   stage: Stage;
   settings: GameSettings;
 }
 
-// TODO: rename and consolidate functions 
 const initialState: GameState = {
-  stage: 'START_GAME',
+  stage: 'INIT',
   settings: {
     questions: 10,
     difficulty: 'any',
@@ -18,40 +15,28 @@ const initialState: GameState = {
     type: 'all'
   }
 }
-// TODO: types from page https://redux-toolkit.js.org/api/createslice
+
 const gameSlice: Slice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    startGame: (state: GameState, action) => {
-      state.stage = 'FETCHING_GAME';
+    setStage: (state: GameState, action: PayloadAction<Stage>) => {
+      state.stage = action.payload;
     },
-    cancelGame: (state: GameState, action) => {
-      state.stage = 'START_GAME';
-    },
-    moveToGame: (state: GameState, action) => {
-      state.stage = 'GAME';
-    },
-    finishGame: (state: GameState, action) => {
-      state.stage = 'END_GAME';
-    },
-    restartGame: (state: GameState, action) => {
-      state.stage = 'START_GAME';
-    },
-    setSettings: (state: GameState, action) => {
+    setSettings: (state: GameState, action: PayloadAction<GameSettings>) => {
       state.settings = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchQuestionsSuccess, (state: GameState, action) => {
-        state.stage = 'START_GAME'
-      })
-      .addCase(fetchQuestionsFail, (state: GameState, action) => {
-        state.stage = 'START_GAME';
-      })
-  }
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(fetchQuestionsSuccess, (state: GameState, action) => {
+  //       state.stage = 'START_GAME'
+  //     })
+  //     .addCase(fetchQuestionsFail, (state: GameState, action) => {
+  //       state.stage = 'START_GAME';
+  //     })
+  // }
 });
 
-export const { startGame, cancelGame, restartGame, finishGame, moveToGame, setSettings } = gameSlice.actions;
+export const { setStage, setSettings } = gameSlice.actions;
 export default gameSlice.reducer;

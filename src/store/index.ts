@@ -4,7 +4,8 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { persistStore } from "redux-persist";
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export const persistor = persistStore(store);

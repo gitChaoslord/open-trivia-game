@@ -42,13 +42,21 @@ const InitialPage: React.FC = () => {
             difficulty: questionDifficulty
         }
         let result = await api.OpenTDBService.getQuestions(payload);
-        result.response_code === 0 ? console.log(result.results) : console.log('Something went wrong.')
+        result.response_code === 0 ? console.log(result.results) : console.log('Something went wrong.');
     }
 
     return (
         <div className="page-content">
             <h1 className="text-4xl text-indigo-500 text-center">Current settings</h1>
             <form className="lg:w-auto border-b-2 text-lg border-indigo-500 flex flex-col justify-between bg-white my-6 p-5 rounded ">
+
+
+                {/* <div className="page-content">
+            <div className="loading-container mb-12">
+                <div className="loading-indicator"></div>
+            </div>
+        </div> */}
+
                 <FormGroup
                     name={'Number of questions'}
                     id={'questionNumber'}
@@ -80,4 +88,3 @@ const InitialPage: React.FC = () => {
 }
 
 export default InitialPage;
-
