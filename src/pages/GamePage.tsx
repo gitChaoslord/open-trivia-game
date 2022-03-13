@@ -1,20 +1,14 @@
 import React from 'react';
-import { RootStateOrAny } from 'react-redux';
-import { useSelector, useDispatch } from 'react-redux';
-import { answerQuestion, nextQuestion } from '../store/features/quiz';
+import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
+import { RootState, useAppSelector } from '../store';
 import { finishGame } from '../store/features/game';
+import { answerQuestion, nextQuestion } from '../store/features/quiz';
 
 const GamePage: React.FC = () => {
     const dispatch = useDispatch();
     const [timeLeft, setTimeLeft] = React.useState(60);
-    const currentQuestionIndex: number = useSelector((state: RootStateOrAny) => state.quiz.currentQuestionIndex);
-    const currentQuestion: string = useSelector((state: RootStateOrAny) => state.quiz.questions[currentQuestionIndex].question);
-    const currentQuestionType: string = useSelector((state: RootStateOrAny) => state.quiz.questions[currentQuestionIndex].type);
-    // TODO: clear this thing a bit
-
-
-    // combine incorrect answers array and corrent one, then randomize, then display
+    const { currentQuestionIndex, currentQuestion, currentQuestionType } = useAppSelector((state: RootState) => state.quiz);
 
     const answerHandler = (answer: 'True' | 'False'): void => {
         // TODO: Dynamic index

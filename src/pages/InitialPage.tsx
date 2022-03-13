@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import api from '../api';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
 import { GameSettings, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
-import api from '../api';
 
 const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
     { label: "Mixed", code: "any" },
