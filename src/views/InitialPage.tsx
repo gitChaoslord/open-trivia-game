@@ -18,9 +18,9 @@ const questionNumberSetting: { label: string, code: QuestionNumberOptions }[] = 
   { label: "20", code: 20 }
 ];
 const questionTypeSetting: { label: string, code: QuestionTypeOptions }[] = [
+  { label: "All", code: "all" },
   { label: "True/False", code: "boolean" },
-  { label: "Multiple choice", code: "multiple" },
-  { label: "All", code: "all" }
+  { label: "Multiple choice", code: "multiple" }
 ];
 const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[] = [
   { label: "Any", code: 10 }
