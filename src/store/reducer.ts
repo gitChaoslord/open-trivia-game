@@ -6,12 +6,12 @@ import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 
 const persistConfig: PersistConfig<any> = {
-    key: 'trivia-game-',
-    storage,
-    throttle: 200
+  key: 'trivia-game-',
+  storage,
+  throttle: 200
 }
 
 export default combineReducers({
-    quiz: persistReducer<QuizState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'quiz' }, quiz),
-    game: persistReducer<GameState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'game' }, game)
+  quiz: persistReducer<QuizState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'quiz' }, quiz),
+  game: persistReducer<GameState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'game' }, game)
 });

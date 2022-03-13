@@ -10,7 +10,7 @@ const store = configureStore({
 
 export const persistor = persistStore(store);
 export type AppDispatch = ThunkDispatch<RootState, void, Action>
-export const useAppDispatch = (args?: any) => useDispatch<AppDispatch>();
+export const useAppDispatch = (args?: any) => useDispatch<AppDispatch>(); // Export a hook that can be reused to resolve types
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector; // Export a selector that be reused to get the state
 export default store;
