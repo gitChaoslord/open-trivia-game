@@ -50,12 +50,12 @@ const InitialPage: React.FC = () => {
     await appDispatch(getQuestions(payload))
       .unwrap()
       .then(() => {
+        setLoading(false);
         appDispatch(setStage('GAME'));
       })
       .catch((error: any) => {
-        console.log(error);
-      }).finally(() => {
         setLoading(false);
+        console.log(error);
       });
   }, [questionNumber, questionType, questionDifficulty, questionCategory, appDispatch])
 

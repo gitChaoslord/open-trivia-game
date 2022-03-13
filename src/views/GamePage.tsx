@@ -9,8 +9,9 @@ const GamePage: React.FC = () => {
   const dispatch = useDispatch();
   const [timeLeft, setTimeLeft] = React.useState(60);
   const { currentQuestionIndex, questions } = useAppSelector((state: RootState) => state.quiz);
+  const [availableAnswers, setAvailableAnswers] = React.useState<string[]>([])
 
-  const answerHandler = (answer: 'True' | 'False'): void => {
+  const answerHandler = (answer: string): void => {
     // TODO: Dynamic index
     dispatch(answerQuestion({ answer }));
     dispatch(nextQuestion({}));
@@ -33,27 +34,27 @@ const GamePage: React.FC = () => {
     }
   }, [timeLeft, dispatch]);
 
+  React.useEffect(() => {
+
+    setAvailableAnswers([questions[currentQuestionIndex].correct_answer, ...questions[currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random()));
+  }, [currentQuestionIndex, questions]);
+
   return (
     <React.Fragment>
       <div className="page-content relative flex-grow overflow-hidden">
         <p className="timer-container">{timeLeft}</p>
         <p className="question-counter">{currentQuestionIndex + 1}/10 </p>
-        <p dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} className="p-7 bg-white rounded shadow"></p>
-        {questions[currentQuestionIndex].type === 'boolean' &&
-          <div className="action-container-boolean mt-8">
-            <Button addClassNames="btn-primary" onClick={() => {
-              answerHandler('True');
-            }}>True</Button>
-            <Button addClassNames="btn-primary" onClick={() => {
-              answerHandler('False');
-            }}>False</Button>
-          </div>
-        }
-        {questions[currentQuestionIndex].type === 'multiple' &&
-          <div className="action-container-boolean mt-8">
-            Question multiple choice TODO:
-          </div>
-        }
+        <p dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} className="p-7 bg-white rounded shadow" />
+
+        <div className="action-container-boolean mt-8 grid grid-cols-2">
+          {availableAnswers.map((answer: string, index: number) =>
+            <Button key={index} addClassNames="btn-primary m-1" onClick={() => {
+              answerHandler(answer);
+            }}>
+              {answer}
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="absolute bottom-16 right-4">

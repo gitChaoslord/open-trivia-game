@@ -21,9 +21,9 @@ const ScorePage: React.FC = () => {
       {answers.length !== 0 && (
         <div className="mt-4 p-4 block overflow-y-scroll">
           {answers.map((answer: Answer, index: number) => (
-            <div key={`question-${index}`} className="border-b-2 text-lg border-blue-300 flex justify-between bg-white mb-2 rounded px-1">
-              <p className="p-3 mr-2" dangerouslySetInnerHTML={{ __html: answer.question }}></p>
-              <span className={`p-2 text-xl ${answer.correct_answer === answer.answer ? 'text-green-500' : 'text-red-500'}`}>{answer.answer}</span>
+            <div key={`question-${index}`} className="border-b-2 text-lg border-indigo-300 flex lg:flex-row flex-col justify-between bg-white mb-2 rounded lg:px-2">
+              <p className="py-2 lg:px-2 px-4" dangerouslySetInnerHTML={{ __html: answer.question }}></p>
+              <p className={`p-2 mx-2 text-xl text-center ${answer.correct_answer === answer.answer ? 'text-green-500' : 'text-red-500'}`}>{answer.answer}</p>
             </div>
           ))}
         </div>
