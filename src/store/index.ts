@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { Action, configureStore, ThunkDispatch } from "@reduxjs/toolkit";
 import rootReducer from './reducer';
-import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { persistStore } from "redux-persist";
 
 const store = configureStore({
@@ -9,7 +9,8 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
+export type AppDispatch = ThunkDispatch<RootState, void, Action>
+export const useAppDispatch = (args?: any) => useDispatch<AppDispatch>();
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector; // Export a selector that be reused to get the state
 export default store;

@@ -27,15 +27,6 @@ const gameSlice: Slice = createSlice({
       state.settings = action.payload;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchQuestionsSuccess, (state: GameState, action) => {
-  //       state.stage = 'START_GAME'
-  //     })
-  //     .addCase(fetchQuestionsFail, (state: GameState, action) => {
-  //       state.stage = 'START_GAME';
-  //     })
-  // }
 });
 
 export const { setStage, setSettings } = gameSlice.actions;

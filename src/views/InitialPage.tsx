@@ -1,8 +1,11 @@
 import React from 'react';
-import api from '../api';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
 import { GameSettings, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
+import { Question } from '../models/Quiz';
+import { useAppDispatch } from '../store';
+import { setStage } from '../store/features/game';
+import { getQuestions } from '../store/features/quiz';
 
 const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
     { label: "Mixed", code: "any" },
@@ -25,25 +28,34 @@ const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[
 ];
 
 const InitialPage: React.FC = () => {
+    const appDispatch = useAppDispatch();
+    // TODO: get from redux store in future commit
     const [questionNumber, setQuestionNumber] = React.useState<QuestionNumberOptions>(10);
     const [questionType, setQuestionType] = React.useState<QuestionTypeOptions>('all');
     const [questionDifficulty, setQuestionDifficulty] = React.useState<QuestionDifficultyOptions>('any');
     const [questionCategory, setQuestionCategory] = React.useState<QuestionCategoryOptions>(10);
 
     const startGameHandler = (e: React.MouseEvent): void => {
-        getQuestions();
+        LoadQuestions();
     }
 
-    const getQuestions = async (): Promise<void> => {
+    const LoadQuestions = React.useCallback(async () => {
         const payload: GameSettings = {
             questions: questionNumber,
             category: questionCategory,
             type: questionType,
             difficulty: questionDifficulty
         }
-        let result = await api.OpenTDBService.getQuestions(payload);
-        result.response_code === 0 ? console.log(result.results) : console.log('Something went wrong.');
-    }
+
+        await appDispatch(getQuestions(payload))
+            .unwrap()
+            .then((res: Question[]) => {
+                appDispatch(setStage('GAME'));
+            })
+            .catch((error: any) => {
+                console.log(error);
+            })
+    }, [questionNumber, questionType, questionDifficulty, questionCategory, appDispatch])
 
     return (
         <div className="page-content">
