@@ -1,47 +1,50 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setSettings, startGame } from '../store/features/game';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
-import { QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
+import { GameSettings, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
+import api from '../api';
+
+const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
+    { label: "Mixed", code: "any" },
+    { label: "Easy", code: "easy" },
+    { label: "Medium", code: "medium" },
+    { label: "Hard", code: "hard" }
+];
+const questionNumberSetting: { label: string, code: QuestionNumberOptions }[] = [
+    { label: "10", code: 10 },
+    { label: "15", code: 15 },
+    { label: "20", code: 20 }
+];
+const questionTypeSetting: { label: string, code: QuestionTypeOptions }[] = [
+    { label: "True/False", code: "boolean" },
+    { label: "Multiple choice", code: "multiple" },
+    { label: "All", code: "all" }
+];
+const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[] = [
+    { label: "Any", code: 10 }
+];
 
 const InitialPage: React.FC = () => {
-    const dispatch = useDispatch();
     const [questionNumber, setQuestionNumber] = React.useState<QuestionNumberOptions>(10);
     const [questionType, setQuestionType] = React.useState<QuestionTypeOptions>('all');
     const [questionDifficulty, setQuestionDifficulty] = React.useState<QuestionDifficultyOptions>('any');
     const [questionCategory, setQuestionCategory] = React.useState<QuestionCategoryOptions>(10);
 
-    // TODO: localstorage update, when you visit the initial link, you should be able to start a new game instead of loading the storage
     const startGameHandler = (e: React.MouseEvent): void => {
-        dispatch(setSettings({
-            questions: questionNumber,
-            type: questionType,
-            category: questionCategory,
-            difficulty: questionDifficulty
-        }));
-        dispatch(startGame({ stage: "FETCHING_GAME" }));
+        getQuestions();
     }
 
-    const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
-        { label: "Mixed", code: "any" },
-        { label: "Easy", code: "easy" },
-        { label: "Medium", code: "medium" },
-        { label: "Hard", code: "hard" }
-    ];
-    const questionNumberSetting: { label: string, code: QuestionNumberOptions }[] = [
-        { label: "10", code: 10 },
-        { label: "15", code: 15 },
-        { label: "20", code: 20 }
-    ];
-    const questionTypeSetting: { label: string, code: QuestionTypeOptions }[] = [
-        { label: "True/False", code: "boolean" },
-        { label: "Multiple choice", code: "multiple" },
-        { label: "All", code: "all" }
-    ]
-    const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[] = [
-        { label: "Any", code: 10 }
-    ]
+    const getQuestions = async (): Promise<void> => {
+        const payload: GameSettings = {
+            questions: questionNumber,
+            category: questionCategory,
+            type: questionType,
+            difficulty: questionDifficulty
+        }
+        let result = await api.OpenTDBService.getQuestions(payload);
+        result.response_code === 0 ? console.log(result.results) : console.log('Something went wrong.')
+    }
 
     return (
         <div className="page-content">
