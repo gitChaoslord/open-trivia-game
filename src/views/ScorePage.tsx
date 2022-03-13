@@ -8,7 +8,7 @@ import { setStage } from '../store/features/game';
 
 const ScorePage: React.FC = () => {
   const dispatch = useDispatch();
-  const { answers, score } = useAppSelector((state: RootState) => state.quiz);
+  const { answers, score, questions } = useAppSelector((state: RootState) => state.quiz);
   const restartHandler = (e: React.MouseEvent): void => {
     dispatch(setStage('INIT'));
   };
@@ -16,7 +16,7 @@ const ScorePage: React.FC = () => {
   return (
     <div className="page-content overflow-y-hidden">
       <h1 className="text-4xl text-indigo-500 my-4">Game Over</h1>
-      <p className="text-2xl mb-4 ">Your score was <span className="text-indigo-400">{score}</span>/10</p>
+      <p className="text-2xl mb-4 ">Your score was <span className="text-indigo-400">{score}</span>/{questions.length}</p>
       <Button addClassNames="btn-primary" onClick={restartHandler}>Restart game</Button>
       {answers.length !== 0 && (
         <div className="mt-4 p-4 block overflow-y-scroll">

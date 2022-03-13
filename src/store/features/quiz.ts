@@ -46,9 +46,8 @@ const quizSlice: Slice = createSlice({
         is_correct: action.payload.anwer === currentQuestion.correct_answer
       });
     },
-    nextQuestion: (state: QuizState, action) => {
-      // TODO: Dynamic index
-      if (state.currentQuestionIndex < 9) {
+    nextQuestion: (state: QuizState) => {
+      if (state.currentQuestionIndex < state.questions.length) {
         state.currentQuestionIndex += 1;
       }
     },

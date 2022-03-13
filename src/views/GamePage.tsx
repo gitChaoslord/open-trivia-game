@@ -12,11 +12,12 @@ const GamePage: React.FC = () => {
   const [availableAnswers, setAvailableAnswers] = React.useState<string[]>([])
 
   const answerHandler = (answer: string): void => {
-    // TODO: Dynamic index
     dispatch(answerQuestion({ answer }));
-    dispatch(nextQuestion({}));
-    if (currentQuestionIndex === 9) {
+    if (currentQuestionIndex === questions.length - 1) {
       dispatch(setStage('END'));
+    }
+    else {
+      dispatch(nextQuestion({}));
     }
   }
 
@@ -43,7 +44,8 @@ const GamePage: React.FC = () => {
     <React.Fragment>
       <div className="page-content relative flex-grow overflow-hidden">
         <p className="timer-container">{timeLeft}</p>
-        <p className="question-counter">{currentQuestionIndex + 1}/10 </p>
+        <p className="question-counter">{currentQuestionIndex + 1}/ {questions.length} </p>
+
         <p dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} className="p-7 bg-white rounded shadow" />
 
         <div className="action-container-boolean mt-8 grid grid-cols-2">
