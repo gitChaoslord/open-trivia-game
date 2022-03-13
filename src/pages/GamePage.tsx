@@ -8,8 +8,13 @@ import { finishGame } from '../store/features/game';
 const GamePage: React.FC = () => {
     const dispatch = useDispatch();
     const [timeLeft, setTimeLeft] = React.useState(60);
-    const currentQuestionIndex: number = useSelector((state: RootStateOrAny) => state.quiz.value.currentQuestionIndex);
-    const currentQuestion: string = useSelector((state: RootStateOrAny) => state.quiz.value.questions[currentQuestionIndex].question);
+    const currentQuestionIndex: number = useSelector((state: RootStateOrAny) => state.quiz.currentQuestionIndex);
+    const currentQuestion: string = useSelector((state: RootStateOrAny) => state.quiz.questions[currentQuestionIndex].question);
+    const currentQuestionType: string = useSelector((state: RootStateOrAny) => state.quiz.questions[currentQuestionIndex].type);
+    // TODO: clear this thing a bit
+
+
+    // combine incorrect answers array and corrent one, then randomize, then display
 
     const answerHandler = (answer: 'True' | 'False'): void => {
         // TODO: Dynamic index
@@ -27,7 +32,6 @@ const GamePage: React.FC = () => {
     // TODO: save timer to state
     React.useEffect(() => {
         const interval = setInterval(() => {
-            // TODO: Dynamic Time in future
             timeLeft <= 0 ? dispatch(finishGame({})) : setTimeLeft(prev => prev - 1);
         }, 1000);
         return () => {
@@ -40,19 +44,28 @@ const GamePage: React.FC = () => {
             <div className="page-content relative flex-grow overflow-hidden">
                 <p className="timer-container">{timeLeft}</p>
                 <p className="question-counter">{currentQuestionIndex + 1}/10 </p>
-                <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="mx-2 p-7 bg-white rounded shadow"></p>
-                <div className="action-container-boolean mt-8">
-                    <Button addClassNames="btn-primary" onClick={() => {
-                        answerHandler('True');
-                    }}>True</Button>
-                    <Button addClassNames="btn-primary" onClick={() => {
-                        answerHandler('False');
-                    }}>False</Button>
-                </div>
+                <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="p-7 bg-white rounded shadow"></p>
+                {currentQuestionType === 'boolean' &&
+                    <div className="action-container-boolean mt-8">
+                        <Button addClassNames="btn-primary" onClick={() => {
+                            answerHandler('True');
+                        }}>True</Button>
+                        <Button addClassNames="btn-primary" onClick={() => {
+                            answerHandler('False');
+                        }}>False</Button>
+                    </div>
+                }
+                {currentQuestionType === 'multiple' &&
+                    <div className="action-container-boolean mt-8">
+                        Question multiple choice TODO:
+                    </div>
+                }
             </div>
+
             <div className="absolute bottom-16 right-4">
                 <Button addClassNames="btn-error" onClick={endGameHandler}>Quit game</Button>
             </div>
+
         </React.Fragment>
     )
 }

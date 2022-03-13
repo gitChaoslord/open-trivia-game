@@ -1,55 +1,51 @@
 import { createSlice, Slice } from "@reduxjs/toolkit";
-import { Answer } from '../../models/Answer';
-import { Question } from '../../models/Question';
+import { Answer } from '../../models/Quiz';
+import { Question } from '../../models/Quiz';
 
 interface TriviaState {
-  value: {
-    questions: Question[],
-    error: string | null,
-    score: number,
-    currentQuestionIndex: number,
-    answers: Answer[];
-  }
+  questions: Question[],
+  error: string | undefined,
+  score: number,
+  currentQuestionIndex: number,
+  answers: Answer[];
 }
 
 const initialState: TriviaState = {
-  value: {
-    questions: [],
-    error: null,
-    score: 0,
-    currentQuestionIndex: 0,
-    answers: []
-  }
+  questions: [],
+  error: undefined,
+  score: 0,
+  currentQuestionIndex: 0,
+  answers: []
 }
 
 const quizSlice: Slice = createSlice({
   name: 'quiz',
   initialState,
   reducers: {
-    fetchQuestionsSuccess: (state, action) => {
-      state.value.questions = action.payload;
-      state.value.score = 0;
-      state.value.currentQuestionIndex = 0;
-      state.value.answers = [];
+    fetchQuestionsSuccess: (state: TriviaState, action) => {
+      state.questions = action.payload;
+      state.score = 0;
+      state.currentQuestionIndex = 0;
+      state.answers = [];
     },
-    fetchQuestionsFail: (state, action) => {
-      state.value.error = action.payload;
+    fetchQuestionsFail: (state: TriviaState, action) => {
+      state.error = action.payload;
     },
-    answerQuestion: (state, action) => {
-      const currentQuestion = state.value.questions[state.value.currentQuestionIndex];
-      state.value.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
+    answerQuestion: (state: TriviaState, action) => {
+      const currentQuestion = state.questions[state.currentQuestionIndex];
+      state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
 
-      state.value.answers.push({
+      state.answers.push({
         question: currentQuestion.question,
         answer: action.payload.answer,
         correct_answer: currentQuestion.correct_answer,
         is_correct: action.payload.anwer === currentQuestion.correct_answer
       });
     },
-    nextQuestion: (state, action) => {
+    nextQuestion: (state: TriviaState, action) => {
       // TODO: Dynamic index
-      if (state.value.currentQuestionIndex < 9) {
-        state.value.currentQuestionIndex += 1;
+      if (state.currentQuestionIndex < 9) {
+        state.currentQuestionIndex += 1;
       }
     }
   }

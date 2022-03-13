@@ -3,12 +3,12 @@ import { RootStateOrAny } from 'react-redux'
 import { useDispatch, useSelector } from 'react-redux';
 import { restartGame } from '../store/features/game';
 import Button from '../components/Button';
-import { Answer } from '../models/Answer';
+import { Answer } from '../models/Quiz';
 
 const ScorePage: React.FC = () => {
     const dispatch = useDispatch();
-    const answers: Answer[] = useSelector((state: RootStateOrAny) => state.quiz.value.answers);
-    const score: number = useSelector((state: RootStateOrAny) => state.quiz.value.score);
+    const answers: Answer[] = useSelector((state: RootStateOrAny) => state.quiz.answers);
+    const score: number = useSelector((state: RootStateOrAny) => state.quiz.score);
     const restartHandler = (e: React.MouseEvent): void => {
         dispatch(restartGame({}));
     };

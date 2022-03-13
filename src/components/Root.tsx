@@ -10,7 +10,7 @@ import MainLayout from '../layouts/Main';
 
 export const Root: React.FC = () => {
   const navigate = useNavigate();
-  const currentPage: string = useSelector((state: RootStateOrAny) => state.game.value.stage);
+  const currentPage: string = useSelector((state: RootStateOrAny) => state.game.stage);
 
   React.useEffect(() => {
     switch (currentPage) {
