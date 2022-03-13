@@ -8,7 +8,7 @@ import { answerQuestion, nextQuestion } from '../store/features/quiz';
 const GamePage: React.FC = () => {
     const dispatch = useDispatch();
     const [timeLeft, setTimeLeft] = React.useState(60);
-    const { currentQuestionIndex, currentQuestion, currentQuestionType } = useAppSelector((state: RootState) => state.quiz);
+    const { currentQuestionIndex, questions } = useAppSelector((state: RootState) => state.quiz);
 
     const answerHandler = (answer: 'True' | 'False'): void => {
         // TODO: Dynamic index
@@ -38,8 +38,8 @@ const GamePage: React.FC = () => {
             <div className="page-content relative flex-grow overflow-hidden">
                 <p className="timer-container">{timeLeft}</p>
                 <p className="question-counter">{currentQuestionIndex + 1}/10 </p>
-                <p dangerouslySetInnerHTML={{ __html: currentQuestion }} className="p-7 bg-white rounded shadow"></p>
-                {currentQuestionType === 'boolean' &&
+                <p dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} className="p-7 bg-white rounded shadow"></p>
+                {questions[currentQuestionIndex].type === 'boolean' &&
                     <div className="action-container-boolean mt-8">
                         <Button addClassNames="btn-primary" onClick={() => {
                             answerHandler('True');
@@ -49,7 +49,7 @@ const GamePage: React.FC = () => {
                         }}>False</Button>
                     </div>
                 }
-                {currentQuestionType === 'multiple' &&
+                {questions[currentQuestionIndex].type === 'multiple' &&
                     <div className="action-container-boolean mt-8">
                         Question multiple choice TODO:
                     </div>

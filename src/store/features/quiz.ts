@@ -2,7 +2,7 @@ import { createSlice, Slice } from "@reduxjs/toolkit";
 import { Answer } from '../../models/Quiz';
 import { Question } from '../../models/Quiz';
 
-interface TriviaState {
+export interface QuizState {
   questions: Question[],
   error: string | undefined,
   score: number,
@@ -10,7 +10,7 @@ interface TriviaState {
   answers: Answer[];
 }
 
-const initialState: TriviaState = {
+const initialState: QuizState = {
   questions: [],
   error: undefined,
   score: 0,
@@ -22,16 +22,16 @@ const quizSlice: Slice = createSlice({
   name: 'quiz',
   initialState,
   reducers: {
-    fetchQuestionsSuccess: (state: TriviaState, action) => {
+    fetchQuestionsSuccess: (state: QuizState, action) => {
       state.questions = action.payload;
       state.score = 0;
       state.currentQuestionIndex = 0;
       state.answers = [];
     },
-    fetchQuestionsFail: (state: TriviaState, action) => {
+    fetchQuestionsFail: (state: QuizState, action) => {
       state.error = action.payload;
     },
-    answerQuestion: (state: TriviaState, action) => {
+    answerQuestion: (state: QuizState, action) => {
       const currentQuestion = state.questions[state.currentQuestionIndex];
       state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
 
@@ -42,7 +42,7 @@ const quizSlice: Slice = createSlice({
         is_correct: action.payload.anwer === currentQuestion.correct_answer
       });
     },
-    nextQuestion: (state: TriviaState, action) => {
+    nextQuestion: (state: QuizState, action) => {
       // TODO: Dynamic index
       if (state.currentQuestionIndex < 9) {
         state.currentQuestionIndex += 1;

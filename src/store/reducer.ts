@@ -1,5 +1,17 @@
-import { combineReducers } from "redux";
-import quiz from "./features/quiz";
-import game from "./features/game";
+import { AnyAction, combineReducers } from "redux";
+import quiz, { QuizState } from "./features/quiz";
+import game, { GameState } from "./features/game";
+import { PersistConfig } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import persistReducer from "redux-persist/es/persistReducer";
 
-export default combineReducers({ quiz, game });
+const persistConfig: PersistConfig<any> = {
+    key: 'trivia-game-',
+    storage,
+    throttle: 200
+}
+
+export default combineReducers({
+    quiz: persistReducer<QuizState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'quiz' }, quiz),
+    game: persistReducer<GameState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'game' }, game)
+});

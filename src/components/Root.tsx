@@ -7,7 +7,6 @@ import GamePage from '../pages/GamePage';
 import LoadingPage from '../pages/LoadingPage';
 import MainLayout from '../layouts/Main';
 
-
 export const Root: React.FC = () => {
   const navigate = useNavigate();
   const currentPage: string = useSelector((state: RootStateOrAny) => state.game.stage);
@@ -31,7 +30,7 @@ export const Root: React.FC = () => {
     }
   }, [currentPage])
 
-  return <React.Fragment>
+  return (
     <Routes>
       <Route path='' element={<MainLayout />}>
         <Route path='' element={<InitialPage />} />
@@ -40,5 +39,5 @@ export const Root: React.FC = () => {
         <Route path='/score' element={<ScorePage />} />
       </Route>
     </Routes>
-  </React.Fragment>
+  )
 }

@@ -3,7 +3,7 @@ import { GameSettings, Stage } from "../../models/Game";
 import { fetchQuestionsFail, fetchQuestionsSuccess } from "./quiz";
 
 
-interface GameState {
+export interface GameState {
   stage: Stage;
   settings: GameSettings;
 }

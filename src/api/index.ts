@@ -1,6 +1,5 @@
 import OpenTDBService from "./OpenTDBService";
 
-
 interface ApiOBject {
     OpenTDBService: OpenTDBService;
 }
