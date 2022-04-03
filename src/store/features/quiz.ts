@@ -9,16 +9,17 @@ export interface QuizState {
   score: number,
   currentQuestionIndex: number,
   answers: Answer[];
+  loading: boolean;
 }
 
 const initialState: QuizState = {
   questions: [],
   score: 0,
   currentQuestionIndex: 0,
-  answers: []
+  answers: [],
+  loading: false
 }
 
-// TODO: check type issues
 export const getQuestions = createAsyncThunk(
   "quiz/getQuestions",
   async (payload: GameSettings, { rejectWithValue }): Promise<Question[] | any> => {
@@ -55,16 +56,18 @@ const quizSlice: Slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getQuestions.pending, () => { })
+      .addCase(getQuestions.pending, (state: QuizState) => {
+        state.loading = true;
+      })
       .addCase(getQuestions.fulfilled, (state: QuizState, action: PayloadAction<Question[]>) => {
-        // state = { ...initialState, questions: action.payload }
         state.questions = action.payload;
         state.currentQuestionIndex = initialState.currentQuestionIndex;
         state.answers = initialState.answers;
         state.score = initialState.score;
+        state.loading = false;
       })
-      .addCase(getQuestions.rejected, (state: QuizState, action: any) => {
-
+      .addCase(getQuestions.rejected, (state: QuizState) => {
+        state.loading = false;
       })
   }
 });

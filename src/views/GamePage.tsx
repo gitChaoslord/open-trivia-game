@@ -9,9 +9,9 @@ const GamePage: React.FC = () => {
   const dispatch = useDispatch();
   const [timeLeft, setTimeLeft] = React.useState(60);
   const { currentQuestionIndex, questions } = useAppSelector((state: RootState) => state.quiz);
-  const [availableAnswers, setAvailableAnswers] = React.useState<string[]>([])
+  const [availableAnswers, setAvailableAnswers] = React.useState<string[]>([]);
 
-  const answerHandler = (answer: string): void => {
+  const handleAnswer = (answer: string): void => {
     dispatch(answerQuestion({ answer }));
     if (currentQuestionIndex === questions.length - 1) {
       dispatch(setStage('END'));
@@ -21,7 +21,7 @@ const GamePage: React.FC = () => {
     }
   }
 
-  const endGameHandler = (e: React.MouseEvent): void => {
+  const handleEndGame = (): void => {
     dispatch(setStage('END'));
   }
 
@@ -36,7 +36,6 @@ const GamePage: React.FC = () => {
   }, [timeLeft, dispatch]);
 
   React.useEffect(() => {
-
     setAvailableAnswers([questions[currentQuestionIndex].correct_answer, ...questions[currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random()));
   }, [currentQuestionIndex, questions]);
 
@@ -50,8 +49,8 @@ const GamePage: React.FC = () => {
 
         <div className="action-container-boolean mt-8 grid grid-cols-2">
           {availableAnswers.map((answer: string, index: number) =>
-            <Button key={index} addClassNames="btn-primary m-1" onClick={() => {
-              answerHandler(answer);
+            <Button key={index} className="btn-primary m-1" onClick={() => {
+              handleAnswer(answer);
             }}>
               {answer}
             </Button>
@@ -60,7 +59,7 @@ const GamePage: React.FC = () => {
       </div>
 
       <div className="absolute bottom-16 right-4">
-        <Button addClassNames="btn-error" onClick={endGameHandler}>Quit game</Button>
+        <Button className="btn-error" onClick={handleEndGame}>Quit game</Button>
       </div>
 
     </React.Fragment>

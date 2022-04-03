@@ -5,11 +5,11 @@ import { Answer } from '../models/Quiz';
 import { RootState, useAppSelector } from '../store';
 import { setStage } from '../store/features/game';
 
-
 const ScorePage: React.FC = () => {
   const dispatch = useDispatch();
   const { answers, score, questions } = useAppSelector((state: RootState) => state.quiz);
-  const restartHandler = (e: React.MouseEvent): void => {
+
+  const handleRestart = (): void => {
     dispatch(setStage('INIT'));
   };
 
@@ -17,7 +17,7 @@ const ScorePage: React.FC = () => {
     <div className="page-content overflow-y-hidden">
       <h1 className="text-4xl text-indigo-500 my-4">Game Over</h1>
       <p className="text-2xl mb-4 ">Your score was <span className="text-indigo-400">{score}</span>/{questions.length}</p>
-      <Button addClassNames="btn-primary" onClick={restartHandler}>Restart game</Button>
+      <Button className="btn-primary" onClick={handleRestart}>Restart game</Button>
       {answers.length !== 0 && (
         <div className="mt-4 p-4 block overflow-y-scroll">
           {answers.map((answer: Answer, index: number) => (
@@ -28,7 +28,6 @@ const ScorePage: React.FC = () => {
           ))}
         </div>
       )}
-
     </div>
   )
 }
