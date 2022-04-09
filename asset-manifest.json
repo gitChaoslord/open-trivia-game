@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/trivia-game/static/css/main.3a648101.css",
-    "main.js": "/trivia-game/static/js/main.92136aa6.js",
-    "index.html": "/trivia-game/index.html",
-    "main.3a648101.css.map": "/trivia-game/static/css/main.3a648101.css.map",
-    "main.92136aa6.js.map": "/trivia-game/static/js/main.92136aa6.js.map"
+    "main.css": "/Trivia-game/static/css/main.3a648101.css",
+    "main.js": "/Trivia-game/static/js/main.92136aa6.js",
+    "index.html": "/Trivia-game/index.html",
+    "main.3a648101.css.map": "/Trivia-game/static/css/main.3a648101.css.map",
+    "main.92136aa6.js.map": "/Trivia-game/static/js/main.92136aa6.js.map"
   },
   "entrypoints": [
     "static/css/main.3a648101.css",
