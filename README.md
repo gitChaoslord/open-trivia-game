@@ -1,7 +1,7 @@
 #
 # <p align="center">Open Trivia Game</p>
 <p align="center">Single player Quiz game with questions provided by <a href="https://opentdb.com" rel="nofollow">Open TDB</a>.</p>
-<p align="center">URL : <a href="https://gitchaoslord.github.io/Trivia-Game"  rel="nofollow">Trivia Game</a></p>
+<p align="center">URL : <a href="https://gitchaoslord.github.io/Trivia-game"  rel="nofollow">Trivia Game</a></p>
 
 </br>
 </br>
