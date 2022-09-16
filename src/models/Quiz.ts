@@ -14,7 +14,7 @@ export interface Answer {
 }
 
 export interface Category {
-  id: string;
+  id: number;
   name: string;
 }
 

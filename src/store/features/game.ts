@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import api from "../../api";
-import { GameState, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
+import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
 
 export const getCategories = createAsyncThunk(
   "quiz/categories",
@@ -21,7 +21,8 @@ const initialState: GameState = {
   questionType: "all",
   questionCategory: 10,
   categories: [],
-  categoriesLoading: false
+  categoriesLoading: false,
+  categoriesInitialized: false
 }
 
 const gameSlice: Slice = createSlice({
@@ -40,7 +41,7 @@ const gameSlice: Slice = createSlice({
     setQuestionType: (state, action: PayloadAction<QuestionTypeOptions>) => {
       state.questionType = action.payload;
     },
-    setQuestionCategory: (state, action: PayloadAction<QuestionCategoryOptions>) => {
+    setQuestionCategory: (state, action: PayloadAction<number>) => {
       state.questionCategory = action.payload;
     }
   },
@@ -52,6 +53,7 @@ const gameSlice: Slice = createSlice({
       .addCase(getCategories.fulfilled, (state, action) => {
         state.categories = action.payload;
         state.categoriesLoading = false;
+        state.categoriesInitialized = true;
       })
       .addCase(getCategories.rejected, (state) => {
         state.categoriesLoading = false;

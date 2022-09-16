@@ -33,7 +33,8 @@ export default class OpenTDBService {
     finalUrl += `?amount=${payload.questions}`;
     finalUrl += `${payload?.type === 'all' ? '' : `&type=${payload.type}`}`;
     finalUrl += `${payload?.difficulty === 'any' ? '' : `&difficulty=${payload.difficulty}`}`;
-    finalUrl += `${payload?.category === 10 ? '' : `&category=${payload.category}`}`;
+    // finalUrl += `${payload?.category === 10 ? '' : `&category=${payload.category}`}`;
+    finalUrl += `&category=${payload.category}`
 
     try {
       const response: any = await fetch(finalUrl);

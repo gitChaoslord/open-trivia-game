@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
-import { GameSettings, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
+import { constructCategories } from '../helpers/utils';
+import { GameSettings, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
 import { useAppDispatch, useAppSelector } from '../store';
-import { setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType, setStage } from '../store/features/game';
+import { getCategories, setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType, setStage } from '../store/features/game';
 import { getQuestions } from '../store/features/quiz';
 
 const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
@@ -22,18 +23,12 @@ const questionTypeSetting: { label: string, code: QuestionTypeOptions }[] = [
   { label: "True/False", code: "boolean" },
   { label: "Multiple choice", code: "multiple" }
 ];
-const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[] = [
-  { label: "Any", code: 10 }
-];
 
 const InitialPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state) => state.game);
+  const { categories, categoriesLoading, categoriesInitialized } = useAppSelector((state) => state.game);
   const { loading } = useAppSelector((state) => state.quiz);
-
-  const handleStartGame = (e: React.MouseEvent): void => {
-    LoadQuestions();
-  }
 
   const LoadQuestions = React.useCallback(async () => {
     const payload: GameSettings = {
@@ -42,8 +37,7 @@ const InitialPage: React.FC = () => {
       type: questionType,
       difficulty: difficulty
     }
-    await dispatch(getQuestions(payload))
-      .unwrap()
+    await dispatch(getQuestions(payload)).unwrap()
       .then(() => {
         dispatch(setStage('GAME'));
       })
@@ -52,16 +46,22 @@ const InitialPage: React.FC = () => {
       });
   }, [questionNumber, questionType, difficulty, questionCategory, dispatch]);
 
+  React.useEffect(() => {
+    if (!categoriesInitialized) {
+      dispatch(getCategories()).unwrap()
+    }
+  }, [dispatch, categoriesInitialized])
+
   return (
     <React.Fragment>
-      {loading &&
+      {(loading || categoriesLoading) &&
         <div className="page-content">
           <div className="loading-container mb-12">
             <div className="loading-indicator"></div>
           </div>
         </div>}
 
-      {!loading &&
+      {!loading && !categoriesLoading &&
         <div className="page-content">
           <h1 className="text-4xl text-indigo-500 text-center">Current settings</h1>
           <form className="lg:w-auto border-b-2 text-lg border-indigo-500 flex flex-col justify-between bg-white my-6 p-5 rounded ">
@@ -83,7 +83,7 @@ const InitialPage: React.FC = () => {
             <FormGroup
               name={'Category'}
               id={'questionCategory'}
-              options={questionCategorySetting}
+              options={constructCategories(categories)}
               selected={questionCategory}
               handler={(e: any) => dispatch(setQuestionCategory(e.target.value))}
             />
@@ -95,7 +95,7 @@ const InitialPage: React.FC = () => {
               handler={(e: any) => dispatch(setQuestionType(e.target.value))}
             />
           </form>
-          <Button onClick={handleStartGame} className="btn-primary">Start Game</Button>
+          <Button disabled={categoriesLoading} onClick={LoadQuestions} className="btn-primary">Start Game</Button>
         </div>}
     </React.Fragment>
   )

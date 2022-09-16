@@ -15,5 +15,5 @@ const persistConfig: PersistConfig<any> = {
 
 export default combineReducers({
   quiz: persistReducer<QuizState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'quiz', blacklist: ['loading'] }, quiz),
-  game: persistReducer<GameState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'game' }, game)
+  game: persistReducer<GameState, AnyAction>({ ...persistConfig, key: persistConfig.key + 'game', blacklist: ['categoriesInitialized', 'categoriesLoading', 'categories'] }, game)
 });
