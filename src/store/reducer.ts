@@ -1,9 +1,11 @@
 import { AnyAction, combineReducers } from "redux";
-import quiz, { QuizState } from "./features/quiz";
-import game, { GameState } from "./features/game";
 import { PersistConfig } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
+import storage from "redux-persist/lib/storage";
+import { GameState } from "../models/Game";
+import { QuizState } from "../models/Quiz";
+import game from "./features/game";
+import quiz from "./features/quiz";
 
 const persistConfig: PersistConfig<any> = {
   key: 'trivia-game-',

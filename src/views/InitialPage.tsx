@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
 import { GameSettings, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
-import { RootState, useAppDispatch, useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
 import { setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType, setStage } from '../store/features/game';
 import { getQuestions } from '../store/features/quiz';
 
@@ -28,8 +28,8 @@ const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[
 
 const InitialPage: React.FC = () => {
   const appDispatch = useAppDispatch();
-  const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state: RootState) => state.game);
-  const { loading } = useAppSelector((state: RootState) => state.quiz);
+  const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state) => state.game);
+  const { loading } = useAppSelector((state) => state.quiz);
 
   const handleStartGame = (e: React.MouseEvent): void => {
     LoadQuestions();

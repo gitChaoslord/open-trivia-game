@@ -1,16 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import api from "../../api";
 import { GameSettings } from "../../models/Game";
-import { Answer } from '../../models/Quiz';
+import { QuizState } from '../../models/Quiz';
 import { Question } from '../../models/Quiz';
-
-export interface QuizState {
-  questions: Question[],
-  score: number,
-  currentQuestionIndex: number,
-  answers: Answer[];
-  loading: boolean;
-}
 
 const initialState: QuizState = {
   questions: [],
@@ -36,7 +28,7 @@ const quizSlice: Slice = createSlice({
   name: 'quiz',
   initialState,
   reducers: {
-    answerQuestion: (state: QuizState, action) => {
+    answerQuestion: (state, action) => {
       const currentQuestion = state.questions[state.currentQuestionIndex];
       state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
 
@@ -47,7 +39,7 @@ const quizSlice: Slice = createSlice({
         is_correct: action.payload.anwer === currentQuestion.correct_answer
       });
     },
-    nextQuestion: (state: QuizState) => {
+    nextQuestion: (state) => {
       if (state.currentQuestionIndex < state.questions.length) {
         state.currentQuestionIndex += 1;
       }
@@ -56,17 +48,17 @@ const quizSlice: Slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getQuestions.pending, (state: QuizState) => {
+      .addCase(getQuestions.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getQuestions.fulfilled, (state: QuizState, action: PayloadAction<Question[]>) => {
+      .addCase(getQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
         state.questions = action.payload;
         state.currentQuestionIndex = initialState.currentQuestionIndex;
         state.answers = initialState.answers;
         state.score = initialState.score;
         state.loading = false;
       })
-      .addCase(getQuestions.rejected, (state: QuizState) => {
+      .addCase(getQuestions.rejected, (state) => {
         state.loading = false;
       })
   }

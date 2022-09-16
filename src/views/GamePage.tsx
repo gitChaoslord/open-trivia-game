@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
-import { RootState, useAppSelector } from '../store';
+import { useAppSelector } from '../store';
 import { setStage } from '../store/features/game';
 import { answerQuestion, nextQuestion } from '../store/features/quiz';
 
 const GamePage: React.FC = () => {
   const dispatch = useDispatch();
   const [timeLeft, setTimeLeft] = React.useState(60);
-  const { currentQuestionIndex, questions } = useAppSelector((state: RootState) => state.quiz);
+  const { currentQuestionIndex, questions } = useAppSelector((state) => state.quiz);
   const [availableAnswers, setAvailableAnswers] = React.useState<string[]>([]);
 
   const handleAnswer = (answer: string): void => {

@@ -1,18 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import api from "../../api";
-import { QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
-import { Category } from "../../models/Quiz";
-
-export interface GameState {
-  stage: Stage;
-  difficulty: QuestionDifficultyOptions;
-  questionNumber: QuestionNumberOptions;
-  questionType: QuestionTypeOptions;
-  questionCategory: QuestionCategoryOptions;
-  categories: Category[];
-  categoriesLoading: boolean;
-
-}
+import { GameState, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
 
 export const getCategories = createAsyncThunk(
   "quiz/categories",
@@ -40,19 +28,19 @@ const gameSlice: Slice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setStage: (state: GameState, action: PayloadAction<Stage>) => {
+    setStage: (state, action: PayloadAction<Stage>) => {
       state.stage = action.payload;
     },
-    setDifficulty: (state: GameState, action: PayloadAction<QuestionDifficultyOptions>) => {
+    setDifficulty: (state, action: PayloadAction<QuestionDifficultyOptions>) => {
       state.difficulty = action.payload;
     },
-    setQuestionNumbmer: (state: GameState, action: PayloadAction<QuestionNumberOptions>) => {
+    setQuestionNumbmer: (state, action: PayloadAction<QuestionNumberOptions>) => {
       state.questionNumber = action.payload;
     },
-    setQuestionType: (state: GameState, action: PayloadAction<QuestionTypeOptions>) => {
+    setQuestionType: (state, action: PayloadAction<QuestionTypeOptions>) => {
       state.questionType = action.payload;
     },
-    setQuestionCategory: (state: GameState, action: PayloadAction<QuestionCategoryOptions>) => {
+    setQuestionCategory: (state, action: PayloadAction<QuestionCategoryOptions>) => {
       state.questionCategory = action.payload;
     }
   },

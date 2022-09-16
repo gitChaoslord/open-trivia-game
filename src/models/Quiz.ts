@@ -17,3 +17,11 @@ export interface Category {
   id: string;
   name: string;
 }
+
+export interface QuizState {
+  questions: Question[],
+  score: number,
+  currentQuestionIndex: number,
+  answers: Answer[];
+  loading: boolean;
+}

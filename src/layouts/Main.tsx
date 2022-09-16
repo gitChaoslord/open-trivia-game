@@ -1,13 +1,13 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import { Navbar } from '../components/Navbar';
-import { RootState, useAppSelector } from '../store';
+import { useAppSelector } from '../store';
 import GamePage from '../views/GamePage';
 import InitialPage from '../views/InitialPage';
 import ScorePage from '../views/ScorePage';
 
 const MainLayout: React.FC = () => {
-  const { stage } = useAppSelector((state: RootState) => state.game);
+  const { stage } = useAppSelector((state) => state.game);
   return (
     <React.Fragment>
       <Navbar />
