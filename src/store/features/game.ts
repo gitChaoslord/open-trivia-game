@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import api from "../../api";
 import { QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
+import { Category } from "../../models/Quiz";
 
 export interface GameState {
   stage: Stage;
@@ -7,15 +9,31 @@ export interface GameState {
   questionNumber: QuestionNumberOptions;
   questionType: QuestionTypeOptions;
   questionCategory: QuestionCategoryOptions;
+  categories: Category[];
+  categoriesLoading: boolean;
 
 }
+
+export const getCategories = createAsyncThunk(
+  "quiz/categories",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.OpenTDBService.getCategories();
+      return response.trivia_categories;
+    } catch (rejected: any) {
+      return rejectWithValue(rejected);
+    }
+  }
+)
 
 const initialState: GameState = {
   stage: 'INIT',
   difficulty: "any",
   questionNumber: 10,
   questionType: "all",
-  questionCategory: 10
+  questionCategory: 10,
+  categories: [],
+  categoriesLoading: false
 }
 
 const gameSlice: Slice = createSlice({
@@ -38,6 +56,19 @@ const gameSlice: Slice = createSlice({
       state.questionCategory = action.payload;
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCategories.pending, (state) => {
+        state.categoriesLoading = true;
+      })
+      .addCase(getCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
+        state.categoriesLoading = false;
+      })
+      .addCase(getCategories.rejected, (state) => {
+        state.categoriesLoading = false;
+      })
+  }
 });
 
 export const { setStage, setDifficulty, setQuestionNumbmer, setQuestionType, setQuestionCategory } = gameSlice.actions;
