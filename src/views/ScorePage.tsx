@@ -1,12 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import { Answer } from '../models/Quiz';
-import { useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
 import { setStage } from '../store/features/game';
 
 const ScorePage: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { answers, score, questions } = useAppSelector((state) => state.quiz);
 
   const handleRestart = (): void => {

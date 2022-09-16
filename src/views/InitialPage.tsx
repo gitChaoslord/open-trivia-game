@@ -27,7 +27,7 @@ const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[
 ];
 
 const InitialPage: React.FC = () => {
-  const appDispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state) => state.game);
   const { loading } = useAppSelector((state) => state.quiz);
 
@@ -42,15 +42,15 @@ const InitialPage: React.FC = () => {
       type: questionType,
       difficulty: difficulty
     }
-    await appDispatch(getQuestions(payload))
+    await dispatch(getQuestions(payload))
       .unwrap()
       .then(() => {
-        appDispatch(setStage('GAME'));
+        dispatch(setStage('GAME'));
       })
       .catch((error: any) => {
         console.log(error);
       });
-  }, [questionNumber, questionType, difficulty, questionCategory, appDispatch]);
+  }, [questionNumber, questionType, difficulty, questionCategory, dispatch]);
 
   return (
     <React.Fragment>
@@ -71,28 +71,28 @@ const InitialPage: React.FC = () => {
               id={'questionNumber'}
               options={questionNumberSetting}
               selected={questionNumber}
-              handler={(e: any) => appDispatch(setQuestionNumbmer(e.target.value))}
+              handler={(e: any) => dispatch(setQuestionNumbmer(e.target.value))}
             />
             <FormGroup
               name={'Difficulty'}
               id={'questionDifficulty'}
               options={questionDiffSetting}
               selected={difficulty}
-              handler={(e: any) => appDispatch(setDifficulty(e.target.value))}
+              handler={(e: any) => dispatch(setDifficulty(e.target.value))}
             />
             <FormGroup
               name={'Category'}
               id={'questionCategory'}
               options={questionCategorySetting}
               selected={questionCategory}
-              handler={(e: any) => appDispatch(setQuestionCategory(e.target.value))}
+              handler={(e: any) => dispatch(setQuestionCategory(e.target.value))}
             />
             <FormGroup
               name={'Type'}
               id={'questionType'}
               options={questionTypeSetting}
               selected={questionType}
-              handler={(e: any) => appDispatch(setQuestionType(e.target.value))}
+              handler={(e: any) => dispatch(setQuestionType(e.target.value))}
             />
           </form>
           <Button onClick={handleStartGame} className="btn-primary">Start Game</Button>
