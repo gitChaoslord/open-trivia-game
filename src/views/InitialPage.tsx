@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { constructCategories } from '../helpers/utils';
 import { GameSettings, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
 import { useAppDispatch, useAppSelector } from '../store';
-import { getCategories, setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType, setStage } from '../store/features/game';
+import { getCategories, setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType } from '../store/features/game';
 import { getQuestions } from '../store/features/quiz';
 
 const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
@@ -50,12 +51,7 @@ const InitialPage: React.FC = () => {
 
   return (
     <React.Fragment>
-      {isLoading &&
-        <div className="page-content">
-          <div className="loading-container mb-12">
-            <div className="loading-indicator"></div>
-          </div>
-        </div>}
+      {isLoading && <LoadingSpinner />}
 
       {!isLoading &&
         <div className="page-content">
