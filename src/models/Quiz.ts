@@ -12,3 +12,8 @@ export interface Answer {
   correct_answer: string;
   is_correct: boolean;
 }
+
+export interface Category {
+  id: string;
+  name: string;
+}
