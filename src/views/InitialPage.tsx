@@ -30,20 +30,16 @@ const InitialPage: React.FC = () => {
   const { categories, categoriesLoading, categoriesInitialized } = useAppSelector((state) => state.game);
   const { loading } = useAppSelector((state) => state.quiz);
 
+  const isLoading = React.useMemo(() => loading || categoriesLoading, [loading, categoriesLoading]);
+
   const LoadQuestions = React.useCallback(async () => {
     const payload: GameSettings = {
       questions: questionNumber,
       category: questionCategory,
       type: questionType,
       difficulty: difficulty
-    }
-    await dispatch(getQuestions(payload)).unwrap()
-      .then(() => {
-        dispatch(setStage('GAME'));
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
+    };
+    await dispatch(getQuestions(payload)).unwrap();
   }, [questionNumber, questionType, difficulty, questionCategory, dispatch]);
 
   React.useEffect(() => {
@@ -54,14 +50,14 @@ const InitialPage: React.FC = () => {
 
   return (
     <React.Fragment>
-      {(loading || categoriesLoading) &&
+      {isLoading &&
         <div className="page-content">
           <div className="loading-container mb-12">
             <div className="loading-indicator"></div>
           </div>
         </div>}
 
-      {!loading && !categoriesLoading &&
+      {!isLoading &&
         <div className="page-content">
           <h1 className="text-4xl text-indigo-500 text-center">Current settings</h1>
           <form className="lg:w-auto border-b-2 text-lg border-indigo-500 flex flex-col justify-between bg-white my-6 p-5 rounded ">
