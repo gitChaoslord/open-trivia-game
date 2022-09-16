@@ -47,13 +47,13 @@ const GamePage: React.FC = () => {
         <p dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} className="p-7 bg-white rounded shadow" />
 
         <div className="action-container-boolean mt-8 grid grid-cols-2">
-          {availableAnswers.map((answer: string, index: number) =>
-            <Button key={index} className="btn-primary m-1" onClick={() => {
+          {availableAnswers.map((answer) => (
+            <Button key={answer} className="btn-primary m-1" onClick={() => {
               handleAnswer(answer);
             }}>
               {answer}
             </Button>
-          )}
+          ))}
         </div>
       </div>
 
