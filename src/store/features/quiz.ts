@@ -17,8 +17,11 @@ export const getQuestions = createAsyncThunk(
   async (payload: GameSettings, { rejectWithValue }): Promise<Question[] | any> => {
     try {
       const response = await api.OpenTDBService.getQuestions(payload);
+
+      if (response.response_code === 1) return rejectWithValue('There are not enough available questions for your criteria.');
+
       return response.results;
-    } catch (rejected: any) {
+    } catch (rejected) {
       return rejectWithValue(rejected);
     }
   }
@@ -49,17 +52,17 @@ const quizSlice: Slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getQuestions.pending, (state) => {
-        state.loading = true;
+        state.loading = !initialState.loading;
       })
       .addCase(getQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
         state.questions = action.payload;
         state.currentQuestionIndex = initialState.currentQuestionIndex;
         state.answers = initialState.answers;
         state.score = initialState.score;
-        state.loading = false;
+        state.loading = initialState.loading;
       })
-      .addCase(getQuestions.rejected, (state) => {
-        state.loading = false;
+      .addCase(getQuestions.rejected, (state, action) => {
+        state.loading = initialState.loading;
       })
   }
 });
