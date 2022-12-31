@@ -7,8 +7,7 @@ import { answerQuestion, nextQuestion } from '../store/features/quiz';
 const GamePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [timeLeft, setTimeLeft] = React.useState(60);
-  const { currentQuestionIndex, questions } = useAppSelector((state) => state.quiz);
-  const [availableAnswers, setAvailableAnswers] = React.useState<string[]>([]);
+  const { currentQuestionIndex, questions, availableAnswers } = useAppSelector((state) => state.quiz);
 
   const handleAnswer = (answer: string): void => {
     dispatch(answerQuestion({ answer }));
@@ -20,9 +19,7 @@ const GamePage: React.FC = () => {
     }
   }
 
-  const handleEndGame = (): void => {
-    dispatch(setStage('END'));
-  }
+  const handleEndGame = () => dispatch(setStage('END'));
 
   // TODO: save timer to state
   React.useEffect(() => {
@@ -33,10 +30,6 @@ const GamePage: React.FC = () => {
       clearInterval(interval);
     }
   }, [timeLeft, dispatch]);
-
-  React.useEffect(() => {
-    setAvailableAnswers([questions[currentQuestionIndex].correct_answer, ...questions[currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random()));
-  }, [currentQuestionIndex, questions]);
 
   return (
     <React.Fragment>

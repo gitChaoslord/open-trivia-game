@@ -9,6 +9,7 @@ const initialState: QuizState = {
   score: 0,
   currentQuestionIndex: 0,
   answers: [],
+  availableAnswers: [],
   loading: false
 }
 
@@ -34,7 +35,6 @@ const quizSlice: Slice = createSlice({
     answerQuestion: (state, action) => {
       const currentQuestion = state.questions[state.currentQuestionIndex];
       state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
-
       state.answers.push({
         question: currentQuestion.question,
         answer: action.payload.answer,
@@ -45,6 +45,7 @@ const quizSlice: Slice = createSlice({
     nextQuestion: (state) => {
       if (state.currentQuestionIndex < state.questions.length) {
         state.currentQuestionIndex += 1;
+        state.availableAnswers = [state.questions[state.currentQuestionIndex].correct_answer, ...state.questions[state.currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random());
       }
     },
 
@@ -56,7 +57,9 @@ const quizSlice: Slice = createSlice({
       })
       .addCase(getQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
         state.questions = action.payload;
+        console.log(action.payload);
         state.currentQuestionIndex = initialState.currentQuestionIndex;
+        state.availableAnswers = [state.questions[state.currentQuestionIndex].correct_answer, ...state.questions[state.currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random());
         state.answers = initialState.answers;
         state.score = initialState.score;
         state.loading = initialState.loading;

@@ -23,5 +23,6 @@ export interface QuizState {
   score: number,
   currentQuestionIndex: number,
   answers: Answer[];
+  availableAnswers: string[];
   loading: boolean;
 }
