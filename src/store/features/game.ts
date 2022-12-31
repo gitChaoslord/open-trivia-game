@@ -1,43 +1,70 @@
-import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
-import { QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
+import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import api from "../../api";
+import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
+import { getQuestions } from "./quiz";
 
-export interface GameState {
-  stage: Stage;
-  difficulty: QuestionDifficultyOptions;
-  questionNumber: QuestionNumberOptions;
-  questionType: QuestionTypeOptions;
-  questionCategory: QuestionCategoryOptions;
-
-}
+export const getCategories = createAsyncThunk(
+  "quiz/categories",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.OpenTDBService.getCategories();
+      return response.trivia_categories;
+    } catch (rejected: any) {
+      return rejectWithValue(rejected);
+    }
+  }
+)
 
 const initialState: GameState = {
   stage: 'INIT',
   difficulty: "any",
   questionNumber: 10,
   questionType: "all",
-  questionCategory: 10
+  questionCategory: 10,
+  categories: [],
+  categoriesLoading: false,
+  categoriesInitialized: false
 }
 
 const gameSlice: Slice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setStage: (state: GameState, action: PayloadAction<Stage>) => {
+    setStage: (state, action: PayloadAction<Stage>) => {
       state.stage = action.payload;
     },
-    setDifficulty: (state: GameState, action: PayloadAction<QuestionDifficultyOptions>) => {
+    setDifficulty: (state, action: PayloadAction<QuestionDifficultyOptions>) => {
       state.difficulty = action.payload;
     },
-    setQuestionNumbmer: (state: GameState, action: PayloadAction<QuestionNumberOptions>) => {
+    setQuestionNumbmer: (state, action: PayloadAction<QuestionNumberOptions>) => {
       state.questionNumber = action.payload;
     },
-    setQuestionType: (state: GameState, action: PayloadAction<QuestionTypeOptions>) => {
+    setQuestionType: (state, action: PayloadAction<QuestionTypeOptions>) => {
       state.questionType = action.payload;
     },
-    setQuestionCategory: (state: GameState, action: PayloadAction<QuestionCategoryOptions>) => {
+    setQuestionCategory: (state, action: PayloadAction<number>) => {
       state.questionCategory = action.payload;
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCategories.pending, (state) => {
+        state.categoriesLoading = true;
+      })
+      .addCase(getCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
+        state.categoriesLoading = false;
+        state.categoriesInitialized = true;
+      })
+      .addCase(getCategories.rejected, (state) => {
+        state.categoriesLoading = false;
+      })
+
+      /* ---- EXTERNAL: ---- */
+      .addCase(getQuestions.fulfilled, (state) => {
+        state.stage = 'GAME';
+      })
+  }
 });
 
 export const { setStage, setDifficulty, setQuestionNumbmer, setQuestionType, setQuestionCategory } = gameSlice.actions;

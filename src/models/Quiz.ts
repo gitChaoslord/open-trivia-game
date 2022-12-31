@@ -12,3 +12,17 @@ export interface Answer {
   correct_answer: string;
   is_correct: boolean;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+}
+
+export interface QuizState {
+  questions: Question[],
+  score: number,
+  currentQuestionIndex: number,
+  answers: Answer[];
+  availableAnswers: string[];
+  loading: boolean;
+}

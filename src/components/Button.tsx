@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import classnames from 'classnames';
 
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick: React.MouseEventHandler;
-  type?: 'submit' | 'button';
-  className?: string;
-  disabled?: boolean;
-};
+interface PropTypes extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> { }
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, type, className, disabled }) => {
+const Button: React.FC<PropTypes> = ({ children, onClick, type, className, disabled }) => {
   return (
-    <button onClick={onClick} type={type ? type : 'button'} disabled={disabled} className={`btn ${className}`}>
+    <button onClick={onClick} type={type} disabled={disabled} className={classnames("btn", className, { "btn-disabled": disabled })}>
       {children}
     </button>
   );

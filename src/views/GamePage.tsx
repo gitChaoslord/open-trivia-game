@@ -1,15 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
-import { RootState, useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
 import { setStage } from '../store/features/game';
 import { answerQuestion, nextQuestion } from '../store/features/quiz';
 
 const GamePage: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [timeLeft, setTimeLeft] = React.useState(60);
-  const { currentQuestionIndex, questions } = useAppSelector((state: RootState) => state.quiz);
-  const [availableAnswers, setAvailableAnswers] = React.useState<string[]>([]);
+  const { currentQuestionIndex, questions, availableAnswers } = useAppSelector((state) => state.quiz);
 
   const handleAnswer = (answer: string): void => {
     dispatch(answerQuestion({ answer }));
@@ -21,9 +19,7 @@ const GamePage: React.FC = () => {
     }
   }
 
-  const handleEndGame = (): void => {
-    dispatch(setStage('END'));
-  }
+  const handleEndGame = () => dispatch(setStage('END'));
 
   // TODO: save timer to state
   React.useEffect(() => {
@@ -35,10 +31,6 @@ const GamePage: React.FC = () => {
     }
   }, [timeLeft, dispatch]);
 
-  React.useEffect(() => {
-    setAvailableAnswers([questions[currentQuestionIndex].correct_answer, ...questions[currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random()));
-  }, [currentQuestionIndex, questions]);
-
   return (
     <React.Fragment>
       <div className="page-content relative flex-grow overflow-hidden">
@@ -48,13 +40,13 @@ const GamePage: React.FC = () => {
         <p dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} className="p-7 bg-white rounded shadow" />
 
         <div className="action-container-boolean mt-8 grid grid-cols-2">
-          {availableAnswers.map((answer: string, index: number) =>
-            <Button key={index} className="btn-primary m-1" onClick={() => {
+          {availableAnswers.map((answer) => (
+            <Button key={answer} className="btn-primary m-1" onClick={() => {
               handleAnswer(answer);
             }}>
               {answer}
             </Button>
-          )}
+          ))}
         </div>
       </div>
 

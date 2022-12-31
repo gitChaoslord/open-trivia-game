@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface FormGroupProps {
+interface PropTypes {
   name: string;
   id: string;
   options: { label: string, code: string | number }[];
@@ -8,7 +8,7 @@ interface FormGroupProps {
   selected: string | number;
 }
 
-const FormGroup: React.FC<FormGroupProps> = ({ name, id, options, handler, selected }) => {
+const FormGroup: React.FC<PropTypes> = ({ name, id, options, handler, selected }) => {
   return (
     <div className="form-group">
       <label className="form-label">{name}</label>

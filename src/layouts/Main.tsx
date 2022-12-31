@@ -1,21 +1,32 @@
 import React from 'react';
 import Footer from '../components/Footer';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Navbar } from '../components/Navbar';
-import { RootState, useAppSelector } from '../store';
+import { useAppDispatch, useAppSelector } from '../store';
+import { getCategories } from '../store/features/game';
 import GamePage from '../views/GamePage';
 import InitialPage from '../views/InitialPage';
 import ScorePage from '../views/ScorePage';
 
 const MainLayout: React.FC = () => {
-  const { stage } = useAppSelector((state: RootState) => state.game);
+  const { stage } = useAppSelector((state) => state.game);
+  const { categoriesLoading, categoriesInitialized } = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    if (!categoriesInitialized) dispatch(getCategories()).unwrap();
+  }, [dispatch, categoriesInitialized])
+
   return (
-    <React.Fragment>
+    <div className="font-mono bg-indigo-50 h-screen flex flex-col justify-between overflow-hidden">
       <Navbar />
-      {stage === 'INIT' && <InitialPage />}
-      {stage === 'GAME' && <GamePage />}
-      {stage === 'END' && <ScorePage />}
+      {categoriesLoading ? <LoadingSpinner /> : <React.Fragment>
+        {stage === 'INIT' && <InitialPage />}
+        {stage === 'GAME' && <GamePage />}
+        {stage === 'END' && <ScorePage />}
+      </React.Fragment>}
       <Footer />
-    </React.Fragment>
+    </div>
   )
 }
 export default MainLayout;

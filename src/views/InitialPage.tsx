@@ -1,39 +1,19 @@
 import React from 'react';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
-import { GameSettings, QuestionCategoryOptions, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
-import { RootState, useAppDispatch, useAppSelector } from '../store';
-import { setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType, setStage } from '../store/features/game';
+import LoadingSpinner from '../components/LoadingSpinner';
+import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '../constants/questionSettings';
+import { constructCategories } from '../helpers/utils';
+import { GameSettings } from '../models/Game';
+import { useAppDispatch, useAppSelector } from '../store';
+import { setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType } from '../store/features/game';
 import { getQuestions } from '../store/features/quiz';
 
-const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
-  { label: "Mixed", code: "any" },
-  { label: "Easy", code: "easy" },
-  { label: "Medium", code: "medium" },
-  { label: "Hard", code: "hard" }
-];
-const questionNumberSetting: { label: string, code: QuestionNumberOptions }[] = [
-  { label: "10", code: 10 },
-  { label: "15", code: 15 },
-  { label: "20", code: 20 }
-];
-const questionTypeSetting: { label: string, code: QuestionTypeOptions }[] = [
-  { label: "All", code: "all" },
-  { label: "True/False", code: "boolean" },
-  { label: "Multiple choice", code: "multiple" }
-];
-const questionCategorySetting: { label: string, code: QuestionCategoryOptions }[] = [
-  { label: "Any", code: 10 }
-];
-
 const InitialPage: React.FC = () => {
-  const appDispatch = useAppDispatch();
-  const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state: RootState) => state.game);
-  const { loading } = useAppSelector((state: RootState) => state.quiz);
-
-  const handleStartGame = (e: React.MouseEvent): void => {
-    LoadQuestions();
-  }
+  const dispatch = useAppDispatch();
+  const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state) => state.game);
+  const { categories } = useAppSelector((state) => state.game);
+  const { loading } = useAppSelector((state) => state.quiz);
 
   const LoadQuestions = React.useCallback(async () => {
     const payload: GameSettings = {
@@ -41,25 +21,13 @@ const InitialPage: React.FC = () => {
       category: questionCategory,
       type: questionType,
       difficulty: difficulty
-    }
-    await appDispatch(getQuestions(payload))
-      .unwrap()
-      .then(() => {
-        appDispatch(setStage('GAME'));
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
-  }, [questionNumber, questionType, difficulty, questionCategory, appDispatch]);
+    };
+    await dispatch(getQuestions(payload)).unwrap();
+  }, [questionNumber, questionType, difficulty, questionCategory, dispatch]);
 
   return (
     <React.Fragment>
-      {loading &&
-        <div className="page-content">
-          <div className="loading-container mb-12">
-            <div className="loading-indicator"></div>
-          </div>
-        </div>}
+      {loading && <LoadingSpinner />}
 
       {!loading &&
         <div className="page-content">
@@ -71,31 +39,31 @@ const InitialPage: React.FC = () => {
               id={'questionNumber'}
               options={questionNumberSetting}
               selected={questionNumber}
-              handler={(e: any) => appDispatch(setQuestionNumbmer(e.target.value))}
+              handler={(e: any) => dispatch(setQuestionNumbmer(e.target.value))}
             />
             <FormGroup
               name={'Difficulty'}
               id={'questionDifficulty'}
               options={questionDiffSetting}
               selected={difficulty}
-              handler={(e: any) => appDispatch(setDifficulty(e.target.value))}
+              handler={(e: any) => dispatch(setDifficulty(e.target.value))}
             />
             <FormGroup
               name={'Category'}
               id={'questionCategory'}
-              options={questionCategorySetting}
+              options={constructCategories(categories)}
               selected={questionCategory}
-              handler={(e: any) => appDispatch(setQuestionCategory(e.target.value))}
+              handler={(e: any) => dispatch(setQuestionCategory(e.target.value))}
             />
             <FormGroup
               name={'Type'}
               id={'questionType'}
               options={questionTypeSetting}
               selected={questionType}
-              handler={(e: any) => appDispatch(setQuestionType(e.target.value))}
+              handler={(e: any) => dispatch(setQuestionType(e.target.value))}
             />
           </form>
-          <Button onClick={handleStartGame} className="btn-primary">Start Game</Button>
+          <Button onClick={LoadQuestions} className="btn-primary">Start Game</Button>
         </div>}
     </React.Fragment>
   )
