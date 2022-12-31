@@ -57,7 +57,6 @@ const quizSlice: Slice = createSlice({
       })
       .addCase(getQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
         state.questions = action.payload;
-        console.log(action.payload);
         state.currentQuestionIndex = initialState.currentQuestionIndex;
         state.availableAnswers = [state.questions[state.currentQuestionIndex].correct_answer, ...state.questions[state.currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random());
         state.answers = initialState.answers;
