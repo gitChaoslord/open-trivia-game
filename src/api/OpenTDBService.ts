@@ -3,7 +3,7 @@ import { Question, Category } from "../models/Quiz";
 
 interface GetQuestionsResponse {
   response_code: number;
-  results?: Question[];
+  results: Question[];
 }
 
 interface GetCategoriesResponse {
