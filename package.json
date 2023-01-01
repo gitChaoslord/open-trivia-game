@@ -1,16 +1,16 @@
 {
-  "name": "opentrivia-quiz-game",
+  "name": "opentdb-trivia-game",
   "author": "gitChaoslord",
   "version": "1.0.0",
-  "homepage": "https://gitchaoslord.github.io/Trivia-game/",
+  "homepage": "https://gitchaoslord.github.io/opentdb-trivia-game/",
   "license": "MIT",
-  "description": "",
+  "description": "A trivia game in which you are asked questions about different topics. All questions and answers are provided by Open Trivia DB.",
   "bugs": {
-    "url": "https://github.com/gitChaoslord/Trivia-game/issues"
+    "url": "https://github.com/gitChaoslord/opentdb-trivia-game/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gitChaoslord/Trivia-game.git"
+    "url": "git+https://github.com/gitChaoslord/opentdb-trivia-game.git"
   },
   "keywords": [
     "react",
