@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import api from "../../api";
+import { cleanAnswersHtml } from "../../helpers/quiz";
 import { GameSettings } from "../../models/Game";
 import { QuizState } from '../../models/Quiz';
 import { Question } from '../../models/Quiz';
@@ -21,7 +22,18 @@ export const getQuestions = createAsyncThunk(
 
       if (response.response_code === 1) return rejectWithValue('There are not enough available questions for your criteria.');
 
-      return response.results;
+      const questions = response.results.map((question) => {
+        return {
+          ...question,
+          ...cleanAnswersHtml({
+            correctAnswer: question.correct_answer,
+            incorrectAnswers: question.incorrect_answers
+          })
+        };
+      })
+
+
+      return questions;
     } catch (rejected) {
       return rejectWithValue(rejected);
     }
