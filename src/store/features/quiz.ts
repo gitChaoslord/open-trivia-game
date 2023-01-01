@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import api from "../../api";
-import { cleanAnswersHtml } from "../../helpers/quiz";
+import { cleanQuestionContent } from "../../helpers/quiz";
 import { GameSettings } from "../../models/Game";
 import { QuizState } from '../../models/Quiz';
 import { Question } from '../../models/Quiz';
@@ -9,6 +9,7 @@ const initialState: QuizState = {
   questions: [],
   score: 0,
   currentQuestionIndex: 0,
+  currectQuestionDescription: "",
   answers: [],
   availableAnswers: [],
   loading: false
@@ -22,16 +23,7 @@ export const getQuestions = createAsyncThunk(
 
       if (response.response_code === 1) return rejectWithValue('There are not enough available questions for your criteria.');
 
-      const questions = response.results.map((question) => {
-        return {
-          ...question,
-          ...cleanAnswersHtml({
-            correctAnswer: question.correct_answer,
-            incorrectAnswers: question.incorrect_answers
-          })
-        };
-      })
-
+      const questions = response.results.map((question) => cleanQuestionContent(question));
 
       return questions;
     } catch (rejected) {
@@ -57,6 +49,7 @@ const quizSlice: Slice = createSlice({
     nextQuestion: (state) => {
       if (state.currentQuestionIndex < state.questions.length) {
         state.currentQuestionIndex += 1;
+        state.currectQuestionDescription = state.questions[state.currentQuestionIndex].question;
         state.availableAnswers = [state.questions[state.currentQuestionIndex].correct_answer, ...state.questions[state.currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random());
       }
     },
@@ -70,12 +63,17 @@ const quizSlice: Slice = createSlice({
       .addCase(getQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
         state.questions = action.payload;
         state.currentQuestionIndex = initialState.currentQuestionIndex;
-        state.availableAnswers = [state.questions[state.currentQuestionIndex].correct_answer, ...state.questions[state.currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random());
+
+        const initialQuestion = state.questions[initialState.currentQuestionIndex];
+
+        state.availableAnswers = [initialQuestion.correct_answer, ...initialQuestion.incorrect_answers].sort((a, b) => 0.5 - Math.random());
+        state.currectQuestionDescription = initialQuestion.question;
+
         state.answers = initialState.answers;
         state.score = initialState.score;
         state.loading = initialState.loading;
       })
-      .addCase(getQuestions.rejected, (state, action) => {
+      .addCase(getQuestions.rejected, (state) => {
         state.loading = initialState.loading;
       })
   }

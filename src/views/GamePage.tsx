@@ -7,7 +7,7 @@ import { answerQuestion, nextQuestion } from '../store/features/quiz';
 const GamePage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [timeLeft, setTimeLeft] = React.useState(60);
-  const { currentQuestionIndex, questions, availableAnswers } = useAppSelector((state) => state.quiz);
+  const { currentQuestionIndex, currectQuestionDescription, questions, availableAnswers } = useAppSelector((state) => state.quiz);
 
   const handleAnswer = (answer: string): void => {
     dispatch(answerQuestion({ answer }));
@@ -35,9 +35,9 @@ const GamePage: React.FC = () => {
     <React.Fragment>
       <div className="page-content relative flex-grow overflow-hidden">
         <p className="timer-container">{timeLeft}</p>
-        <p className="question-counter">{currentQuestionIndex + 1}/ {questions.length} </p>
+        <p className="question-counter">{currentQuestionIndex + 1}{" / "}{questions.length} </p>
 
-        <p dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} className="p-7 bg-white rounded shadow" />
+        <p className="p-7 bg-white rounded shadow">{currectQuestionDescription}</p>
 
         <div className="action-container-boolean mt-8 grid grid-cols-2">
           {availableAnswers.map((answer) => (
