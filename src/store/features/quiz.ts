@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
 import { cleanQuestionContent } from "../../helpers/quiz";
 import { GameSettings } from "../../models/Game";
@@ -32,18 +32,18 @@ export const getQuestions = createAsyncThunk(
   }
 )
 
-const quizSlice: Slice = createSlice({
+const quizSlice = createSlice({
   name: 'quiz',
   initialState,
   reducers: {
-    answerQuestion: (state, action) => {
+    answerQuestion: (state, action: PayloadAction<{ answer: string }>) => {
       const currentQuestion = state.questions[state.currentQuestionIndex];
       state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
       state.answers.push({
         question: currentQuestion.question,
         answer: action.payload.answer,
         correct_answer: currentQuestion.correct_answer,
-        is_correct: action.payload.anwer === currentQuestion.correct_answer
+        is_correct: action.payload.answer === currentQuestion.correct_answer
       });
     },
     nextQuestion: (state) => {

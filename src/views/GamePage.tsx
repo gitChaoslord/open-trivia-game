@@ -15,7 +15,7 @@ const GamePage: React.FC = () => {
       dispatch(setStage('END'));
     }
     else {
-      dispatch(nextQuestion({}));
+      dispatch(nextQuestion());
     }
   }
 
