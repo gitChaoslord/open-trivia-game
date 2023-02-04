@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
 import { cleanQuestionContent } from "../../helpers/quiz";
 import { GameSettings } from "../../models/Game";
@@ -32,25 +32,34 @@ export const getQuestions = createAsyncThunk(
   }
 )
 
-const quizSlice: Slice = createSlice({
+const quizSlice = createSlice({
   name: 'quiz',
   initialState,
   reducers: {
-    answerQuestion: (state, action) => {
+    answerQuestion: (state, action: PayloadAction<{ answer: string }>) => {
       const currentQuestion = state.questions[state.currentQuestionIndex];
       state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
       state.answers.push({
         question: currentQuestion.question,
         answer: action.payload.answer,
         correct_answer: currentQuestion.correct_answer,
-        is_correct: action.payload.anwer === currentQuestion.correct_answer
+        is_correct: action.payload.answer === currentQuestion.correct_answer
       });
     },
     nextQuestion: (state) => {
       if (state.currentQuestionIndex < state.questions.length) {
         state.currentQuestionIndex += 1;
         state.currectQuestionDescription = state.questions[state.currentQuestionIndex].question;
-        state.availableAnswers = [state.questions[state.currentQuestionIndex].correct_answer, ...state.questions[state.currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random());
+        state.availableAnswers = [
+          state.questions[state.currentQuestionIndex].correct_answer,
+          ...state.questions[state.currentQuestionIndex].incorrect_answers
+        ].sort((a, b) => {
+          if (state.questions[state.currentQuestionIndex].type === 'boolean') {
+            return a.length - b.length;
+          } else {
+            return 0.5 - Math.random();
+          };
+        });
       }
     },
 
@@ -66,7 +75,17 @@ const quizSlice: Slice = createSlice({
 
         const initialQuestion = state.questions[initialState.currentQuestionIndex];
 
-        state.availableAnswers = [initialQuestion.correct_answer, ...initialQuestion.incorrect_answers].sort((a, b) => 0.5 - Math.random());
+        state.availableAnswers = [
+          initialQuestion.correct_answer,
+          ...initialQuestion.incorrect_answers
+        ].sort((a, b) => {
+          if (initialQuestion.type === 'boolean') {
+            return a.length - b.length;
+          } else {
+            return 0.5 - Math.random();
+          };
+        });
+
         state.currectQuestionDescription = initialQuestion.question;
 
         state.answers = initialState.answers;
