@@ -50,7 +50,16 @@ const quizSlice = createSlice({
       if (state.currentQuestionIndex < state.questions.length) {
         state.currentQuestionIndex += 1;
         state.currectQuestionDescription = state.questions[state.currentQuestionIndex].question;
-        state.availableAnswers = [state.questions[state.currentQuestionIndex].correct_answer, ...state.questions[state.currentQuestionIndex].incorrect_answers].sort((a, b) => 0.5 - Math.random());
+        state.availableAnswers = [
+          state.questions[state.currentQuestionIndex].correct_answer,
+          ...state.questions[state.currentQuestionIndex].incorrect_answers
+        ].sort((a, b) => {
+          if (state.questions[state.currentQuestionIndex].type === 'boolean') {
+            return a.length - b.length;
+          } else {
+            return 0.5 - Math.random();
+          };
+        });
       }
     },
 
@@ -66,7 +75,17 @@ const quizSlice = createSlice({
 
         const initialQuestion = state.questions[initialState.currentQuestionIndex];
 
-        state.availableAnswers = [initialQuestion.correct_answer, ...initialQuestion.incorrect_answers].sort((a, b) => 0.5 - Math.random());
+        state.availableAnswers = [
+          initialQuestion.correct_answer,
+          ...initialQuestion.incorrect_answers
+        ].sort((a, b) => {
+          if (initialQuestion.type === 'boolean') {
+            return a.length - b.length;
+          } else {
+            return 0.5 - Math.random();
+          };
+        });
+
         state.currectQuestionDescription = initialQuestion.question;
 
         state.answers = initialState.answers;
