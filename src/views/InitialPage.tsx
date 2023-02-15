@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import Button from '../components/Button';
 import FormGroup from '../components/FormGroup';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -22,7 +23,9 @@ const InitialPage: React.FC = () => {
       type: questionType,
       difficulty: difficulty
     };
-    await dispatch(getQuestions(payload)).unwrap();
+    await dispatch(getQuestions(payload)).unwrap().catch((error) => {
+      toast.error(error);
+    });
   }, [questionNumber, questionType, difficulty, questionCategory, dispatch]);
 
   return (
