@@ -25,7 +25,7 @@ const InitialPage: React.FC = () => {
       difficulty: difficulty
     };
     await dispatch(getQuestions(payload)).unwrap().catch((error) => {
-      toast.error(error);
+      toast.error(error, { toastId: "question-error" }); // Setting ID will prevent toast duplication 
     });
   }, [questionNumber, questionType, difficulty, questionCategory, dispatch]);
 

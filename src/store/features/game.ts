@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
 import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
 import { getQuestions } from "./quiz";
@@ -26,7 +26,7 @@ const initialState: GameState = {
   categoriesInitialized: false
 }
 
-const gameSlice: Slice = createSlice({
+const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
