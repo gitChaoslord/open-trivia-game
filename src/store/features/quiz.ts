@@ -21,14 +21,12 @@ export const getQuestions = createAsyncThunk(
     try {
       const response = await api.OpenTDBService.getQuestions(payload);
 
+      if (response.response_code === 0) return response.results.map((question) => cleanQuestionContent(question));
       if (response.response_code === 1) return rejectWithValue('There are not enough available questions for your criteria');
+      return rejectWithValue('Unable to retrieve questions');
 
-      const questions = response.results.map((question) => cleanQuestionContent(question));
-
-      return questions;
     } catch (rejected) {
-      // return rejectWithValue(rejected);
-      return rejectWithValue('Unable to retrieve questions')
+      return rejectWithValue(rejected);
     }
   }
 )
