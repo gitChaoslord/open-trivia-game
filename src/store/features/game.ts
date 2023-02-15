@@ -10,7 +10,7 @@ export const getCategories = createAsyncThunk(
       const response = await api.OpenTDBService.getCategories();
       return response.trivia_categories;
     } catch (rejected: any) {
-      return rejectWithValue(rejected);
+      return rejectWithValue('Unable to retrieve categories');
     }
   }
 )

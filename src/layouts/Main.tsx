@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Navbar } from '../components/Navbar';
@@ -14,7 +15,9 @@ const MainLayout: React.FC = () => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    if (!categoriesInitialized) dispatch(getCategories()).unwrap();
+    if (!categoriesInitialized) dispatch(getCategories()).unwrap().catch((error) => {
+      toast.error(error);
+    });
   }, [dispatch, categoriesInitialized])
 
   return (
