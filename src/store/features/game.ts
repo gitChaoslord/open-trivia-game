@@ -20,7 +20,7 @@ const initialState: GameState = {
   difficulty: "any",
   questionNumber: 10,
   questionType: "all",
-  questionCategory: 10,
+  questionCategory: 0,
   categories: [],
   categoriesLoading: false,
   categoriesInitialized: false
@@ -52,7 +52,7 @@ const gameSlice: Slice = createSlice({
         state.categoriesLoading = true;
       })
       .addCase(getCategories.fulfilled, (state, action) => {
-        state.categories = action.payload;
+        state.categories = [{ id: 0, name: "Any category" }, ...action.payload];
         state.categoriesLoading = false;
         state.categoriesInitialized = true;
       })

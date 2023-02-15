@@ -11,10 +11,11 @@ import { setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType
 import { getQuestions } from '../store/features/quiz';
 
 const InitialPage: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state) => state.game);
   const { categories } = useAppSelector((state) => state.game);
   const { loading } = useAppSelector((state) => state.quiz);
+  const dispatch = useAppDispatch();
+
 
   const LoadQuestions = React.useCallback(async () => {
     const payload: GameSettings = {
@@ -44,6 +45,7 @@ const InitialPage: React.FC = () => {
               selected={questionNumber}
               handler={(e: any) => dispatch(setQuestionNumbmer(e.target.value))}
             />
+
             <FormGroup
               name={'Difficulty'}
               id={'questionDifficulty'}
@@ -51,13 +53,15 @@ const InitialPage: React.FC = () => {
               selected={difficulty}
               handler={(e: any) => dispatch(setDifficulty(e.target.value))}
             />
-            <FormGroup
+
+            {categories.length ? <FormGroup
               name={'Category'}
               id={'questionCategory'}
               options={constructCategories(categories)}
               selected={questionCategory}
               handler={(e: any) => dispatch(setQuestionCategory(e.target.value))}
-            />
+            /> : null}
+
             <FormGroup
               name={'Type'}
               id={'questionType'}
