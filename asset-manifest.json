@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/opentdb-trivia-game/static/css/main.65f9a95b.css",
-    "main.js": "/opentdb-trivia-game/static/js/main.47d3d805.js",
+    "main.css": "/opentdb-trivia-game/static/css/main.b1980951.css",
+    "main.js": "/opentdb-trivia-game/static/js/main.f46eba95.js",
     "index.html": "/opentdb-trivia-game/index.html",
-    "main.65f9a95b.css.map": "/opentdb-trivia-game/static/css/main.65f9a95b.css.map",
-    "main.47d3d805.js.map": "/opentdb-trivia-game/static/js/main.47d3d805.js.map"
+    "main.b1980951.css.map": "/opentdb-trivia-game/static/css/main.b1980951.css.map",
+    "main.f46eba95.js.map": "/opentdb-trivia-game/static/js/main.f46eba95.js.map"
   },
   "entrypoints": [
-    "static/css/main.65f9a95b.css",
-    "static/js/main.47d3d805.js"
+    "static/css/main.b1980951.css",
+    "static/js/main.f46eba95.js"
   ]
 }
