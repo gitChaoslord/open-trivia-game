@@ -1,4 +1,4 @@
-import { AnyAction, combineReducers } from "redux";
+import { AnyAction, combineReducers } from "@reduxjs/toolkit";
 import { PersistConfig } from "redux-persist";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
