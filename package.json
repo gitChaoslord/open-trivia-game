@@ -1,7 +1,7 @@
 {
   "name": "opentdb-trivia-game",
   "author": "gitChaoslord",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://gitchaoslord.github.io/opentdb-trivia-game/",
   "license": "MIT",
   "description": "A trivia game in which you are asked questions about different topics. All questions and answers are provided by Open Trivia DB.",
@@ -23,21 +23,18 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "classnames": "^2.3.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^8.0.5",
-    "react-router-dom": "^6.0.0",
-    "react-scripts": "5.0.0",
-    "react-toastify": "^9.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.0",
+    "react-router-dom": "^6.13.0",
+    "react-toastify": "^9.1.3",
     "redux-persist": "^6.0.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "vite",
+    "build": "vite build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject",
     "depcruise": "npx depcruise --config .dependency-cruiser.js src"
   },
   "eslintConfig": {
@@ -58,15 +55,17 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^12.20.36",
-    "@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.10",
-    "@types/react-redux": "^7.1.20",
-    "@types/react-router-dom": "^5.3.2",
+    "@types/node": "^20.3.1",
+    "@types/react": "^18.2.12",
+    "@types/react-dom": "^18.2.5",
+    "@types/react-redux": "^7.1.25",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.2",
     "dependency-cruiser": "^12.11.0",
     "gh-pages": "^3.2.3",
     "postcss": "^8.4.8",
-    "tailwindcss": "^3.0.23"
+    "tailwindcss": "^3.0.23",
+    "vite": "^4.3.9"
   }
 }
