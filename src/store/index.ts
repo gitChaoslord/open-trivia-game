@@ -6,7 +6,7 @@ import { persistStore } from "redux-persist";
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
-  devTools: process.env.NODE_ENV !== 'production'
+  devTools: import.meta.env.DEV
 });
 
 export const persistor = persistStore(store);

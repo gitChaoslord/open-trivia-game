@@ -11,7 +11,7 @@ interface GetCategoriesResponse {
 }
 
 export default class OpenTDBService {
-  baseUrl: string = 'https://opentdb.com';
+  baseUrl = 'https://opentdb.com';
 
   constructor(url?: string) {
     if (url) {

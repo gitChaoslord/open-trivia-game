@@ -57,7 +57,7 @@ const quizSlice = createSlice({
             return a.length - b.length;
           } else {
             return 0.5 - Math.random();
-          };
+          }
         });
       }
     },
@@ -82,7 +82,7 @@ const quizSlice = createSlice({
             return a.length - b.length;
           } else {
             return 0.5 - Math.random();
-          };
+          }
         });
 
         state.currectQuestionDescription = initialQuestion.question;
