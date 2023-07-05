@@ -1,10 +1,10 @@
 import OpenTDBService from "./OpenTDBService";
 
-interface ApiOBject {
+interface OpenTDBApi {
     OpenTDBService: OpenTDBService;
 }
 
-const api: ApiOBject = {
+const api: OpenTDBApi = {
     OpenTDBService: new OpenTDBService()
 }
 
