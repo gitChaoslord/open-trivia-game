@@ -4,12 +4,12 @@ import { useAppDispatch, useAppSelector } from '../store';
 import { setStage } from '../store/features/game';
 
 const ScorePage: React.FC = () => {
+  const answers = useAppSelector((state) => state.quiz.answers);
+  const score = useAppSelector((state) => state.quiz.score);
+  const questions = useAppSelector((state) => state.quiz.questions);
   const dispatch = useAppDispatch();
-  const { answers, score, questions } = useAppSelector((state) => state.quiz);
 
-  const handleRestart = (): void => {
-    dispatch(setStage('INIT'));
-  };
+  const handleRestart = () => dispatch(setStage('INIT'));
 
   return (
     <div className="page-content overflow-y-hidden">

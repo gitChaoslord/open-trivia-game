@@ -11,11 +11,13 @@ import { setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType
 import { getQuestions } from '../store/features/quiz';
 
 const InitialPage: React.FC = () => {
-  const { questionNumber, questionType, questionCategory, difficulty } = useAppSelector((state) => state.game);
-  const { categories } = useAppSelector((state) => state.game);
-  const { loading } = useAppSelector((state) => state.quiz);
+  const questionNumber = useAppSelector((state) => state.game.questionNumber);
+  const questionType = useAppSelector((state) => state.game.questionType);
+  const questionCategory = useAppSelector((state) => state.game.questionCategory);
+  const difficulty = useAppSelector((state) => state.game.difficulty);
+  const categories = useAppSelector((state) => state.game.categories);
+  const loading = useAppSelector((state) => state.quiz.loading);
   const dispatch = useAppDispatch();
-
 
   const LoadQuestions = React.useCallback(async () => {
     const payload: GameSettings = {

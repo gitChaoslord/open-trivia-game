@@ -10,20 +10,21 @@ import InitialPage from '../views/InitialPage';
 import ScorePage from '../views/ScorePage';
 
 const MainLayout: React.FC = () => {
-  const { stage } = useAppSelector((state) => state.game);
-  const { categoriesLoading, categoriesInitialized } = useAppSelector((state) => state.game);
+  const stage = useAppSelector((state) => state.game.stage);
+  const loading = useAppSelector((state) => state.game.categoriesLoading);
+  const initialized = useAppSelector((state) => state.game.categoriesInitialized);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    if (!categoriesInitialized) dispatch(getCategories()).unwrap().catch((error) => {
+    if (!initialized) dispatch(getCategories()).unwrap().catch((error) => {
       toast.error(error);
     });
-  }, [dispatch, categoriesInitialized])
+  }, [dispatch, initialized])
 
   return (
     <div className="font-mono bg-indigo-50 h-screen flex flex-col justify-between overflow-hidden">
       <Navbar />
-      {categoriesLoading ? <LoadingSpinner /> : <React.Fragment>
+      {loading ? <LoadingSpinner /> : <React.Fragment>
         {stage === 'INIT' && <InitialPage />}
         {stage === 'GAME' && <GamePage />}
         {stage === 'END' && <ScorePage />}
