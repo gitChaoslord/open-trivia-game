@@ -1,35 +1,49 @@
 import React from 'react';
+import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import Button from '../components/Button';
-import FormGroup from '../components/FormGroup';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '../constants/questionSettings';
 import { constructCategories } from '../helpers/utils';
-import { GameSettings } from '../models/Game';
+import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
 import { useAppDispatch, useAppSelector } from '../store';
-import { setDifficulty, setQuestionCategory, setQuestionNumbmer, setQuestionType } from '../store/features/game';
 import { getQuestions } from '../store/features/quiz';
+
+interface FormModel {
+  questionNumber: QuestionNumberOptions;
+  questionCategory: string;
+  questionType: QuestionTypeOptions;
+  questionDifficulty: QuestionDifficultyOptions;
+}
 
 const InitialPage: React.FC = () => {
   const questionNumber = useAppSelector((state) => state.game.questionNumber);
   const questionType = useAppSelector((state) => state.game.questionType);
   const questionCategory = useAppSelector((state) => state.game.questionCategory);
-  const difficulty = useAppSelector((state) => state.game.difficulty);
+  const questionDifficulty = useAppSelector((state) => state.game.difficulty);
   const categories = useAppSelector((state) => state.game.categories);
   const loading = useAppSelector((state) => state.quiz.loading);
   const dispatch = useAppDispatch();
 
-  const LoadQuestions = React.useCallback(async () => {
-    const payload: GameSettings = {
-      questions: questionNumber,
-      category: questionCategory,
-      type: questionType,
-      difficulty: difficulty
-    };
-    await dispatch(getQuestions(payload)).unwrap().catch((error) => {
+  const { handleSubmit, register } = useForm<FormModel>({
+    defaultValues: {
+      questionNumber,
+      questionType,
+      questionCategory,
+      questionDifficulty
+    }
+  });
+
+  const loadQuestions = React.useCallback(async (data: FormModel) => {
+    await dispatch(getQuestions({
+      number: data.questionNumber,
+      category: data.questionCategory,
+      type: data.questionType,
+      difficulty: data.questionDifficulty
+    })).unwrap().catch((error) => {
       toast.error(error, { toastId: "question-error" }); // Setting ID will prevent toast duplication 
     });
-  }, [questionNumber, questionType, difficulty, questionCategory, dispatch]);
+  }, [dispatch]);
 
   return (
     <React.Fragment>
@@ -37,42 +51,76 @@ const InitialPage: React.FC = () => {
 
       {!loading &&
         <div className="page-content">
+
           <h1 className="text-4xl text-indigo-500 text-center">Current settings</h1>
-          <form className="lg:w-auto border-b-2 text-lg border-indigo-500 flex flex-col justify-between bg-white my-6 p-5 rounded ">
 
-            <FormGroup
-              name={'Number of questions'}
-              id={'questionNumber'}
-              options={questionNumberSetting}
-              selected={questionNumber}
-              handler={(e: any) => dispatch(setQuestionNumbmer(e.target.value))}
-            />
+          <form
+            onSubmit={handleSubmit((data) => loadQuestions(data))}
+            className="lg:w-auto text-lg flex flex-col justify-between"
+          >
+            <div className="border-b-2 border-indigo-500 bg-white my-6 p-5 rounded">
 
-            <FormGroup
-              name={'Difficulty'}
-              id={'questionDifficulty'}
-              options={questionDiffSetting}
-              selected={difficulty}
-              handler={(e: any) => dispatch(setDifficulty(e.target.value))}
-            />
+              <div className="form-group">
+                <label className="form-label">Number of questions</label>
+                <select
+                  {...register("questionNumber")}
+                  id="questionNumber"
+                  className="form-control"
+                >
+                  {questionNumberSetting.map((option, index) => (
+                    <option value={option.code} key={`${"questionNumber"}-${index}`}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
 
-            {categories.length ? <FormGroup
-              name={'Category'}
-              id={'questionCategory'}
-              options={constructCategories(categories)}
-              selected={questionCategory}
-              handler={(e: any) => dispatch(setQuestionCategory(e.target.value))}
-            /> : null}
+              <div className="form-group">
+                <label className="form-label">Difficulty</label>
+                <select
+                  {...register("questionDifficulty")}
+                  id="questionDifficulty"
+                  className="form-control"
+                >
+                  {questionDiffSetting.map((option, index) => (
+                    <option value={option.code} key={`${"questionDifficulty"}-${index}`}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
 
-            <FormGroup
-              name={'Type'}
-              id={'questionType'}
-              options={questionTypeSetting}
-              selected={questionType}
-              handler={(e: any) => dispatch(setQuestionType(e.target.value))}
-            />
+              {categories.length && <div className="form-group">
+                <label className="form-label">Category</label>
+                <select
+                  {...register("questionCategory")}
+                  id="questionCategory"
+                  className="form-control"
+                >
+                  {constructCategories(categories).map((option, index) => (
+                    <option value={option.code} key={`${"questionCategory"}-${index}`}>{option.label}</option>
+                  ))}
+                </select>
+              </div>}
+
+              <div className="form-group">
+                <label className="form-label">Type</label>
+                <select
+                  {...register("questionType")}
+                  id="questionType"
+                  className="form-control"
+                >
+                  {questionTypeSetting.map((option, index) => (
+                    <option value={option.code} key={`${'questionType'}-${index}`}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="btn-primary mx-auto"
+            >
+              Start Game
+            </Button>
+
           </form>
-          <Button onClick={LoadQuestions} className="btn-primary">Start Game</Button>
         </div>}
     </React.Fragment>
   )

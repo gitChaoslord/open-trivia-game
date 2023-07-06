@@ -28,18 +28,22 @@ export default class OpenTDBService {
     }
   }
 
-  async getQuestions(payload: GameSettings): Promise<GetQuestionsResponse> {
-    let finalUrl = `${this.baseUrl}/api.php`;
-    finalUrl += `?amount=${payload.questions}`;
-    finalUrl += `${payload?.type === 'all' ? '' : `&type=${payload.type}`}`;
-    finalUrl += `${payload?.difficulty === 'any' ? '' : `&difficulty=${payload.difficulty}`}`;
-    // finalUrl += `${payload?.category === 10 ? '' : `&category=${payload.category}`}`;
-    finalUrl += `${payload?.category ? `&category=${payload.category}` : ""}`;
+  async getQuestions({ number, type, difficulty, category }: GameSettings): Promise<GetQuestionsResponse> {
+
+    const queryUrl = new URL("/api.php", this.baseUrl);
+
+    queryUrl.searchParams.set('amount', number);
+    if (difficulty !== 'any') queryUrl.searchParams.set('difficulty', difficulty);
+    // INFO: '0' is a custom category i created to represent any category
+    // see /src/store/features/game.ts line 55
+    // providing seems to work as intended but i decided against it since their example does not include it either
+    if (category !== '0') queryUrl.searchParams.set('category', category);
+    if (type !== 'all') queryUrl.searchParams.set('type', type);
 
     try {
-      const response: any = await fetch(finalUrl);
+      const response = await fetch(queryUrl);
       return await Promise.resolve(response.json());
-    } catch (error: any) {
+    } catch (error) {
       return await Promise.reject(error)
     }
   }

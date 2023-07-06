@@ -1,14 +1,14 @@
 import { Category } from "./Quiz";
 
 export type Stage = 'INIT' | 'GAME' | 'END';
-export type QuestionNumberOptions = 10 | 15 | 20;
+export type QuestionNumberOptions = "10" | "15" | "20";
 export type QuestionDifficultyOptions = 'easy' | 'medium' | 'hard' | 'any';
 export type QuestionTypeOptions = 'boolean' | 'multiple' | 'all';
 
 export interface GameSettings {
-  questions: QuestionNumberOptions;
+  number: QuestionNumberOptions;
   difficulty: QuestionDifficultyOptions
-  category: number
+  category: string
   type: QuestionTypeOptions
 }
 
@@ -17,7 +17,7 @@ export interface GameState {
   difficulty: QuestionDifficultyOptions;
   questionNumber: QuestionNumberOptions;
   questionType: QuestionTypeOptions;
-  questionCategory: number;
+  questionCategory: string;
   categories: Category[];
   categoriesLoading: boolean;
   categoriesInitialized: boolean;

@@ -1,5 +1,4 @@
 import { AnyAction, combineReducers } from "@reduxjs/toolkit";
-import { PersistConfig } from "redux-persist";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import { GameState } from "../models/Game";
@@ -7,7 +6,7 @@ import { QuizState } from "../models/Quiz";
 import game from "./features/game";
 import quiz from "./features/quiz";
 
-const persistConfig: PersistConfig<any> = {
+const persistConfig = {
   key: 'trivia-game-',
   storage,
   throttle: 200

@@ -17,7 +17,7 @@ const initialState: QuizState = {
 
 export const getQuestions = createAsyncThunk(
   "quiz/getQuestions",
-  async (payload: GameSettings, { rejectWithValue }): Promise<Question[] | any> => {
+  async (payload: GameSettings, { rejectWithValue }) => {
     try {
       const response = await api.OpenTDBService.getQuestions(payload);
 
@@ -29,7 +29,7 @@ export const getQuestions = createAsyncThunk(
       return rejectWithValue(rejected);
     }
   }
-)
+);
 
 const quizSlice = createSlice({
   name: 'quiz',

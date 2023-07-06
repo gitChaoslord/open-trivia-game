@@ -9,7 +9,7 @@ export const getCategories = createAsyncThunk(
     try {
       const response = await api.OpenTDBService.getCategories();
       return response.trivia_categories;
-    } catch (rejected: any) {
+    } catch (rejected) {
       return rejectWithValue('Unable to retrieve categories');
     }
   }
@@ -18,9 +18,9 @@ export const getCategories = createAsyncThunk(
 const initialState: GameState = {
   stage: 'INIT',
   difficulty: "any",
-  questionNumber: 10,
+  questionNumber: "10",
   questionType: "all",
-  questionCategory: 0,
+  questionCategory: "0",
   categories: [],
   categoriesLoading: false,
   categoriesInitialized: false
@@ -42,7 +42,7 @@ const gameSlice = createSlice({
     setQuestionType: (state, action: PayloadAction<QuestionTypeOptions>) => {
       state.questionType = action.payload;
     },
-    setQuestionCategory: (state, action: PayloadAction<number>) => {
+    setQuestionCategory: (state, action: PayloadAction<string>) => {
       state.questionCategory = action.payload;
     }
   },
@@ -63,6 +63,13 @@ const gameSlice = createSlice({
       /* ---- EXTERNAL: ---- */
       .addCase(getQuestions.fulfilled, (state) => {
         state.stage = 'GAME';
+      })
+
+      .addCase(getQuestions.pending, (state, action) => {
+        state.difficulty = action.meta.arg.difficulty;
+        state.questionNumber = action.meta.arg.number;
+        state.questionType = action.meta.arg.type;
+        state.questionCategory = action.meta.arg.category;
       })
   }
 });

@@ -1,11 +1,11 @@
 import OpenTDBService from "./OpenTDBService";
 
 interface OpenTDBApi {
-    OpenTDBService: OpenTDBService;
+	OpenTDBService: OpenTDBService;
 }
 
 const api: OpenTDBApi = {
-    OpenTDBService: new OpenTDBService()
+	OpenTDBService: new OpenTDBService()
 }
 
 export default api;
