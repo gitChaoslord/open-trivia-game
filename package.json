@@ -1,7 +1,7 @@
 {
   "name": "opentdb-trivia-game",
   "author": "gitChaoslord",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://gitchaoslord.github.io/opentdb-trivia-game/",
   "license": "MIT",
   "description": "A trivia game in which you are asked questions about different topics. All questions and answers are provided by Open Trivia DB.",
@@ -14,8 +14,11 @@
   },
   "keywords": [
     "react",
+    "react-hook-form",
     "redux",
     "redux-toolkit",
+    "vite",
+    "tailwind",
     "typescript",
     "opentdb"
   ],
