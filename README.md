@@ -7,6 +7,6 @@
 </br>
 
 #
-This project is based on a [tutorial](https://www.youtube.com/watch?v=C9g-Zhsd_FE) i followed by Raul Terhes in order to get familiar with Redux-Toolkit and was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). I decided to forgo the use of Redux Saga as i felt it overcomplicated things and used TypeScript. I've also included game setting options for difficulty, number of questions, etc. along with saving the App State to local stoarge.
-</br>
-</br>
+This project was initially based on a [tutorial](https://www.youtube.com/watch?v=C9g-Zhsd_FE) by Raul Terhes in order to get familiar with Redux-Toolkit and React. I decided to forgo the use of Redux Saga as i felt it overcomplicated things and also added TypeScript.
+It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and was corverted to [Vite](https://vitejs.dev/). 
+I've also included game setting options for difficulty, number of questions, etc. along with saving the App State to local storage.
