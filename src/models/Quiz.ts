@@ -14,8 +14,8 @@ export interface Answer {
 }
 
 export interface Category {
-  id: number;
-  name: string;
+  label: string;
+  code: string;
 }
 
 export interface QuizState {

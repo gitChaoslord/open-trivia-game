@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import Button from '../components/Button';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '../constants/questionSettings';
-import { constructCategories } from '../helpers/utils';
 import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
 import { useAppDispatch, useAppSelector } from '../store';
 import { getQuestions } from '../store/features/quiz';
@@ -44,7 +43,6 @@ const InitialPage: React.FC = () => {
       toast.error(error, { toastId: "question-error" }); // Setting ID will prevent toast duplication 
     });
   }, [dispatch]);
-
   return (
     <React.Fragment>
       {loading && <LoadingSpinner />}
@@ -93,7 +91,7 @@ const InitialPage: React.FC = () => {
                   id="questionCategory"
                   className="form-control"
                 >
-                  {constructCategories(categories).map((option, index) => (
+                  {categories.map((option, index) => (
                     <option value={option.code} key={`${"questionCategory"}-${index}`}>{option.label}</option>
                   ))}
                 </select>

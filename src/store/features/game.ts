@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
+import { constructCategories } from "../../helpers/utils";
 import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
 import { getQuestions } from "./quiz";
 
@@ -52,7 +53,7 @@ const gameSlice = createSlice({
         state.categoriesLoading = true;
       })
       .addCase(getCategories.fulfilled, (state, action) => {
-        state.categories = [{ id: 0, name: "Any category" }, ...action.payload];
+        state.categories = constructCategories([{ id: 0, name: "Any category" }, ...action.payload]);
         state.categoriesLoading = false;
         state.categoriesInitialized = true;
       })
@@ -61,15 +62,15 @@ const gameSlice = createSlice({
       })
 
       /* ---- EXTERNAL: ---- */
-      .addCase(getQuestions.fulfilled, (state) => {
-        state.stage = 'GAME';
-      })
-
       .addCase(getQuestions.pending, (state, action) => {
         state.difficulty = action.meta.arg.difficulty;
         state.questionNumber = action.meta.arg.number;
         state.questionType = action.meta.arg.type;
         state.questionCategory = action.meta.arg.category;
+      })
+
+      .addCase(getQuestions.fulfilled, (state) => {
+        state.stage = 'GAME';
       })
   }
 });

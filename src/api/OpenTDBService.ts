@@ -1,5 +1,5 @@
 import { GameSettings } from "../models/Game";
-import { Question, Category } from "../models/Quiz";
+import { Question } from "../models/Quiz";
 
 interface GetQuestionsResponse {
   response_code: number;
@@ -7,7 +7,10 @@ interface GetQuestionsResponse {
 }
 
 interface GetCategoriesResponse {
-  trivia_categories: Category[]
+  trivia_categories: {
+    id: number;
+    name: string;
+  }[]
 }
 
 export default class OpenTDBService {
