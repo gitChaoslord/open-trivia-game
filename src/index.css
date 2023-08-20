@@ -29,10 +29,6 @@
     @apply flex justify-between lg:w-96 md:w-96 w-full;
   }
 
-  .action-container-multi {
-
-  }
-
   .btn {
    @apply focus:outline-none py-3 px-6 text-white shadow rounded
   }
