@@ -65,8 +65,8 @@ const InitialPage: React.FC = () => {
                   id="questionNumber"
                   className="form-control"
                 >
-                  {questionNumberSetting.map((option, index) => (
-                    <option value={option.code} key={`${"questionNumber"}-${index}`}>{option.label}</option>
+                  {questionNumberSetting.map((option) => (
+                    <option value={option.code} key={option.code}>{option.label}</option>
                   ))}
                 </select>
               </div>
@@ -78,21 +78,21 @@ const InitialPage: React.FC = () => {
                   id="questionDifficulty"
                   className="form-control"
                 >
-                  {questionDiffSetting.map((option, index) => (
-                    <option value={option.code} key={`${"questionDifficulty"}-${index}`}>{option.label}</option>
+                  {questionDiffSetting.map((option) => (
+                    <option value={option.code} key={option.code}>{option.label}</option>
                   ))}
                 </select>
               </div>
 
-              {categories.length && <div className="form-group">
+              {categories.length > 0 && <div className="form-group">
                 <label className="form-label">Category</label>
                 <select
                   {...register("questionCategory")}
                   id="questionCategory"
                   className="form-control"
                 >
-                  {categories.map((option, index) => (
-                    <option value={option.code} key={`${"questionCategory"}-${index}`}>{option.label}</option>
+                  {categories.map((option) => (
+                    <option value={option.code} key={option.code}>{option.label}</option>
                   ))}
                 </select>
               </div>}
@@ -104,8 +104,8 @@ const InitialPage: React.FC = () => {
                   id="questionType"
                   className="form-control"
                 >
-                  {questionTypeSetting.map((option, index) => (
-                    <option value={option.code} key={`${'questionType'}-${index}`}>{option.label}</option>
+                  {questionTypeSetting.map((option) => (
+                    <option value={option.code} key={option.code}>{option.label}</option>
                   ))}
                 </select>
               </div>
