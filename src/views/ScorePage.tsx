@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store';
-import { setStage } from '../store/features/game';
+import { setView } from '../store/features/game';
+import { gameViews } from '../constants/game';
 
 const ScorePage: React.FC = () => {
   const answers = useAppSelector((state) => state.quiz.answers);
@@ -9,7 +10,7 @@ const ScorePage: React.FC = () => {
   const questions = useAppSelector((state) => state.quiz.questions);
   const dispatch = useAppDispatch();
 
-  const handleRestart = () => dispatch(setStage('INIT'));
+  const handleRestart = () => dispatch(setView(gameViews.INIT));
 
   return (
     <React.Fragment>

@@ -1,6 +1,8 @@
+import { gameViews } from "../constants/game";
 import { Category } from "./Quiz";
+import { ValueOf } from "./utilities";
 
-export type Stage = 'INIT' | 'GAME' | 'END';
+export type GameViews = ValueOf<typeof gameViews>;
 export type QuestionNumberOptions = "10" | "15" | "20";
 export type QuestionDifficultyOptions = 'easy' | 'medium' | 'hard' | 'any';
 export type QuestionTypeOptions = 'boolean' | 'multiple' | 'all';
@@ -13,7 +15,7 @@ export interface GameSettings {
 }
 
 export interface GameState {
-  stage: Stage;
+  activeView: GameViews;
   difficulty: QuestionDifficultyOptions;
   questionNumber: QuestionNumberOptions;
   questionType: QuestionTypeOptions;

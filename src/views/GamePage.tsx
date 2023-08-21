@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store';
-import { setStage } from '../store/features/game';
+import { setView } from '../store/features/game';
 import { answerQuestion, nextQuestion } from '../store/features/quiz';
+import { gameViews } from '../constants/game';
 
 const GamePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ const GamePage: React.FC = () => {
     dispatch(answerQuestion({ answer }));
     // TODO: this should be moved into the store
     if (currentQuestionIndex === questions.length - 1) {
-      dispatch(setStage('END'));
+      dispatch(setView(gameViews.END));
     }
     else {
       dispatch(nextQuestion());
@@ -23,7 +24,7 @@ const GamePage: React.FC = () => {
   // TODO: save timer to state
   React.useEffect(() => {
     const interval = setInterval(() => {
-      timeLeft <= 0 ? dispatch(setStage('END')) : setTimeLeft(prev => prev - 1);
+      timeLeft <= 0 ? dispatch(setView(gameViews.END)) : setTimeLeft(prev => prev - 1);
     }, 1000);
     return () => {
       clearInterval(interval);

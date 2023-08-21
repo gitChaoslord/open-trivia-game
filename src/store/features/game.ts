@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
 import { constructCategories } from "../../helpers/utils";
-import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, Stage } from "../../models/Game";
+import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, GameViews } from "../../models/Game";
 import { getQuestions } from "./quiz";
+import { gameViews } from "../../constants/game";
 
 export const getCategories = createAsyncThunk(
   "quiz/categories",
@@ -17,7 +18,7 @@ export const getCategories = createAsyncThunk(
 )
 
 const initialState: GameState = {
-  stage: 'INIT',
+  activeView: gameViews.INIT,
   difficulty: "any",
   questionNumber: "10",
   questionType: "all",
@@ -31,8 +32,8 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setStage: (state, action: PayloadAction<Stage>) => {
-      state.stage = action.payload;
+    setView: (state, action: PayloadAction<GameViews>) => {
+      state.activeView = action.payload;
     },
     setDifficulty: (state, action: PayloadAction<QuestionDifficultyOptions>) => {
       state.difficulty = action.payload;
@@ -70,10 +71,10 @@ const gameSlice = createSlice({
       })
 
       .addCase(getQuestions.fulfilled, (state) => {
-        state.stage = 'GAME';
+        state.activeView = gameViews.GAME;
       })
   }
 });
 
-export const { setStage, setDifficulty, setQuestionNumbmer, setQuestionType, setQuestionCategory } = gameSlice.actions;
+export const { setView, setDifficulty, setQuestionNumbmer, setQuestionType, setQuestionCategory } = gameSlice.actions;
 export default gameSlice.reducer;
