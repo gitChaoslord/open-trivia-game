@@ -11,15 +11,14 @@ const GamePage: React.FC = () => {
 
   const handleAnswer = (answer: string): void => {
     dispatch(answerQuestion({ answer }));
+    // TODO: this should be moved into the store
     if (currentQuestionIndex === questions.length - 1) {
       dispatch(setStage('END'));
     }
     else {
       dispatch(nextQuestion());
     }
-  }
-
-  const handleEndGame = () => dispatch(setStage('END'));
+  };
 
   // TODO: save timer to state
   React.useEffect(() => {
@@ -33,27 +32,21 @@ const GamePage: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div className="page-content relative flex-grow overflow-hidden">
-        <p className="timer-container">{timeLeft}</p>
-        <p className="question-counter">{currentQuestionIndex + 1}{" / "}{questions.length} </p>
 
-        <p className="p-7 bg-white rounded shadow">{currectQuestionDescription}</p>
+      <p className="timer-container">{timeLeft}</p>
+      <p className="question-counter">{currentQuestionIndex + 1}{" / "}{questions.length} </p>
 
-        <div className="action-container-boolean mt-8 grid grid-cols-2">
-          {availableAnswers.map((answer) => (
-            <Button key={answer} className="btn-primary m-1" onClick={() => {
-              handleAnswer(answer);
-            }}>
-              {answer}
-            </Button>
-          ))}
-        </div>
+      <p className="p-7 bg-white rounded shadow">{currectQuestionDescription}</p>
+
+      <div className="action-container-boolean mt-8 grid grid-cols-2">
+        {availableAnswers.map((answer) => (
+          <Button key={answer} className="btn-primary m-1" onClick={() => {
+            handleAnswer(answer);
+          }}>
+            {answer}
+          </Button>
+        ))}
       </div>
-
-      <div className="absolute bottom-16 right-4">
-        <Button className="btn-error" onClick={handleEndGame}>Quit game</Button>
-      </div>
-
     </React.Fragment>
   )
 }

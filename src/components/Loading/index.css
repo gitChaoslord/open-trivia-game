@@ -1,0 +1,7 @@
+.loading-container {
+  @apply w-16 h-16 bg-indigo-500 rounded-full flex justify-center items-center;
+}
+
+.loading-indicator {
+  @apply w-12 h-12 bg-indigo-200 rounded-full animate-bounce;
+}

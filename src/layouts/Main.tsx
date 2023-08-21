@@ -1,13 +1,15 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import Footer from '../components/Footer';
-import LoadingSpinner from '../components/LoadingSpinner';
+import LoadingSpinner from '../components/Loading';
 import { Navbar } from '../components/Navbar';
 import { useAppDispatch, useAppSelector } from '../store';
-import { getCategories } from '../store/features/game';
+import { getCategories, setStage } from '../store/features/game';
 import GamePage from '../views/GamePage';
 import InitialPage from '../views/InitialPage';
 import ScorePage from '../views/ScorePage';
+import classnames from 'classnames';
+import Button from '../components/Button';
 
 const MainLayout: React.FC = () => {
   const stage = useAppSelector((state) => state.game.stage);
@@ -19,18 +21,29 @@ const MainLayout: React.FC = () => {
     if (!initialized) dispatch(getCategories()).unwrap().catch((error) => {
       toast.error(error);
     });
-  }, [dispatch, initialized])
+  }, [dispatch, initialized]);
+
+  const handleEndGame = () => dispatch(setStage('END'));
+
+  // const isPlaying = stage === "GAME";
 
   return (
-    <div className="font-mono bg-indigo-50 h-screen flex flex-col justify-between overflow-hidden">
-      <Navbar />
-      {loading ? <LoadingSpinner /> : <React.Fragment>
-        {stage === 'INIT' && <InitialPage />}
-        {stage === 'GAME' && <GamePage />}
-        {stage === 'END' && <ScorePage />}
-      </React.Fragment>}
+    <main>
+      {stage === "INIT" && <Navbar />}
+      <div className={classnames("page-content", { "overflow-y-hidden": stage === "END", "relative flex-grow overflow-hidden": stage === "GAME" })}>
+        {loading ? <LoadingSpinner /> : <React.Fragment>
+          {stage === "INIT" && <InitialPage />}
+          {stage === "GAME" && <GamePage />}
+          {stage === "END" && <ScorePage />}
+        </React.Fragment>}
+      </div>
+
+      {stage === "GAME" && <div className="absolute bottom-16 right-4">
+        <Button className="btn-error" onClick={handleEndGame}>Quit game</Button>
+      </div>}
+
       <Footer />
-    </div>
+    </main>
   )
 }
 export default MainLayout;

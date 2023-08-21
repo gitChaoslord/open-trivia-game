@@ -12,7 +12,7 @@ const ScorePage: React.FC = () => {
   const handleRestart = () => dispatch(setStage('INIT'));
 
   return (
-    <div className="page-content overflow-y-hidden">
+    <React.Fragment>
       <h1 className="text-4xl text-indigo-500 my-4">Game Over</h1>
       <p className="text-2xl mb-4">
         Your score was{" "}
@@ -29,7 +29,7 @@ const ScorePage: React.FC = () => {
           ))}
         </div>
         : null}
-    </div>
+    </React.Fragment>
   )
 }
 export default ScorePage
