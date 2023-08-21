@@ -4,6 +4,7 @@ import { constructCategories } from "../../helpers/utils";
 import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, GameViews } from "../../models/Game";
 import { getQuestions } from "./quiz";
 import { gameViews } from "../../constants/game";
+import { ERR_CAT_RETRIEVE } from "../../constants/strings";
 
 export const getCategories = createAsyncThunk(
   "quiz/categories",
@@ -12,7 +13,7 @@ export const getCategories = createAsyncThunk(
       const response = await api.OpenTDBService.getCategories();
       return response.trivia_categories;
     } catch (rejected) {
-      return rejectWithValue('Unable to retrieve categories');
+      return rejectWithValue(ERR_CAT_RETRIEVE);
     }
   }
 )

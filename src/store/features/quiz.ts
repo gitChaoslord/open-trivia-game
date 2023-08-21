@@ -4,6 +4,7 @@ import { cleanQuestionContent } from "../../helpers/quiz";
 import { GameSettings } from "../../models/Game";
 import { QuizState } from '../../models/Quiz';
 import { Question } from '../../models/Quiz';
+import { ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "../../constants/strings";
 
 const initialState: QuizState = {
   questions: [],
@@ -22,8 +23,8 @@ export const getQuestions = createAsyncThunk(
       const response = await api.OpenTDBService.getQuestions(payload);
 
       if (response.response_code === 0) return response.results.map((question) => cleanQuestionContent(question));
-      if (response.response_code === 1) return rejectWithValue('There are not enough available questions for your criteria');
-      return rejectWithValue('Unable to retrieve questions');
+      if (response.response_code === 1) return rejectWithValue(ERR_QUEST_LOW_COUNT);
+      return rejectWithValue(ERR_QUEST_RETRIEVE);
 
     } catch (rejected) {
       return rejectWithValue(rejected);

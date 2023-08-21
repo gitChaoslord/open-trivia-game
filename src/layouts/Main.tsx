@@ -11,6 +11,7 @@ import ScorePage from '../views/ScorePage';
 import classnames from 'classnames';
 import Button from '../components/Button';
 import { gameViews } from '../constants/game';
+import { QUIT_GAME } from '../constants/strings';
 
 const MainLayout: React.FC = () => {
   const activeView = useAppSelector((state) => state.game.activeView);
@@ -46,7 +47,9 @@ const MainLayout: React.FC = () => {
       </div>
 
       {isPlaying && <div className="absolute bottom-16 right-4">
-        <Button className="btn-error" onClick={handleEndGame}>Quit game</Button>
+        <Button className="btn-error" onClick={handleEndGame}>
+          {QUIT_GAME}
+        </Button>
       </div>}
 
       <Footer />

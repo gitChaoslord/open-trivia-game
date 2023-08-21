@@ -7,6 +7,7 @@ import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from 
 import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
 import { useAppDispatch, useAppSelector } from '../store';
 import { getQuestions } from '../store/features/quiz';
+import { CUR_SETTIGNS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '../constants/strings';
 
 interface FormModel {
   questionNumber: QuestionNumberOptions;
@@ -49,7 +50,7 @@ const InitialPage: React.FC = () => {
 
       {!loading && <React.Fragment>
 
-        <h1 className="text-4xl text-indigo-500 text-center">Current settings</h1>
+        <h1 className="text-4xl text-indigo-500 text-center">{CUR_SETTIGNS}</h1>
 
         <form
           onSubmit={handleSubmit((data) => loadQuestions(data))}
@@ -58,7 +59,7 @@ const InitialPage: React.FC = () => {
           <div className="border-b-2 border-indigo-500 bg-white my-6 p-5 rounded">
 
             <div className="form-group">
-              <label className="form-label">Number of questions</label>
+              <label className="form-label">{QUEST_NUM}</label>
               <select
                 {...register("questionNumber")}
                 id="questionNumber"
@@ -71,7 +72,7 @@ const InitialPage: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label className="form-label">Difficulty</label>
+              <label className="form-label">{QUEST_DIFF}</label>
               <select
                 {...register("questionDifficulty")}
                 id="questionDifficulty"
@@ -84,7 +85,7 @@ const InitialPage: React.FC = () => {
             </div>
 
             {categories.length > 0 && <div className="form-group">
-              <label className="form-label">Category</label>
+              <label className="form-label">{QUEST_CAT}</label>
               <select
                 {...register("questionCategory")}
                 id="questionCategory"
@@ -97,7 +98,7 @@ const InitialPage: React.FC = () => {
             </div>}
 
             <div className="form-group">
-              <label className="form-label">Type</label>
+              <label className="form-label">{QUEST_TYPE}</label>
               <select
                 {...register("questionType")}
                 id="questionType"
@@ -114,7 +115,7 @@ const InitialPage: React.FC = () => {
             type="submit"
             className="btn-primary mx-auto"
           >
-            Start Game
+            {START_GAME}
           </Button>
 
         </form>

@@ -1,15 +1,15 @@
 import React from 'react';
 import "./index.css"
+import { GAME_TITLE, PORTFOLIO_LINK } from '../../constants/strings';
 
 export const Navbar: React.FC = () => {
   return (
     <header className="nav-bar">
 
-
-      <h1 className="app-title">Trivia game</h1>
+      <h1 className="app-title">{GAME_TITLE}</h1>
 
       <div className="nav-actions">
-        <a href="https://gitchaoslord.github.io"
+        <a href={PORTFOLIO_LINK}
           className="portfolio-link "
           target="_blank"
           rel="noreferrer"

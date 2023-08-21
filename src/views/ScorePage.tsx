@@ -3,6 +3,7 @@ import Button from '../components/Button';
 import { useAppDispatch, useAppSelector } from '../store';
 import { setView } from '../store/features/game';
 import { gameViews } from '../constants/game';
+import { GAME_OVER, RESTART_GAME, YOU_SCORED } from '../constants/strings';
 
 const ScorePage: React.FC = () => {
   const answers = useAppSelector((state) => state.quiz.answers);
@@ -14,12 +15,12 @@ const ScorePage: React.FC = () => {
 
   return (
     <React.Fragment>
-      <h1 className="text-4xl text-indigo-500 my-4">Game Over</h1>
+      <h1 className="text-4xl text-indigo-500 my-4">{GAME_OVER}</h1>
       <p className="text-2xl mb-4">
-        Your score was{" "}
+        {YOU_SCORED}
         <span className="text-indigo-400">{score}</span>/{questions.length}
       </p>
-      <Button className="btn-primary" onClick={handleRestart}>Restart game</Button>
+      <Button className="btn-primary" onClick={handleRestart}>{RESTART_GAME}</Button>
       {answers.length ?
         <div className="mt-4 p-4 block overflow-y-auto">
           {answers.map((answer) => (
