@@ -46,11 +46,9 @@ const MainLayout: React.FC = () => {
         </React.Fragment>}
       </div>
 
-      {isPlaying && <div className="absolute bottom-16 right-4">
-        <Button className="btn-error" onClick={handleEndGame}>
-          {QUIT_GAME}
-        </Button>
-      </div>}
+      {isPlaying && <Button className="btn-error absolute bottom-16 right-4" onClick={handleEndGame}>
+        {QUIT_GAME}
+      </Button>}
 
       <Footer />
     </main>
