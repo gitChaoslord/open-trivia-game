@@ -17,10 +17,6 @@
     @apply px-2;
   }
   
-  .timer-container {
-    @apply h-20 w-20 flex justify-center items-center border-8 border-indigo-500 rounded-full my-4 text-3xl text-indigo-500;
-  }
-
   .question-counter {
     @apply absolute top-4 right-4 text-2xl text-indigo-500;
   }

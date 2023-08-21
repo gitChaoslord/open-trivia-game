@@ -45,6 +45,11 @@ const quizSlice = createSlice({
         correct_answer: currentQuestion.correct_answer,
         is_correct: action.payload.answer === currentQuestion.correct_answer
       });
+      if (state.currentQuestionIndex === state.questions.length - 1) {
+        console.log('game should finish')
+      } else {
+        console.log('next question')
+      }
     },
     nextQuestion: (state) => {
       if (state.currentQuestionIndex < state.questions.length) {

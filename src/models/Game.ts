@@ -16,6 +16,7 @@ export interface GameSettings {
 
 export interface GameState {
   activeView: GameViews;
+  timeLeft: number;
   difficulty: QuestionDifficultyOptions;
   questionNumber: QuestionNumberOptions;
   questionType: QuestionTypeOptions;

@@ -3,7 +3,7 @@ import api from "../../api";
 import { constructCategories } from "../../helpers/utils";
 import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, GameViews } from "../../models/Game";
 import { getQuestions } from "./quiz";
-import { gameViews } from "../../constants/game";
+import { gameDuration, gameViews } from "../../constants/game";
 import { ERR_CAT_RETRIEVE } from "../../constants/strings";
 
 export const getCategories = createAsyncThunk(
@@ -20,6 +20,7 @@ export const getCategories = createAsyncThunk(
 
 const initialState: GameState = {
   activeView: gameViews.INIT,
+  timeLeft: gameDuration,
   difficulty: "any",
   questionNumber: "10",
   questionType: "all",
@@ -33,6 +34,9 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    timerTick: (state) => {
+      state.timeLeft -= 1;
+    },
     setView: (state, action: PayloadAction<GameViews>) => {
       state.activeView = action.payload;
     },
@@ -73,9 +77,10 @@ const gameSlice = createSlice({
 
       .addCase(getQuestions.fulfilled, (state) => {
         state.activeView = gameViews.GAME;
+        state.timeLeft = gameDuration;
       })
   }
 });
 
-export const { setView, setDifficulty, setQuestionNumbmer, setQuestionType, setQuestionCategory } = gameSlice.actions;
+export const { setView, timerTick, setDifficulty, setQuestionNumbmer, setQuestionType, setQuestionCategory } = gameSlice.actions;
 export default gameSlice.reducer;
