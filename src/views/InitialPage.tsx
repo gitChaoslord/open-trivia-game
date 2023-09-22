@@ -4,9 +4,9 @@ import { toast } from 'react-toastify';
 import Button from '../components/Button';
 import LoadingSpinner from '../components/Loading';
 import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '../constants/settings';
-import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/Game';
+import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/game';
 import { useAppDispatch, useAppSelector } from '../store';
-import { getQuestions } from '../store/features/quiz';
+import { getQuestions } from '../store/features/game';
 import { CUR_SETTIGNS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '../constants/strings';
 
 interface FormModel {
@@ -22,7 +22,7 @@ const InitialPage: React.FC = () => {
   const questionCategory = useAppSelector((state) => state.game.questionCategory);
   const questionDifficulty = useAppSelector((state) => state.game.difficulty);
   const categories = useAppSelector((state) => state.game.categories);
-  const loading = useAppSelector((state) => state.quiz.loading);
+  const loading = useAppSelector((state) => state.game.loading);
   const dispatch = useAppDispatch();
 
   const { handleSubmit, register } = useForm<FormModel>({

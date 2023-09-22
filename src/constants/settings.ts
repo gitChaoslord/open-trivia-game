@@ -1,4 +1,4 @@
-import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from "../models/Game";
+import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from "../models/game";
 
 export const questionDiffSetting: { label: string, code: QuestionDifficultyOptions }[] = [
   { label: "Mixed", code: "any" },

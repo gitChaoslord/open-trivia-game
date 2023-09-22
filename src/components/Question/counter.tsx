@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector } from '../../store';
 
 const Counter: React.FC = () => {
-  const { currentQuestionIndex: index, questions } = useAppSelector((state) => state.quiz);
+  const { currentQuestionIndex: index, questions } = useAppSelector((state) => state.game);
 
   const count = React.useMemo(() => questions.length, [questions]);
 

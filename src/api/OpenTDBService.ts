@@ -1,5 +1,5 @@
-import { GameSettings } from "../models/Game";
-import { Question } from "../models/Quiz";
+import { GameSettings } from "../models/game";
+import { Question } from "../models/game";
 
 interface GetQuestionsResponse {
   response_code: number;
@@ -22,7 +22,7 @@ export default class OpenTDBService {
     }
   }
 
-  async getCategories(): Promise<GetCategoriesResponse> {
+  async retrieveCategories(): Promise<GetCategoriesResponse> {
     try {
       const response = await fetch(`${this.baseUrl}/api_category.php`);
       return await Promise.resolve(response.json());
@@ -31,7 +31,7 @@ export default class OpenTDBService {
     }
   }
 
-  async getQuestions({ number, type, difficulty, category }: GameSettings): Promise<GetQuestionsResponse> {
+  async retrieveQuestions({ number, type, difficulty, category }: GameSettings): Promise<GetQuestionsResponse> {
 
     const queryUrl = new URL("/api.php", this.baseUrl);
 

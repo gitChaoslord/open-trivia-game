@@ -1,6 +1,6 @@
 import React from 'react';
-import "./index.css"
 import { GAME_TITLE, PORTFOLIO_LINK } from '../../constants/strings';
+import "./index.css";
 
 export const Navbar: React.FC = () => {
   return (

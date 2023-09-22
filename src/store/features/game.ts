@@ -1,26 +1,48 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
-import { constructCategories } from "../../helpers/utils";
-import { GameState, QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions, GameViews } from "../../models/Game";
-import { getQuestions } from "./quiz";
 import { gameDuration, gameViews } from "../../constants/game";
-import { ERR_CAT_RETRIEVE } from "../../constants/strings";
+import { ERR_CAT_RETRIEVE, ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "../../constants/strings";
+import { constructCategories, cleanQuestionContent } from "../../helpers/utils";
+import { GameSettings, GameState, GameViews, Question } from "../../models/game";
+
+export const getQuestions = createAsyncThunk(
+  "quiz/getQuestions",
+  async (payload: GameSettings, { rejectWithValue }) => {
+    try {
+      const response = await api.OpenTDBService.retrieveQuestions(payload);
+
+      if (response.response_code === 0) return response.results.map((question) => cleanQuestionContent(question));
+      if (response.response_code === 1) return rejectWithValue(ERR_QUEST_LOW_COUNT);
+      return rejectWithValue(ERR_QUEST_RETRIEVE);
+
+    } catch (rejected) {
+      return rejectWithValue(rejected);
+    }
+  }
+);
 
 export const getCategories = createAsyncThunk(
   "quiz/categories",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.OpenTDBService.getCategories();
+      const response = await api.OpenTDBService.retrieveCategories();
       return response.trivia_categories;
     } catch (rejected) {
       return rejectWithValue(ERR_CAT_RETRIEVE);
     }
   }
-)
+);
 
 const initialState: GameState = {
   activeView: gameViews.INIT,
   timeLeft: gameDuration,
+  questions: [],
+  score: 0,
+  currentQuestionIndex: 0,
+  currectQuestionDescription: "",
+  answers: [],
+  availableAnswers: [],
+  loading: false,
   difficulty: "any",
   questionNumber: "10",
   questionType: "all",
@@ -34,27 +56,78 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    answerQuestion: (state, action: PayloadAction<{ answer: string }>) => {
+      const currentQuestion = state.questions[state.currentQuestionIndex];
+      state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
+      state.answers.push({
+        question: currentQuestion.question,
+        answer: action.payload.answer,
+        correct_answer: currentQuestion.correct_answer,
+        is_correct: action.payload.answer === currentQuestion.correct_answer
+      });
+
+      // next question or end
+      if (state.currentQuestionIndex === state.questions.length - 1) {
+        state.activeView = gameViews.END;
+      } else {
+        state.currentQuestionIndex += 1;
+        state.currectQuestionDescription = state.questions[state.currentQuestionIndex].question;
+        state.availableAnswers = [
+          state.questions[state.currentQuestionIndex].correct_answer,
+          ...state.questions[state.currentQuestionIndex].incorrect_answers
+        ].sort((a, b) => {
+          if (state.questions[state.currentQuestionIndex].type === 'boolean') {
+            return a.length - b.length;
+          } else {
+            return 0.5 - Math.random();
+          }
+        });
+      }
+    },
     timerTick: (state) => {
       state.timeLeft -= 1;
     },
     setView: (state, action: PayloadAction<GameViews>) => {
       state.activeView = action.payload;
-    },
-    setDifficulty: (state, action: PayloadAction<QuestionDifficultyOptions>) => {
-      state.difficulty = action.payload;
-    },
-    setQuestionNumbmer: (state, action: PayloadAction<QuestionNumberOptions>) => {
-      state.questionNumber = action.payload;
-    },
-    setQuestionType: (state, action: PayloadAction<QuestionTypeOptions>) => {
-      state.questionType = action.payload;
-    },
-    setQuestionCategory: (state, action: PayloadAction<string>) => {
-      state.questionCategory = action.payload;
     }
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getQuestions.pending, (state, action) => {
+        state.loading = !initialState.loading;
+        state.difficulty = action.meta.arg.difficulty;
+        state.questionNumber = action.meta.arg.number;
+        state.questionType = action.meta.arg.type;
+        state.questionCategory = action.meta.arg.category;
+      })
+      .addCase(getQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
+        state.questions = action.payload;
+        state.currentQuestionIndex = initialState.currentQuestionIndex;
+
+        const initialQuestion = state.questions[initialState.currentQuestionIndex];
+
+        state.availableAnswers = [
+          initialQuestion.correct_answer,
+          ...initialQuestion.incorrect_answers
+        ].sort((a, b) => {
+          if (initialQuestion.type === 'boolean') {
+            return a.length - b.length;
+          } else {
+            return 0.5 - Math.random();
+          }
+        });
+        state.currectQuestionDescription = initialQuestion.question;
+        state.answers = initialState.answers;
+        state.score = initialState.score;
+        state.loading = initialState.loading;
+        state.activeView = gameViews.GAME;
+        state.timeLeft = gameDuration;
+      })
+      .addCase(getQuestions.rejected, (state) => {
+        state.loading = initialState.loading;
+      })
+
+      //
       .addCase(getCategories.pending, (state) => {
         state.categoriesLoading = true;
       })
@@ -66,21 +139,8 @@ const gameSlice = createSlice({
       .addCase(getCategories.rejected, (state) => {
         state.categoriesLoading = false;
       })
-
-      /* ---- EXTERNAL: ---- */
-      .addCase(getQuestions.pending, (state, action) => {
-        state.difficulty = action.meta.arg.difficulty;
-        state.questionNumber = action.meta.arg.number;
-        state.questionType = action.meta.arg.type;
-        state.questionCategory = action.meta.arg.category;
-      })
-
-      .addCase(getQuestions.fulfilled, (state) => {
-        state.activeView = gameViews.GAME;
-        state.timeLeft = gameDuration;
-      })
   }
 });
 
-export const { setView, timerTick, setDifficulty, setQuestionNumbmer, setQuestionType, setQuestionCategory } = gameSlice.actions;
+export const { answerQuestion, setView, timerTick } = gameSlice.actions;
 export default gameSlice.reducer;

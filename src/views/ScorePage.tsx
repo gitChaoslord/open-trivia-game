@@ -6,9 +6,9 @@ import { gameViews } from '../constants/game';
 import { GAME_OVER, RESTART_GAME, YOU_SCORED } from '../constants/strings';
 
 const ScorePage: React.FC = () => {
-  const answers = useAppSelector((state) => state.quiz.answers);
-  const score = useAppSelector((state) => state.quiz.score);
-  const questions = useAppSelector((state) => state.quiz.questions);
+  const questions = useAppSelector((state) => state.game.questions);
+  const answers = useAppSelector((state) => state.game.answers);
+  const score = useAppSelector((state) => state.game.score);
   const dispatch = useAppDispatch();
 
   const handleRestart = () => dispatch(setView(gameViews.INIT));
