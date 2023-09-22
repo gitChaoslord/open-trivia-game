@@ -5,4 +5,4 @@ export const gameViews = Object.freeze({
 });
 
 
-export const gameDuration = 10; // seconds
+export const gameDuration = 60; // seconds

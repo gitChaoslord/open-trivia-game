@@ -13,10 +13,9 @@ export const addAppListener = addListener as TypedAddListener<RootState, AppDisp
 
 startAppListening({
   matcher: isAnyOf(getQuestions.fulfilled, INIT_TIMER),
-  effect: (action, { getState, dispatch }) => {
+  effect: (_action, { getState, dispatch }) => {
 
 
-    console.log(action);
     const interval = setInterval(() => {
       const { timeLeft, activeView } = getState().game;
 
