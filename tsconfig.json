@@ -23,7 +23,31 @@
     "useDefineForClassFields": true,
     "types": [
       "vite/client"
-    ]
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@api/*": [
+        "api/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@models/*": [
+        "models/*"
+      ],
+      "@views/*": [
+        "views/*"
+      ]
+    }
   },
   "include": [
     "src",

@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import api from "../../api";
-import { gameDuration, gameViews } from "../../constants/game";
-import { ERR_CAT_RETRIEVE, ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "../../constants/strings";
-import { constructCategories, cleanQuestionContent } from "../../helpers/utils";
-import { GameSettings, GameState, GameViews, Question } from "../../models/game";
+import api from "@api/index";
+import { gameDuration, gameViews } from "@constants/game";
+import { ERR_CAT_RETRIEVE, ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "@constants/strings";
+import { cleanQuestionContent, constructCategories } from "@helpers/utils";
+import type { GameSettings, GameState, GameViews, Question } from "@models/game";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getQuestions = createAsyncThunk(
   "quiz/getQuestions",

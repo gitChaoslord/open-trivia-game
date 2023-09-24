@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../store';
+import { useAppSelector } from '@store/index';
 
 const Counter: React.FC = () => {
   const { currentQuestionIndex: index, questions } = useAppSelector((state) => state.game);

@@ -1,5 +1,5 @@
-import { gameViews } from "../constants/game";
-import { ValueOf } from "./utilities";
+import { gameViews } from "@constants/game";
+import type { ValueOf } from "@models/utilities";
 
 export type GameViews = ValueOf<typeof gameViews>;
 export type QuestionNumberOptions = "10" | "15" | "20";
@@ -21,6 +21,7 @@ export interface Question {
   question: string;
   type: Omit<QuestionTypeOptions, 'all'>;
 }
+
 export interface Answer {
   question: string;
   answer: string;

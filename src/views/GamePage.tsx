@@ -1,10 +1,10 @@
+import Button from '@components/Button';
+import Counter from '@components/Question/counter';
+import Description from '@components/Question/description';
+import Timer from '@components/Timer';
+import { answerQuestion } from '@store/features/game';
+import { useAppDispatch, useAppSelector } from '@store/index';
 import React from 'react';
-import Button from '../components/Button';
-import Counter from '../components/Question/counter';
-import Description from '../components/Question/description';
-import Timer from '../components/Timer';
-import { useAppDispatch, useAppSelector } from '../store';
-import { answerQuestion } from '../store/features/game';
 
 const GamePage: React.FC = () => {
   const dispatch = useAppDispatch();

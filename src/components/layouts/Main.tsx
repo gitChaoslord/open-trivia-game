@@ -1,17 +1,17 @@
+import Button from '@components/Button';
+import Footer from '@components/Footer';
+import LoadingSpinner from '@components/Loading';
+import { Navbar } from '@components/Navbar';
+import { gameViews } from '@constants/game';
+import { QUIT_GAME } from '@constants/strings';
+import { getCategories, setView } from '@store/features/game';
+import { useAppDispatch, useAppSelector } from '@store/index';
+import GamePage from '@views/GamePage';
+import InitialPage from '@views/InitialPage';
+import ScorePage from '@views/ScorePage';
 import classnames from 'classnames';
 import React from 'react';
 import { toast } from 'react-toastify';
-import Button from '../components/Button';
-import Footer from '../components/Footer';
-import LoadingSpinner from '../components/Loading';
-import { Navbar } from '../components/Navbar';
-import { gameViews } from '../constants/game';
-import { QUIT_GAME } from '../constants/strings';
-import { useAppDispatch, useAppSelector } from '../store';
-import { getCategories, setView } from '../store/features/game';
-import GamePage from '../views/GamePage';
-import InitialPage from '../views/InitialPage';
-import ScorePage from '../views/ScorePage';
 
 const MainLayout: React.FC = () => {
   const activeView = useAppSelector((state) => state.game.activeView);

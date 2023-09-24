@@ -1,9 +1,9 @@
+import Button from '@components/Button';
+import { gameViews } from '@constants/game';
+import { GAME_OVER, RESTART_GAME, YOU_SCORED } from '@constants/strings';
+import { setView } from '@store/features/game';
+import { useAppDispatch, useAppSelector } from '@store/index';
 import React from 'react';
-import Button from '../components/Button';
-import { useAppDispatch, useAppSelector } from '../store';
-import { setView } from '../store/features/game';
-import { gameViews } from '../constants/game';
-import { GAME_OVER, RESTART_GAME, YOU_SCORED } from '../constants/strings';
 
 const ScorePage: React.FC = () => {
   const questions = useAppSelector((state) => state.game.questions);

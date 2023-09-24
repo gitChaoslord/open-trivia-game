@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { INIT_TIMER } from "@store/actions";
+import { listenerMiddleware } from "@store/middlewares/timer";
+import rootReducer from '@store/reducer';
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { persistStore } from "redux-persist";
-import { INIT_TIMER } from "./actions";
-import { listenerMiddleware } from "./middlewares/timer";
-import rootReducer from './reducer';
 
 const store = configureStore({
   reducer: rootReducer,

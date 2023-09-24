@@ -1,8 +1,8 @@
+import type { GameState } from "@models/game";
 import { AnyAction, combineReducers } from "@reduxjs/toolkit";
+import game from "@store/features/game";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
-import { GameState } from "../models/game";
-import game from "./features/game";
 
 const persistConfig = {
   key: 'trivia-',

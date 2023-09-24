@@ -1,4 +1,4 @@
-import { Category, Question } from "../models/game";
+import type { Category, Question } from "@models/game";
 
 export const constructCategories = (categories: {
   id: number;

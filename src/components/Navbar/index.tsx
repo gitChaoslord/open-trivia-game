@@ -1,5 +1,5 @@
 import React from 'react';
-import { GAME_TITLE, PORTFOLIO_LINK } from '../../constants/strings';
+import { GAME_TITLE, PORTFOLIO_LINK } from '@constants/strings';
 import "./index.css";
 
 export const Navbar: React.FC = () => {

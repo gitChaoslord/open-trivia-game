@@ -1,13 +1,13 @@
+import Button from '@components/Button';
+import LoadingSpinner from '@components/Loading';
+import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '@constants/settings';
+import { CUR_SETTIGNS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '@constants/strings';
+import type { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '@models/game';
+import { getQuestions } from '@store/features/game';
+import { useAppDispatch, useAppSelector } from '@store/index';
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import Button from '../components/Button';
-import LoadingSpinner from '../components/Loading';
-import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '../constants/settings';
-import { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '../models/game';
-import { useAppDispatch, useAppSelector } from '../store';
-import { getQuestions } from '../store/features/game';
-import { CUR_SETTIGNS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '../constants/strings';
 
 interface FormModel {
   questionNumber: QuestionNumberOptions;

@@ -1,5 +1,4 @@
-import { GameSettings } from "../models/game";
-import { Question } from "../models/game";
+import type { GameSettings, Question } from "@models/game";
 
 interface GetQuestionsResponse {
   response_code: number;

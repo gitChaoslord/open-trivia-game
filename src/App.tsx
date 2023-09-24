@@ -1,7 +1,7 @@
+import MainLayout from '@components/layouts/Main';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MainLayout from './layouts/Main';
 
 const App: React.FC = () => {
 
