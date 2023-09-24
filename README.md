@@ -1,12 +1,20 @@
-#
-# <p align="center">Open Trivia Game</p>
-<p align="center">Single player Quiz game with questions provided by <a href="https://opentdb.com" rel="nofollow">Open TDB</a>.</p>
-<p align="center">URL : <a href="https://gitchaoslord.github.io/opentdb-trivia-game/"  rel="nofollow">Trivia Game</a></p>
 
-</br>
-</br>
+<div align="center">
+  <h1> Open Trivia Game</h1>
 
-#
+  <p>
+  A Single player Quiz game with questions provided by <a href="https://opentdb.com" rel="nofollow">Open TDB</a>.
+  </p>
+
+
+  <h2>
+    <a href="https://gitchaoslord.github.io/opentdb-trivia-game/" rel="nofollow">Play now!</a>
+  </h2>
+</div>
+
+
+
 This project was initially based on a [tutorial](https://www.youtube.com/watch?v=C9g-Zhsd_FE) by Raul Terhes in order to get familiar with Redux-Toolkit and React. I decided to forgo the use of Redux Saga as i felt it overcomplicated things and also added TypeScript.
-It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and was corverted to [Vite](https://vitejs.dev/). 
-I've also included game setting options for difficulty, number of questions, etc. along with saving the App State to local storage.
+I added additional functionality, in the form of difficulty, number of question selection, etc. and saving app-state to localstorage.
+
+Eventually, i've turned this project into a sort of playground, converting it from [Create React App](https://github.com/facebook/create-react-app) to [Vite](https://vitejs.dev/), checking redux middleware functionality and adding a various bits of knowledge i've accrued over-time.
