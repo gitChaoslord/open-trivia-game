@@ -6,10 +6,9 @@ import { gameViews } from '@constants/game';
 import { QUIT_GAME } from '@constants/strings';
 import { getCategories, setView } from '@store/features/game';
 import { useAppDispatch, useAppSelector } from '@store/index';
-import GamePage from '@views/GamePage';
-import InitialPage from '@views/InitialPage';
-import ScorePage from '@views/ScorePage';
-import classnames from 'classnames';
+import GamePage from '@views/Game/GamePage';
+import InitialPage from '@views/Initial/InitialPage';
+import ScorePage from '@views/Results/ScorePage';
 import React from 'react';
 import { toast } from 'react-toastify';
 
@@ -32,26 +31,28 @@ const MainLayout: React.FC = () => {
   const handleEndGame = () => dispatch(setView(gameViews.END));
 
   return (
-    <main>
+    <React.Fragment>
+
       {isFillingForm && <Navbar />}
-      <div className={classnames("page-content", {
-        "overflow-y-hidden": isComplete,
-        "relative flex-grow overflow-hidden": isPlaying
-      })}
-      >
+      {/* <Navbar /> */}
+
+      <main>
+
         {loading ? <LoadingSpinner /> : <React.Fragment>
           {isFillingForm && <InitialPage />}
           {isPlaying && <GamePage />}
           {isComplete && <ScorePage />}
         </React.Fragment>}
-      </div>
 
-      {isPlaying && <Button className="btn-error absolute bottom-16 right-4" onClick={handleEndGame}>
-        {QUIT_GAME}
-      </Button>}
+        {isPlaying && <Button className="btn-error absolute bottom-16 right-4" onClick={handleEndGame}>
+          {QUIT_GAME}
+        </Button>}
+
+      </main>
 
       <Footer />
-    </main>
+
+    </React.Fragment>
   )
 }
 export default MainLayout;

@@ -21,7 +21,6 @@ const App: React.FC = () => {
       <MainLayout />
 
     </React.Fragment>
-
   );
 }
 export default App;

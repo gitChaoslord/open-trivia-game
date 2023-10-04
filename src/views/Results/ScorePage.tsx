@@ -5,7 +5,7 @@ import { setView } from '@store/features/game';
 import { useAppDispatch, useAppSelector } from '@store/index';
 import React from 'react';
 
-const ScorePage: React.FC = () => {
+const ResultsView: React.FC = () => {
   const questions = useAppSelector((state) => state.game.questions);
   const answers = useAppSelector((state) => state.game.answers);
   const score = useAppSelector((state) => state.game.score);
@@ -34,4 +34,4 @@ const ScorePage: React.FC = () => {
     </React.Fragment>
   )
 }
-export default ScorePage
+export default ResultsView;

@@ -5,16 +5,17 @@
 
 @layer components {
 
-  main {
-    @apply flex flex-col justify-between;
+  #root {
     @apply h-screen overflow-hidden;
     @apply font-mono;
-    @apply bg-indigo-50;
+    @apply flex flex-col justify-between;
   }
 
-  .page-content {
-    @apply flex flex-col items-center;
-    @apply px-2;
+  main {
+    @apply flex-1;
+    @apply flex flex-col justify-center items-center;
+    @apply h-full overflow-hidden;
+    @apply px-3;
   }
 
   .question-counter {

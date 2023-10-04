@@ -6,7 +6,7 @@ import { answerQuestion } from '@store/features/game';
 import { useAppDispatch, useAppSelector } from '@store/index';
 import React from 'react';
 
-const GamePage: React.FC = () => {
+const GameView: React.FC = () => {
   const dispatch = useAppDispatch();
   const availableAnswers = useAppSelector((state) => state.game.availableAnswers);
 
@@ -15,7 +15,7 @@ const GamePage: React.FC = () => {
   };
 
   return (
-    <React.Fragment>
+    <div className="grid grid-rows-3 h-3/5 place-items-center mb-20">
 
       <Timer />
       <Counter />
@@ -31,7 +31,7 @@ const GamePage: React.FC = () => {
           </Button>
         ))}
       </div>
-    </React.Fragment>
+    </div>
   )
 }
-export default GamePage
+export default GameView

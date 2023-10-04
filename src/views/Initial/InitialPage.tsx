@@ -16,7 +16,7 @@ interface FormModel {
   questionDifficulty: QuestionDifficultyOptions;
 }
 
-const InitialPage: React.FC = () => {
+const InitialView: React.FC = () => {
   const questionNumber = useAppSelector((state) => state.game.questionNumber);
   const questionType = useAppSelector((state) => state.game.questionType);
   const questionCategory = useAppSelector((state) => state.game.questionCategory);
@@ -124,4 +124,4 @@ const InitialPage: React.FC = () => {
   )
 }
 
-export default InitialPage;
+export default InitialView;
