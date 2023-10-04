@@ -6,7 +6,7 @@ const Description: React.FC = () => {
 
   // Key is added here to force re-render the node in order for the animation to play
   return (
-    <p className="p-7 bg-white rounded border-b border-indigo-500 shadow animate-fade-in" key={description}>
+    <p className="p-7 bg-white rounded border-b border-indigo-500 shadow animate-fade-in-down" key={description}>
       {description}
     </p>
   )
