@@ -14,7 +14,7 @@ startAppListening({
   matcher: isAnyOf(getQuestions.fulfilled, INIT_TIMER),
   effect: (_action, { getState, dispatch }) => {
 
-
+    // TODO: change to request animation frame
     const interval = setInterval(() => {
       const { timeLeft, activeView } = getState().game;
 
