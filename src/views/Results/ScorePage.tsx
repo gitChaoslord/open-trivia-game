@@ -15,18 +15,27 @@ const ResultsView: React.FC = () => {
 
   return (
     <React.Fragment>
-      <h1 className="text-4xl text-indigo-500 my-4">{GAME_OVER}</h1>
-      <p className="text-2xl mb-4">
+      <h2>{GAME_OVER}</h2>
+
+      <h3 className="text-2xl mb-4 text-content-contrast dark:text-white">
         {YOU_SCORED}
-        <span className="text-indigo-400">{score}</span>/{questions.length}
-      </p>
-      <Button className="btn-primary" onClick={handleRestart}>{RESTART_GAME}</Button>
+        <span className="text-primary">{score}</span>{"/"}{questions.length}
+      </h3>
+
+      <Button className="btn-primary mt-8" onClick={handleRestart}>
+        {RESTART_GAME}
+      </Button>
+
       {answers.length ?
         <div className="mt-4 p-4 block overflow-y-auto">
           {answers.map((answer) => (
-            <div key={answer.question} className="border-b-2 text-lg border-indigo-300 flex lg:flex-row flex-col justify-between bg-white mb-2 rounded lg:px-2">
-              <p className="py-2 lg:px-2 px-4">{answer.question}</p>
-              <p className={`p-2 mx-2 text-xl text-center ${answer.correct_answer === answer.answer ? 'text-green-500' : 'text-red-500'}`}>{answer.answer}</p>
+            <div key={answer.question} className="border-b-2 text-lg border-primary flex lg:flex-row flex-col justify-between bg-content text-content-contrast mb-2 rounded lg:px-2">
+              <p className="py-2 lg:px-2 px-4">
+                {answer.question}
+              </p>
+              <p className={`p-2 mx-2 text-xl text-center ${answer.correct_answer === answer.answer ? 'text-green-500' : 'text-red-500'}`}>
+                {answer.answer}
+              </p>
             </div>
           ))}
         </div>

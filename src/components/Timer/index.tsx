@@ -10,7 +10,6 @@ const Timer: React.FC = () => {
 
   const offset = circumference * ((gameDuration - timeLeft) / gameDuration);
 
-  // TODO: add color variables and dark/light theme
   return (
     <svg width="160" height="160" viewBox="0 0 160 160" style={{ rotate: "-90deg" }}>
       <circle

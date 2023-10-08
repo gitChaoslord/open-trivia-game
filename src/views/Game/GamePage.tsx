@@ -22,7 +22,7 @@ const GameView: React.FC = () => {
       <Description />
 
       {/* TODO: move answers to a different component to avoid triggering re-render of the above elements */}
-      <div className="action-container-boolean mt-8 grid grid-cols-2">
+      <div className="action-container mt-8 grid grid-cols-2">
         {availableAnswers.map((answer) => (
           <Button key={answer} className="btn-primary m-1 animate-fade-in" onClick={() => {
             handleAnswer(answer);

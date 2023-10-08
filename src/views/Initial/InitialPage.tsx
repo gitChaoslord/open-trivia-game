@@ -44,19 +44,20 @@ const InitialView: React.FC = () => {
       toast.error(error, { toastId: "question-error" }); // Setting ID will prevent toast duplication 
     });
   }, [dispatch]);
+
   return (
     <React.Fragment>
       {loading && <LoadingSpinner />}
 
       {!loading && <React.Fragment>
-
-        <h1 className="text-4xl text-indigo-500 text-center">{CUR_SETTIGNS}</h1>
+        <h2>{CUR_SETTIGNS}</h2>
 
         <form
           onSubmit={handleSubmit((data) => loadQuestions(data))}
           className="lg:w-auto text-lg flex flex-col justify-between"
         >
-          <div className="border-b-2 border-indigo-500 bg-white my-6 p-5 rounded">
+
+          <div className="border-b-2 border-primary bg-content my-6 p-5 rounded">
 
             <div className="form-group">
               <label className="form-label">{QUEST_NUM}</label>

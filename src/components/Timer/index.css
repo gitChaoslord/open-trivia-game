@@ -1,12 +1,12 @@
 .timer-text {
-  @apply fill-indigo-500;
-  @apply text-5xl;
+  @apply fill-primary;
+  @apply text-4xl;
 }
 
 .timer-background {
-  @apply stroke-gray-200;
+  @apply stroke-primary/20;
 }
 
 .timer-bar {
-  @apply stroke-indigo-500;
+  @apply stroke-primary;
 }

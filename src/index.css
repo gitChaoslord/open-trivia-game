@@ -2,8 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: 226 100% 97%;
+    --color-primary: 239deg 84% 67%;
+    --color-danger: "";
+    --color-success: "";
+    --layout: 239deg 84% 67%;
+    --layout-contrast: 0deg 0% 100%;
+    --content: 0deg 0% 100%;
+    --content-contrast: 0deg 0% 0%;
+
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 0 0% 9%;
+      --color-primary: 32deg 90% 52%;
+      --color-danger: "";
+      --color-success: "";
+      --layout: 0deg 0% 19%;
+      --layout-contrast: 0deg 0% 100%;
+      --content: 0deg 0% 19%;
+      --content-contrast: 0deg 0% 100%;
+    }
+  }
+
+  :root.dark {
+    --background: 0 0% 9%;
+    --color-primary: 32deg 90% 52%;
+    --color-danger: "";
+    --color-success: "";
+    --layout: 0deg 0% 19%;
+    --layout-contrast: 0deg 0% 100%;
+    --content: 0deg 0% 19%;
+    --content-contrast: 0deg 0% 100%;
+  }
+
+  :root.light {
+    --background: 226 100% 97%;
+    --color-primary: 239deg 84% 67%;
+    --color-danger: "";
+    --color-success: "";
+    --layout: 239deg 84% 67%;
+    --layout-contrast: 0deg 0% 100%;
+    --content: 0deg 0% 100%;
+    --content-contrast: 0deg 0% 0%;
+  }
+}
 
 @layer components {
+
+  body {
+    @apply bg-background;
+  }
 
   #root {
     @apply h-screen overflow-hidden;
@@ -18,20 +70,33 @@
     @apply px-3;
   }
 
-  .question-counter {
-    @apply absolute top-4 right-4 text-2xl text-indigo-500;
+  h2 {
+    @apply my-4;
+    @apply text-4xl;
+    @apply text-primary;
   }
 
-  .action-container-boolean {
-    @apply flex justify-between lg:w-96 md:w-96 w-full;
+  .question-counter {
+    @apply absolute top-4 right-4;
+    @apply text-2xl;
+    @apply text-primary;
+  }
+
+  .action-container {
+    @apply lg:w-96 md:w-96 w-full;
+    @apply flex justify-between;
   }
 
   .btn {
-    @apply focus:outline-none py-3 px-6 text-white shadow rounded
+    @apply py-3 px-6;
+    @apply shadow rounded;
+    @apply text-white;
+    @apply focus:outline-none;
   }
 
   .btn-primary {
-    @apply bg-indigo-500 hover:bg-indigo-700;
+    @apply bg-primary;
+    @apply hover:bg-primary/80;
   }
 
   .btn-error {
@@ -42,16 +107,37 @@
     @apply disabled:opacity-50;
   }
 
-
   .form-group {
-    @apply w-full mb-4;
+    @apply w-full;
+    @apply mb-4;
   }
 
   .form-label {
-    @apply text-indigo-500;
+    @apply text-primary;
   }
 
   .form-control {
-    @apply w-full py-1 px-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-gray-200 rounded;
+    @apply w-full;
+    @apply py-1 px-3;
+    @apply border border-gray-300 rounded;
+    @apply bg-content;
+    @apply text-content-contrast;
+    @apply focus:outline-none focus:ring-2 focus:ring-gray-200;
+  }
+
+
+  .description {
+    @apply p-7;
+    @apply bg-content;
+    @apply text-content-contrast;
+    @apply rounded border-b border-primary;
+    @apply animate-fade-in-down;
+  }
+
+  footer {
+    @apply justify-self-end;
+    @apply bg-layout;
+    @apply text-layout-contrast;
+    @apply py-1 pl-3;
   }
 }

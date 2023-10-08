@@ -1,16 +1,16 @@
 .nav-bar {
   @apply sticky top-0 h-16 w-full;
   @apply flex justify-between;
-  @apply bg-indigo-500;
+  @apply bg-layout;
+  @apply text-layout-contrast;
 }
 
 .app-title {
   @apply my-auto px-3;
-  @apply text-center uppercase text-white text-2xl;
+  @apply text-center uppercase text-2xl;
 }
 
 .nav-actions {
-  @apply bg-indigo-700;
   @apply flex place-items-center gap-3;
   @apply h-full;
   @apply px-3;
