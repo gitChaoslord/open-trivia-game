@@ -1,8 +1,10 @@
 import type { GameState } from "@models/game";
+import { SettingsState } from "@models/settings";
 import { AnyAction, combineReducers } from "@reduxjs/toolkit";
 import game from "@store/features/game";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
+import settings from "./features/settings";
 
 const persistConfig = {
   key: 'trivia-',
@@ -17,4 +19,8 @@ export default combineReducers({
     blacklist: ['loading', 'categoriesInitialized', 'categoriesLoading', 'categories']
   },
     game),
+  settings: persistReducer<SettingsState, AnyAction>({
+    ...persistConfig,
+    key: persistConfig.key + 'settings'
+  }, settings)
 });

@@ -16,3 +16,10 @@ export const questionTypeSetting: { label: string, code: QuestionTypeOptions }[]
   { label: "True/False", code: "boolean" },
   { label: "Multiple choice", code: "multiple" }
 ];
+
+
+export const themeOptions = Object.freeze({
+  LIGHT: "light",
+  DARK: "dark",
+  SYSTEM: "system"
+});
