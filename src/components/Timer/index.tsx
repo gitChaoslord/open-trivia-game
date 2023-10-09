@@ -18,7 +18,7 @@ const Timer: React.FC = () => {
         cx="80"
         cy="80"
         fill="transparent"
-        stroke-width="22px"
+        strokeWidth="22px"
       />
       <circle
         className="timer-bar"
@@ -26,16 +26,16 @@ const Timer: React.FC = () => {
         cx="80"
         cy="80"
         fill="transparent"
-        stroke-width="12px"
-        stroke-dasharray={circumference}
-        stroke-dashoffset={offset}
+        strokeWidth="12px"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
       />
       <text
         className="timer-text"
         x="50%"
         y="50%"
-        dominant-baseline="central"
-        text-anchor="middle"
+        dominantBaseline="central"
+        textAnchor="middle"
         style={{ rotate: "90deg", transformOrigin: '50% 50%' }}>
         {timeLeft}
       </text>
