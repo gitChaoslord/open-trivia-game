@@ -3,13 +3,20 @@ import { SettingsState, ThemeOptions } from "@models/settings";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: SettingsState = {
-  theme: themeOptions.SYSTEM
+  theme: themeOptions.SYSTEM,
+  settingsModalOpen: false
 }
 
 const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
+    showSettingsModal: (state) => {
+      state.settingsModalOpen = true;
+    },
+    hideSettingsModal: (state) => {
+      state.settingsModalOpen = false;
+    },
     setTheme: (state, action: PayloadAction<ThemeOptions>) => {
       state.theme = action.payload;
 
@@ -30,5 +37,5 @@ const settingsSlice = createSlice({
     }
   }
 })
-export const { setTheme } = settingsSlice.actions;
+export const { setTheme, showSettingsModal, hideSettingsModal } = settingsSlice.actions;
 export default settingsSlice.reducer;

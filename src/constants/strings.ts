@@ -14,6 +14,10 @@ export const QUEST_NUM = "Number of questions"
 export const QUEST_CAT = "Category"
 
 
+export const MODAL_SETTINGS_TITLE = "Settings";
+export const MODAL_SETTINGS_THEME = "Theme";
+
+
 export const ERR_CAT_RETRIEVE = "Unable to retrieve categories"
 export const ERR_QUEST_RETRIEVE = "Unable to retrieve questions"
 export const ERR_QUEST_LOW_COUNT = "There are not enough available questions for your criteria"

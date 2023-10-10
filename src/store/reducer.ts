@@ -21,6 +21,7 @@ export default combineReducers({
     game),
   settings: persistReducer<SettingsState, AnyAction>({
     ...persistConfig,
-    key: persistConfig.key + 'settings'
+    key: persistConfig.key + 'settings',
+    blacklist: ['settingsModalOpen']
   }, settings)
 });

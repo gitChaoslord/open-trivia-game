@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from './store';
 import { ThemeOptions } from '@models/settings';
+import ModalContainer from '@components/layouts/modalContainer';
 
 const darkModePref = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -37,6 +38,8 @@ const App: React.FC = () => {
       />
 
       <MainLayout />
+
+      <ModalContainer />
 
     </React.Fragment>
   );

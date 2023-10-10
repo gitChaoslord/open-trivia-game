@@ -15,3 +15,10 @@
   @apply h-full;
   @apply px-3;
 }
+
+.nav-actions>button,
+.nav-actions>a {
+  @apply px-3;
+  @apply h-full;
+  @apply hover:contrast-50;
+}

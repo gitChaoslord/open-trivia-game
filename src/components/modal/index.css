@@ -1,0 +1,23 @@
+dialog::backdrop {
+  @apply bg-black/80;
+}
+
+dialog {
+  @apply w-full md:w-2/3 lg:w-2/4 xl:w-2/5;
+  @apply rounded-md;
+  @apply bg-content;
+  @apply relative;
+}
+
+.modal-close-btn {
+  @apply absolute top-4 right-4;
+  @apply text-content-contrast;
+}
+
+.modal-title {
+  @apply px-4;
+}
+
+.modal-body {
+  @apply p-4
+}
