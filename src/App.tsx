@@ -6,10 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from './store';
 import { ThemeOptions } from '@models/settings';
 
-const initialLocalThemeState = window.matchMedia('(prefers-color-scheme: dark)').matches ? themeOptions.DARK : themeOptions.LIGHT;
+const darkModePref = window.matchMedia('(prefers-color-scheme: dark)');
 
 const App: React.FC = () => {
-  const [localTheme, setLocalTheme] = React.useState<Exclude<ThemeOptions, typeof themeOptions.SYSTEM>>(initialLocalThemeState);
+  const [localTheme, setLocalTheme] = React.useState<Exclude<ThemeOptions, typeof themeOptions.SYSTEM>>(darkModePref.matches ? themeOptions.DARK : themeOptions.LIGHT);
   const theme = useAppSelector((state) => state.settings.theme);
 
   const updateLocalTheme = React.useCallback((isDarkMode: boolean) => {
@@ -17,9 +17,9 @@ const App: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => updateLocalTheme(event.matches));
+    darkModePref.addEventListener('change', event => updateLocalTheme(event.matches));
     return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', (event) => updateLocalTheme(event.matches));
+      darkModePref.removeEventListener('change', (event) => updateLocalTheme(event.matches));
     }
   }, [updateLocalTheme]);
 
