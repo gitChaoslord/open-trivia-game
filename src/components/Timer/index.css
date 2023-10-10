@@ -1,6 +1,8 @@
 .timer-text {
   @apply fill-primary;
   @apply text-4xl;
+  @apply rotate-90;
+  @apply origin-center;
 }
 
 .timer-background {

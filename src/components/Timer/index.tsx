@@ -1,7 +1,8 @@
-import { gameDuration } from '@constants/game';
+import { gameDuration, gameEndingIndicator } from '@constants/game';
 import { useAppSelector } from '@store/index';
 import React from 'react';
 import "./index.css";
+import classnames from 'classnames';
 
 const circumference = 2 * 3.14 * 68;
 
@@ -31,12 +32,13 @@ const Timer: React.FC = () => {
         strokeDashoffset={offset}
       />
       <text
-        className="timer-text"
+        key={timeLeft}
+        className={classnames("timer-text", { "animate-heartbeat": gameEndingIndicator >= timeLeft })}
         x="50%"
         y="50%"
         dominantBaseline="central"
         textAnchor="middle"
-        style={{ rotate: "90deg", transformOrigin: '50% 50%' }}>
+      >
         {timeLeft}
       </text>
 

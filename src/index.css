@@ -4,10 +4,10 @@
 
 @layer base {
   :root {
-    --background: 226 100% 97%;
+    --background: 226deg 100% 97%;
     --color-primary: 239deg 84% 67%;
-    --color-danger: "";
-    --color-success: "";
+    --color-danger: 4deg 83% 52%;
+    --color-success: 115deg 100% 28%;
     --layout: 239deg 84% 67%;
     --layout-contrast: 0deg 0% 100%;
     --content: 0deg 0% 100%;
@@ -17,10 +17,10 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --background: 0 0% 9%;
+      --background: 0deg 0% 9%;
       --color-primary: 32deg 90% 52%;
-      --color-danger: "";
-      --color-success: "";
+      --color-danger: 4deg 83% 52%;
+      --color-success: 150deg 41% 32%;
       --layout: 0deg 0% 19%;
       --layout-contrast: 0deg 0% 100%;
       --content: 0deg 0% 19%;
@@ -29,10 +29,10 @@
   }
 
   :root.dark {
-    --background: 0 0% 9%;
+    --background: 0deg 0% 9%;
     --color-primary: 32deg 90% 52%;
-    --color-danger: "";
-    --color-success: "";
+    --color-danger: 4deg 83% 52%;
+    --color-success: 150deg 41% 32%;
     --layout: 0deg 0% 19%;
     --layout-contrast: 0deg 0% 100%;
     --content: 0deg 0% 19%;
@@ -40,10 +40,10 @@
   }
 
   :root.light {
-    --background: 226 100% 97%;
+    --background: 226deg 100% 97%;
     --color-primary: 239deg 84% 67%;
-    --color-danger: "";
-    --color-success: "";
+    --color-danger: 4deg 83% 52%;
+    --color-success: 115deg 100% 28%;
     --layout: 239deg 84% 67%;
     --layout-contrast: 0deg 0% 100%;
     --content: 0deg 0% 100%;
@@ -100,7 +100,7 @@
   }
 
   .btn-error {
-    @apply bg-red-500 hover:bg-red-700;
+    @apply bg-danger hover:bg-danger/80;
   }
 
   .btn-disabled {

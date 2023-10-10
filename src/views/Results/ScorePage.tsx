@@ -33,7 +33,7 @@ const ResultsView: React.FC = () => {
               <p className="py-2 lg:px-2 px-4">
                 {answer.question}
               </p>
-              <p className={`p-2 mx-2 text-xl text-center ${answer.correct_answer === answer.answer ? 'text-green-500' : 'text-red-500'}`}>
+              <p className={`p-2 mx-2 text-xl text-center ${answer.correct_answer === answer.answer ? 'text-success' : 'text-danger'}`}>
                 {answer.answer}
               </p>
             </div>
