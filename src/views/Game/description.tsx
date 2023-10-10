@@ -1,5 +1,5 @@
-import React from 'react'
-import { useAppSelector } from '@store/index'
+import { useAppSelector } from '@store/index';
+import React from 'react';
 
 const Description: React.FC = () => {
   const description = useAppSelector((state) => state.game.currectQuestionDescription);

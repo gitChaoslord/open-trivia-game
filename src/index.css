@@ -76,37 +76,6 @@
     @apply text-primary;
   }
 
-  .question-counter {
-    @apply absolute top-4 right-4;
-    @apply text-2xl;
-    @apply text-primary;
-  }
-
-  .action-container {
-    @apply lg:w-96 md:w-96 w-full;
-    @apply flex justify-between;
-  }
-
-  .btn {
-    @apply py-3 px-6;
-    @apply shadow rounded;
-    @apply text-white;
-    @apply focus:outline-none;
-  }
-
-  .btn-primary {
-    @apply bg-primary;
-    @apply hover:bg-primary/80;
-  }
-
-  .btn-error {
-    @apply bg-danger hover:bg-danger/80;
-  }
-
-  .btn-disabled {
-    @apply disabled:opacity-50;
-  }
-
   .form-group {
     @apply w-full;
     @apply mb-4;
@@ -123,15 +92,6 @@
     @apply bg-content;
     @apply text-content-contrast;
     @apply focus:outline-none focus:ring-2 focus:ring-gray-200;
-  }
-
-
-  .description {
-    @apply p-7;
-    @apply bg-content;
-    @apply text-content-contrast;
-    @apply rounded border-b border-primary;
-    @apply animate-fade-in-down;
   }
 
   footer {

@@ -1,0 +1,19 @@
+.btn {
+  @apply py-2 px-4;
+  @apply shadow rounded;
+  @apply text-white;
+  @apply focus:outline-none;
+}
+
+.btn-primary {
+  @apply bg-primary;
+  @apply hover:bg-primary/80;
+}
+
+.btn-error {
+  @apply bg-danger hover:bg-danger/80;
+}
+
+.btn-disabled {
+  @apply disabled:opacity-50;
+}

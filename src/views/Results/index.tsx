@@ -1,4 +1,4 @@
-import Button from '@components/Button';
+import Button from '@components/button';
 import { gameViews } from '@constants/game';
 import { GAME_OVER, RESTART_GAME, YOU_SCORED } from '@constants/strings';
 import { setView } from '@store/features/game';

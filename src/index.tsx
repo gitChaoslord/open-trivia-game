@@ -1,11 +1,13 @@
+import { themeOptions } from '@constants/settings';
 import store, { persistor } from '@store/index';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import App from './App';
 import './index.css';
-import { themeOptions } from '@constants/settings';
+// index css should be imported before importing root component to prevent overwrite of certain classes, e.g. button bg-primary with bg-transparent from tailwind defaults
+// source:  https://github.com/tailwindlabs/tailwindcss/discussions/7304#discussioncomment-2256226
+import App from './App';
 
 const handleAfterHydration = () => {
   const theme = store.getState().settings.theme;

@@ -1,0 +1,41 @@
+#game-layout {
+  @apply h-3/5;
+  @apply grid grid-rows-3 place-items-center;
+  @apply mb-20;
+}
+
+
+.question-counter {
+  @apply absolute top-4 right-4;
+  @apply text-2xl;
+  @apply text-primary;
+}
+
+.description {
+  @apply p-7;
+  @apply bg-content;
+  @apply text-content-contrast;
+  @apply rounded border-b border-primary;
+  @apply animate-fade-in-down;
+}
+
+.action-container {
+  @apply lg:w-96 md:w-96 w-full;
+  @apply mt-8;
+  @apply grid grid-cols-2 gap-x-6 gap-y-4;
+}
+
+.timer-text {
+  @apply fill-primary;
+  @apply text-4xl;
+  @apply rotate-90;
+  @apply origin-center;
+}
+
+.timer-background {
+  @apply stroke-primary/20;
+}
+
+.timer-bar {
+  @apply stroke-primary;
+}

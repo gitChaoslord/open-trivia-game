@@ -1,8 +1,9 @@
-import React from 'react';
 import { useAppSelector } from '@store/index';
+import React from 'react';
 
 const Counter: React.FC = () => {
-  const { currentQuestionIndex: index, questions } = useAppSelector((state) => state.game);
+  const index = useAppSelector((state) => state.game.currentQuestionIndex);
+  const questions = useAppSelector((state) => state.game.questions);
 
   const count = React.useMemo(() => questions.length, [questions]);
 

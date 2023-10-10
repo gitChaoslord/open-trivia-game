@@ -1,8 +1,7 @@
 import { gameDuration, gameEndingIndicator } from '@constants/game';
 import { useAppSelector } from '@store/index';
-import React from 'react';
-import "./index.css";
 import classnames from 'classnames';
+import React from 'react';
 
 const circumference = 2 * 3.14 * 68;
 

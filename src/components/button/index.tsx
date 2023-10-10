@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import "./index.css";
 
 const Button: React.FC<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>> = ({ children, disabled, type = 'button', className, ...props }) => {
   return (

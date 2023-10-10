@@ -1,9 +1,9 @@
 import MainLayout from '@components/layouts/Main';
+import { themeOptions } from '@constants/settings';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from './store';
-import { themeOptions } from '@constants/settings';
 
 const App: React.FC = () => {
   const theme = useAppSelector((state) => state.settings.theme);

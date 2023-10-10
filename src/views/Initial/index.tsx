@@ -1,4 +1,4 @@
-import Button from '@components/Button';
+import Button from '@components/button';
 import LoadingSpinner from '@components/Loading';
 import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '@constants/settings';
 import { CUR_SETTIGNS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '@constants/strings';
