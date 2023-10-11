@@ -27,7 +27,7 @@ const SettingsModal: React.FC = () => {
             <div
               role="button"
               key={theme}
-              className={classnames("opacity-80 hover:opacity-100", { "opacity-100": activeTheme === theme })}
+              className={classnames("", { "opacity-100": activeTheme === theme, "opacity-80 hover:opacity-100": activeTheme !== theme })}
               title=""
               onClick={() => handleThemeSelect(theme)}
             >
