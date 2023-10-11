@@ -4,14 +4,15 @@ dialog::backdrop {
 
 dialog {
   @apply w-full md:w-2/3 lg:w-2/4 xl:w-2/5;
-  @apply rounded-md;
   @apply bg-content;
   @apply relative;
+  @apply border-b-2 border-primary rounded-md;
 }
 
 .modal-close-btn {
   @apply absolute top-4 right-4;
   @apply text-content-contrast;
+  @apply hover:contrast-0;
 }
 
 .modal-title {
@@ -19,5 +20,5 @@ dialog {
 }
 
 .modal-body {
-  @apply p-4
+  @apply p-4;
 }

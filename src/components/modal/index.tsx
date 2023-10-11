@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
+import { IoClose } from "react-icons/io5"
 import "./index.css"
 
 interface PropTypes {
@@ -33,7 +34,11 @@ const Modal: React.FC<PropTypes> = ({ children, isOpen, className, onClose, onOp
 
   return (
     <dialog ref={ref} onCancel={handleClose} className={classnames("", className)}>
-      <button onClick={handleClose} className="modal-close-btn">{"X"}</button>
+
+      <button onClick={handleClose} className="modal-close-btn">
+        <IoClose size="20" />
+      </button>
+
       {children}
     </dialog>
   )

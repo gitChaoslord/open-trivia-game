@@ -16,19 +16,32 @@ const SettingsModal: React.FC = () => {
 
   const handleThemeSelect = (theme: ThemeOptions) => dispatch(setTheme(theme))
 
+  // TODO: optimize classes handling
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
       <h2 className="modal-title">{MODAL_SETTINGS_TITLE}</h2>
-      <div className="modal-body">
-        <h3 className="text-primary mb-3">{MODAL_SETTINGS_THEME}</h3>
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+      <div className="modal-body bg-background">
+        <h3 className="text-primary mb-3 text-xl">{MODAL_SETTINGS_THEME}</h3>
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-8 place-items-center">
           {Object.values(themeOptions).map((theme) => (
-            <div role="button"
+            <div
+              role="button"
               key={theme}
-              className={classnames("first-letter:uppercase text-content-contrast p-4 text-center shadow rounded border", { "border-primary": activeTheme === theme })}
+              className={classnames("opacity-80 hover:opacity-100", { "opacity-100": activeTheme === theme })}
+              title=""
               onClick={() => handleThemeSelect(theme)}
             >
-              {theme}
+              <img role="presentation"
+                width="240"
+                height="240"
+                alt=""
+                className={classnames("border-2 border-dashed rounded-lg ", { "border-primary": activeTheme === theme, "border-transparent": activeTheme !== theme })}
+                src={`assets/images/theme/${theme}.svg`}
+              />
+
+              <div className={classnames("font-medium text-content-contrast mt-4 first-letter:uppercase text-center", { "text-primary": activeTheme === theme })}>
+                {theme}
+              </div>
             </div>
           ))}
         </div>
