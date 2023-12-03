@@ -1,5 +1,6 @@
 .nav-bar {
-  @apply sticky top-0 h-16 w-full;
+  /* @apply sticky top-0 h-16 w-full; */
+  @apply h-16 w-full;
   @apply flex justify-between;
   @apply bg-layout;
   @apply text-layout-contrast;

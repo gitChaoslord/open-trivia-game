@@ -1,18 +1,20 @@
 #game-layout {
-  @apply h-3/5;
-  @apply grid grid-rows-3 place-items-center;
-  @apply mb-20;
+  @apply w-full;
+  @apply h-full lg:h-3/5;
+  @apply grid grid-rows-4 place-items-center;
+
 }
 
 
 .question-counter {
-  @apply absolute top-4 right-4;
+  @apply absolute top-4 left-4;
   @apply text-2xl;
   @apply text-primary;
 }
 
 .description {
-  @apply p-7;
+  @apply w-full md:w-3/6;
+  @apply p-4;
   @apply bg-content;
   @apply text-content-contrast;
   @apply rounded border-b border-primary;
@@ -20,9 +22,11 @@
 }
 
 .action-container {
-  @apply lg:w-96 md:w-96 w-full;
-  @apply mt-8;
-  @apply grid grid-cols-2 gap-x-6 gap-y-4;
+  @apply row-span-2;
+  @apply overflow-auto;
+  @apply md:w-3/6 w-full;
+  @apply place-self-start md:place-self-center;
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-4;
 }
 
 .timer-text {

@@ -44,13 +44,13 @@ const MainLayout: React.FC = () => {
           {isComplete && <ScorePage />}
         </React.Fragment>}
 
-        {isPlaying && <Button className="btn-error absolute bottom-16 right-4" onClick={handleEndGame}>
+        {isPlaying && <Button className="btn-error absolute top-4 right-4" onClick={handleEndGame}>
           {QUIT_GAME}
         </Button>}
 
       </main>
 
-      <Footer />
+      {isFillingForm && <Footer />}
 
     </React.Fragment>
   )

@@ -21,4 +21,5 @@ dialog {
 
 .modal-body {
   @apply p-4;
+  @apply overflow-auto;
 }
