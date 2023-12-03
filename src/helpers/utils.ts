@@ -1,4 +1,5 @@
-import type { Category, Question } from "@models/game";
+import type { Category, TDBQuestion, UpdatedQuestion } from "@models/game";
+import { v4 as uuidv4 } from "uuid";
 
 export const constructCategories = (categories: {
   id: number;
@@ -11,16 +12,22 @@ export const constructCategories = (categories: {
   return result;
 }
 
-export const cleanQuestionContent = ({ question, correct_answer, incorrect_answers, ...props }: Question) => {
+export const cleanQuestionContent = ({ question, correct_answer, incorrect_answers, ...props }: TDBQuestion): UpdatedQuestion => {
 
   const parser = new DOMParser();
 
   const description = parser.parseFromString(question, "text/html").documentElement.textContent || question;
 
-  const correctAnswer = parser.parseFromString(correct_answer, "text/html").documentElement.textContent || correct_answer;
+  const correctAnswer = {
+    id: uuidv4(),
+    text: parser.parseFromString(correct_answer, "text/html").documentElement.textContent || correct_answer
+  }
 
   const incorrectAnswers = incorrect_answers.map((answer) => {
-    return parser.parseFromString(answer, "text/html").documentElement.textContent || answer;
+    return {
+      id: uuidv4(),
+      text: parser.parseFromString(answer, "text/html").documentElement.textContent || answer
+    }
   })
 
   return {

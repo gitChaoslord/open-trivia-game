@@ -13,19 +13,31 @@ export interface GameSettings {
   type: QuestionTypeOptions
 }
 
-export interface Question {
+
+interface BaseQuestion {
   category: string;
-  correct_answer: string; // 'True' | 'False'
-  incorrect_answers: string[];
   difficulty: Omit<QuestionDifficultyOptions, 'any'>;
   question: string;
   type: Omit<QuestionTypeOptions, 'all'>;
 }
+export interface TDBQuestion extends BaseQuestion {
+  correct_answer: string;
+  incorrect_answers: string[];
+}
+
+export interface UpdatedQuestion extends BaseQuestion {
+  correct_answer: {
+    text: string;
+    id: string
+  };
+  incorrect_answers: { text: string; id: string }[];
+}
 
 export interface Answer {
   question: string;
-  answer: string;
-  correct_answer: string;
+  // TODO: dislike the fact that interface has a field with the same name
+  answer: { text: string; id: string };
+  correct_answer: { text: string; id: string };
   is_correct: boolean;
 }
 
@@ -34,15 +46,16 @@ export interface Category {
   code: string;
 }
 
+// TODO: cleanup by removing unnecessary fields
 export interface GameState {
   activeView: GameViews;
   timeLeft: number;
-  questions: Question[],
+  questions: UpdatedQuestion[],
   score: number,
   currentQuestionIndex: number,
   currectQuestionDescription: string,
   answers: Answer[];
-  availableAnswers: string[];
+  availableAnswers: { text: string; id: string }[];
   loading: boolean;
   difficulty: QuestionDifficultyOptions;
   questionNumber: QuestionNumberOptions;

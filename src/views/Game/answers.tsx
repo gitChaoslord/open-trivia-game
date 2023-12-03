@@ -9,17 +9,15 @@ const AnswersGrid: React.FC = () => {
   const dispatch = useAppDispatch();
   const availableAnswers = useAppSelector((state) => state.game.availableAnswers);
 
-  const handleAnswer = (answer: string): void => {
-    dispatch(answerQuestion({ answer }));
-  };
+  const handleAnswer = (answer: { id: string; text: string }) => dispatch(answerQuestion({ ...answer }));
 
   return (
     <div className="action-container">
       {availableAnswers.map((answer, index) => (
-        <Button key={answer} className="btn-primary animate-fade-in text-left" onClick={() => {
+        <Button key={answer.id} className="btn-primary animate-fade-in text-left" onClick={() => {
           handleAnswer(answer);
         }}>
-          {answerOrder[index]}{") "}{answer}
+          {answerOrder[index]}{") "}{answer.text}
         </Button>
       ))}
     </div>

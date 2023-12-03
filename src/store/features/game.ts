@@ -2,7 +2,7 @@ import api from "@api/index";
 import { gameDuration, gameViews } from "@constants/game";
 import { ERR_CAT_RETRIEVE, ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "@constants/strings";
 import { cleanQuestionContent, constructCategories } from "@helpers/utils";
-import type { GameSettings, GameState, GameViews, Question } from "@models/game";
+import type { GameSettings, GameState, GameViews, UpdatedQuestion } from "@models/game";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getQuestions = createAsyncThunk(
@@ -56,14 +56,15 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    answerQuestion: (state, action: PayloadAction<{ answer: string }>) => {
+    answerQuestion: (state, action: PayloadAction<{ id: string, text: string }>) => {
       const currentQuestion = state.questions[state.currentQuestionIndex];
-      state.score += action.payload.answer === currentQuestion.correct_answer ? 1 : 0;
+      state.score += action.payload.id === currentQuestion.correct_answer.id ? 1 : 0;
+
       state.answers.push({
         question: currentQuestion.question,
-        answer: action.payload.answer,
+        answer: { id: action.payload.id, text: action.payload.text },
         correct_answer: currentQuestion.correct_answer,
-        is_correct: action.payload.answer === currentQuestion.correct_answer
+        is_correct: action.payload.id === currentQuestion.correct_answer.id
       });
 
       // next question or end
@@ -77,7 +78,7 @@ const gameSlice = createSlice({
           ...state.questions[state.currentQuestionIndex].incorrect_answers
         ].sort((a, b) => {
           if (state.questions[state.currentQuestionIndex].type === 'boolean') {
-            return a.length - b.length;
+            return a.text.length - b.text.length;
           } else {
             return 0.5 - Math.random();
           }
@@ -100,7 +101,7 @@ const gameSlice = createSlice({
         state.questionType = action.meta.arg.type;
         state.questionCategory = action.meta.arg.category;
       })
-      .addCase(getQuestions.fulfilled, (state, action: PayloadAction<Question[]>) => {
+      .addCase(getQuestions.fulfilled, (state, action: PayloadAction<UpdatedQuestion[]>) => {
         state.questions = action.payload;
         state.currentQuestionIndex = initialState.currentQuestionIndex;
 
@@ -111,7 +112,7 @@ const gameSlice = createSlice({
           ...initialQuestion.incorrect_answers
         ].sort((a, b) => {
           if (initialQuestion.type === 'boolean') {
-            return a.length - b.length;
+            return a.text.length - b.text.length;
           } else {
             return 0.5 - Math.random();
           }

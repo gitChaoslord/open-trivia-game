@@ -1,8 +1,8 @@
-import type { GameSettings, Question } from "@models/game";
+import type { GameSettings, TDBQuestion } from "@models/game";
 
 interface GetQuestionsResponse {
   response_code: number;
-  results: Question[];
+  results: TDBQuestion[];
 }
 
 interface GetCategoriesResponse {
@@ -37,8 +37,6 @@ export default class OpenTDBService {
     queryUrl.searchParams.set('amount', number);
     if (difficulty !== 'any') queryUrl.searchParams.set('difficulty', difficulty);
     // INFO: '0' is a custom category i created to represent any category
-    // see /src/store/features/game.ts line 55
-    // providing seems to work as intended but i decided against it since their example does not include it either
     if (category !== '0') queryUrl.searchParams.set('category', category);
     if (type !== 'all') queryUrl.searchParams.set('type', type);
 
