@@ -45,8 +45,8 @@ export default {
           }
         },
         fadeIn: {
-          '0%': { opacity: '0%' },
-          '100%': { opacity: '100%' }
+          '0%': { opacity: '0%', 'pointer-events': "none" },
+          '100%': { opacity: '100%', 'pointer-events': "auto" }
         },
         fadeInDown: {
           '0%': {
