@@ -35,7 +35,7 @@ export interface UpdatedQuestion extends BaseQuestion {
 
 export interface Answer {
   question: string;
-  // TODO: dislike the fact that interface has a field with the same name
+  // TODO: dislike the fact that interface has a field with the same name, maybe change to givenAnswer
   answer: { text: string; id: string };
   correct_answer: { text: string; id: string };
   is_correct: boolean;

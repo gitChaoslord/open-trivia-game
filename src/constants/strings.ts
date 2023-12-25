@@ -14,7 +14,8 @@ export const QUEST_NUM = "Number of questions"
 export const QUEST_CAT = "Category"
 
 export const RESULTS_NO_ANSWERS_GIVEN = "You didn't asnwer any questions!";
-export const RESULTS_REVEAL_ANSWER = "Reveal answer"
+export const RESULTS_ANSWER_CHOICE = "Your answer"
+export const RESULTS_REVEAL_ANSWER = "Reveal correct answer";
 
 
 export const MODAL_SETTINGS_TITLE = "Settings";
