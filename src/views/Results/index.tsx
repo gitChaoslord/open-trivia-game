@@ -1,9 +1,10 @@
 import Button from '@components/button';
 import { gameViews } from '@constants/game';
-import { GAME_OVER, RESTART_GAME, YOU_SCORED } from '@constants/strings';
+import { GAME_OVER, RESTART_GAME, RESULTS_NO_ANSWERS_GIVEN, YOU_SCORED } from '@constants/strings';
 import { setView } from '@store/features/game';
 import { useAppDispatch, useAppSelector } from '@store/index';
 import React from 'react';
+import ResultsAnswer from './answer';
 
 const ResultsView: React.FC = () => {
   const questions = useAppSelector((state) => state.game.questions);
@@ -26,20 +27,14 @@ const ResultsView: React.FC = () => {
         {RESTART_GAME}
       </Button>
 
-      {answers.length ?
-        <div className="mt-4 p-4 block overflow-y-auto">
-          {answers.map((answer) => (
-            <div key={answer.question} className="border-b-2 text-lg border-primary flex lg:flex-row flex-col justify-between bg-content text-content-contrast mb-2 rounded lg:px-2">
-              <p className="py-2 lg:px-2 px-4">
-                {answer.question}
-              </p>
-              <p className={`p-2 mx-2 text-xl text-center ${answer.is_correct ? 'text-success' : 'text-danger'}`}>
-                {answer.answer.text}
-              </p>
-            </div>
-          ))}
-        </div>
-        : null}
+      <div className="mt-4 p-4 block overflow-y-auto">
+        {answers.length ?
+          <React.Fragment>
+            {answers.map((answer) => <ResultsAnswer answer={answer} key={answer.question} />)}
+          </React.Fragment>
+          : RESULTS_NO_ANSWERS_GIVEN}
+      </div>
+
     </React.Fragment>
   )
 }
