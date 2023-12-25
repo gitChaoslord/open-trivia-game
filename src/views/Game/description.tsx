@@ -6,7 +6,7 @@ const Description: React.FC = () => {
 
   // Key is added here to force re-render the node in order for the animation to play
   return (
-    <h3 className="description" key={description}>
+    <h3 className="game__question-description" key={description}>
       {description}
     </h3>
   )

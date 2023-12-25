@@ -1,7 +1,7 @@
 import React from 'react';
 import SettingsModal from '../../modals/settings';
 
-const ModalContainer = () => {
+const ModalContainer: React.FC = () => {
   return (
     <div id="modal-container">
       <SettingsModal />

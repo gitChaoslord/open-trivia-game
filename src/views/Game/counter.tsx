@@ -8,7 +8,7 @@ const Counter: React.FC = () => {
   const count = React.useMemo(() => questions.length, [questions]);
 
   return (
-    <p className="question-counter">
+    <p className="game__counter">
       {index + 1}{" / "}{count}
     </p>
   )

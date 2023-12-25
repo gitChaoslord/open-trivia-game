@@ -1,6 +1,6 @@
 .loading-container {
   @apply w-16 h-16;
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center my-auto;
   @apply bg-primary/20;
   @apply rounded-full;
 }

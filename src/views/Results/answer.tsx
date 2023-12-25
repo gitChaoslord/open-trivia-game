@@ -15,22 +15,25 @@ const ResultsAnswer: React.FC<PropTypes> = ({ answer }) => {
   const handleRevealAnswer = () => setIsRevealed(true);
 
   return (
-    <div className="border-b-2 p-2 lg:p-4 text-lg border-primary bg-content text-content-contrast rounded grid gap-3">
+    <div className="results__answer">
 
-      <p className="text-xl">
+      <p>
         {question}
       </p>
-      <p className={classnames("text-lg", { "text-danger": !isCorrect, "text-success": isCorrect })}>
+      <p className={classnames({ "text-danger": !isCorrect, "text-success": isCorrect })}>
         {answer.answer.text}
       </p>
 
       {!isCorrect && <React.Fragment>
-        {!isRevealed && <Button className="btn-primary mx-auto lg:mr-auto lg:ml-0" onClick={handleRevealAnswer}>
+
+        {!isRevealed && <Button className="btn-primary results__answer-reveal-action" onClick={handleRevealAnswer}>
           {RESULTS_REVEAL_ANSWER}
         </Button>}
-        {isRevealed && <p className="text-xl py-2">
+
+        {isRevealed && <p className="py-2 font-semibold">
           {correct_answer.text}
         </p>}
+
       </React.Fragment>}
     </div>
   )

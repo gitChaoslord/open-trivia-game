@@ -34,12 +34,12 @@ const InitialView: React.FC = () => {
     }
   });
 
-  const loadQuestions = React.useCallback(async (data: FormModel) => {
+  const loadQuestions = React.useCallback(async ({ questionNumber, questionCategory, questionDifficulty, questionType }: FormModel) => {
     await dispatch(getQuestions({
-      number: data.questionNumber,
-      category: data.questionCategory,
-      type: data.questionType,
-      difficulty: data.questionDifficulty
+      number: questionNumber,
+      category: questionCategory,
+      type: questionType,
+      difficulty: questionDifficulty
     })).unwrap().catch((error) => {
       toast.error(error, { toastId: "question-error" }); // Setting ID will prevent toast duplication 
     });
@@ -54,17 +54,17 @@ const InitialView: React.FC = () => {
 
         <form
           onSubmit={handleSubmit((data) => loadQuestions(data))}
-          className="lg:w-auto text-lg flex flex-col justify-between"
+          className="flex flex-col mb-3"
         >
 
-          <div className="border-b-2 border-primary bg-content my-6 p-5 rounded">
+          <div className="form__body">
 
-            <div className="form-group">
-              <label className="form-label">{QUEST_NUM}</label>
+            <div className="form__group">
+              <label className="form__group-label">{QUEST_NUM}</label>
               <select
                 {...register("questionNumber")}
                 id="questionNumber"
-                className="form-control"
+                className="form__group-control"
               >
                 {questionNumberSetting.map((option) => (
                   <option value={option.code} key={option.code}>{option.label}</option>
@@ -72,12 +72,12 @@ const InitialView: React.FC = () => {
               </select>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">{QUEST_DIFF}</label>
+            <div className="form__group">
+              <label className="form__group-label">{QUEST_DIFF}</label>
               <select
                 {...register("questionDifficulty")}
                 id="questionDifficulty"
-                className="form-control"
+                className="form__group-control"
               >
                 {questionDiffSetting.map((option) => (
                   <option value={option.code} key={option.code}>{option.label}</option>
@@ -85,12 +85,12 @@ const InitialView: React.FC = () => {
               </select>
             </div>
 
-            {categories.length > 0 && <div className="form-group">
-              <label className="form-label">{QUEST_CAT}</label>
+            {categories.length > 0 && <div className="form__group">
+              <label className="form__group-label">{QUEST_CAT}</label>
               <select
                 {...register("questionCategory")}
                 id="questionCategory"
-                className="form-control"
+                className="form__group-control"
               >
                 {categories.map((option) => (
                   <option value={option.code} key={option.code}>{option.label}</option>
@@ -98,12 +98,12 @@ const InitialView: React.FC = () => {
               </select>
             </div>}
 
-            <div className="form-group">
-              <label className="form-label">{QUEST_TYPE}</label>
+            <div className="form__group">
+              <label className="form__group-label">{QUEST_TYPE}</label>
               <select
                 {...register("questionType")}
                 id="questionType"
-                className="form-control"
+                className="form__group-control"
               >
                 {questionTypeSetting.map((option) => (
                   <option value={option.code} key={option.code}>{option.label}</option>
@@ -112,13 +112,14 @@ const InitialView: React.FC = () => {
             </div>
           </div>
 
-          <Button
-            type="submit"
-            className="btn-primary mx-auto"
-          >
-            {START_GAME}
-          </Button>
-
+          <div className="form__actions">
+            <Button
+              type="submit"
+              className="btn-primary"
+            >
+              {START_GAME}
+            </Button>
+          </div>
         </form>
       </React.Fragment>}
     </React.Fragment>

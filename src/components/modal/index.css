@@ -9,17 +9,17 @@ dialog {
   @apply border-b-2 border-primary rounded-md;
 }
 
-.modal-close-btn {
+.modal__close-btn {
   @apply absolute top-4 right-4;
   @apply text-content-contrast;
   @apply hover:contrast-0;
 }
 
-.modal-title {
+.modal__title {
   @apply px-4;
 }
 
-.modal-body {
+.modal__body {
   @apply p-4;
   @apply overflow-auto;
 }

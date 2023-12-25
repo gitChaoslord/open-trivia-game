@@ -5,6 +5,7 @@ import { setView } from '@store/features/game';
 import { useAppDispatch, useAppSelector } from '@store/index';
 import React from 'react';
 import ResultsAnswer from './answer';
+import "./index.css";
 
 const ResultsView: React.FC = () => {
   const questions = useAppSelector((state) => state.game.questions);
@@ -18,7 +19,7 @@ const ResultsView: React.FC = () => {
     <React.Fragment>
       <h2>{GAME_OVER}</h2>
 
-      <h3 className="text-2xl mb-4 text-content-contrast dark:text-white">
+      <h3 className="results__message">
         {YOU_SCORED}
         <span className="text-primary">{score}</span>{"/"}{questions.length}
       </h3>
@@ -27,12 +28,12 @@ const ResultsView: React.FC = () => {
         {RESTART_GAME}
       </Button>
 
-      <div className="mt-4 p-4 block overflow-y-auto">
+      <div className="results__list">
         {answers.length ?
           <React.Fragment>
             {answers.map((answer) => <ResultsAnswer answer={answer} key={answer.question} />)}
           </React.Fragment>
-          : RESULTS_NO_ANSWERS_GIVEN}
+          : <span className="text-content-contrast">{RESULTS_NO_ANSWERS_GIVEN}</span>}
       </div>
 
     </React.Fragment>

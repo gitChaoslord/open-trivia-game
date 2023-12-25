@@ -13,18 +13,18 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="nav-bar">
+    <header className="navbar">
 
-      <h1 className="app-title">{GAME_TITLE}</h1>
+      <h1 className="nav__title">{GAME_TITLE}</h1>
 
-      <div className="nav-actions">
+      <div className="nav__actions">
 
         <button onClick={handleOpenSettingsModal}>
           <IoSettingsSharp size={20} />
         </button>
 
         <a href={PORTFOLIO_LINK}
-          className="flex justify-center"
+          className="flex"
           aria-label="portfolio-link"
           target="_blank"
           rel="noreferrer"

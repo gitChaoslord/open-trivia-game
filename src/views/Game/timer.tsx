@@ -11,9 +11,9 @@ const Timer: React.FC = () => {
   const offset = circumference * ((gameDuration - timeLeft) / gameDuration);
 
   return (
-    <svg width="160" height="160" viewBox="0 0 160 160" style={{ rotate: "-90deg" }}>
+    <svg className="game__timer" width="160" height="160" viewBox="0 0 160 160" style={{ rotate: "-90deg" }}>
       <circle
-        className="timer-background"
+        className="game__timer-bg"
         r="68"
         cx="80"
         cy="80"
@@ -21,7 +21,7 @@ const Timer: React.FC = () => {
         strokeWidth="22px"
       />
       <circle
-        className="timer-bar"
+        className="game__timer-bar"
         r="68"
         cx="80"
         cy="80"
@@ -32,7 +32,7 @@ const Timer: React.FC = () => {
       />
       <text
         key={timeLeft}
-        className={classnames("timer-text", { "animate-heartbeat": gameEndingIndicator >= timeLeft })}
+        className={classnames("game__timer-text", { "animate-heartbeat": gameEndingIndicator >= timeLeft })}
         x="50%"
         y="50%"
         dominantBaseline="central"

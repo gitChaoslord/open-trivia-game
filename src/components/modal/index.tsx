@@ -35,7 +35,7 @@ const Modal: React.FC<PropTypes> = ({ children, isOpen, className, onClose, onOp
   return (
     <dialog ref={ref} onCancel={handleClose} className={classnames("", className)}>
 
-      <button onClick={handleClose} className="modal-close-btn">
+      <button onClick={handleClose} className="modal__close-btn">
         <IoClose size="20" />
       </button>
 

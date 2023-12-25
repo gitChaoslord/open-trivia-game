@@ -8,7 +8,7 @@ import "./index.css";
 const GameView: React.FC = () => {
 
   return (
-    <div id="game-layout">
+    <div id="game__layout">
 
       <Timer />
       <Counter />

@@ -16,18 +16,17 @@ const SettingsModal: React.FC = () => {
 
   const handleThemeSelect = (theme: ThemeOptions) => dispatch(setTheme(theme))
 
-  // TODO: optimize classes handling
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
-      <h2 className="modal-title">{MODAL_SETTINGS_TITLE}</h2>
-      <div className="modal-body bg-background">
+      <h2 className="modal__title">{MODAL_SETTINGS_TITLE}</h2>
+      <div className="modal__body bg-background">
         <h3 className="text-primary mb-3 text-xl">{MODAL_SETTINGS_THEME}</h3>
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8 place-items-center">
           {Object.values(themeOptions).map((theme) => (
             <div
               role="button"
               key={theme}
-              className={classnames("", { "opacity-100": activeTheme === theme, "opacity-80 hover:opacity-100": activeTheme !== theme })}
+              className={classnames({ "opacity-100": activeTheme === theme, "opacity-80 hover:opacity-100": activeTheme !== theme })}
               title=""
               onClick={() => handleThemeSelect(theme)}
             >
