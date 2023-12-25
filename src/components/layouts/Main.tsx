@@ -1,7 +1,7 @@
 import Button from '@components/button';
-import Footer from '@components/Footer';
-import LoadingSpinner from '@components/Loading';
-import { Navbar } from '@components/Navbar';
+import Footer from '@components/footer';
+import LoadingSpinner from '@components/loading';
+import { Navbar } from '@components/navbar';
 import { gameViews } from '@constants/game';
 import { QUIT_GAME } from '@constants/strings';
 import { getCategories, setView } from '@store/features/game';
@@ -18,9 +18,9 @@ const MainLayout: React.FC = () => {
   const initialized = useAppSelector((state) => state.game.categoriesInitialized);
   const dispatch = useAppDispatch();
 
-  const isFillingForm = React.useMemo(() => activeView === gameViews.INIT, [activeView]);
-  const isPlaying = React.useMemo(() => activeView === gameViews.GAME, [activeView]);
-  const isComplete = React.useMemo(() => activeView === gameViews.END, [activeView]);
+  const isFillingForm = activeView === gameViews.INIT;
+  const isPlaying = activeView === gameViews.GAME;
+  const isComplete = activeView === gameViews.END;
 
   React.useEffect(() => {
     if (!initialized) dispatch(getCategories()).unwrap().catch((error) => {
@@ -34,7 +34,6 @@ const MainLayout: React.FC = () => {
     <React.Fragment>
 
       {isFillingForm && <Navbar />}
-      {/* <Navbar /> */}
 
       <main>
 
