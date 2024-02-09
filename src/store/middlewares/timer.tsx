@@ -1,14 +1,11 @@
 import { gameViews } from "@constants/game";
-import { TypedAddListener, TypedStartListening, addListener, createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
+import { TypedStartListening, createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import { INIT_TIMER } from "@store/actions";
 import { getQuestions, setView, timerTick } from "@store/features/game";
 import type { AppDispatch, RootState } from "@store/index";
 
-export type AppStartListening = TypedStartListening<RootState, AppDispatch>;
 export const listenerMiddleware = createListenerMiddleware();
-export const startAppListening = listenerMiddleware.startListening as AppStartListening;
-export const addAppListener = addListener as TypedAddListener<RootState, AppDispatch>;
-
+const startAppListening = listenerMiddleware.startListening as TypedStartListening<RootState, AppDispatch>;
 
 startAppListening({
   matcher: isAnyOf(getQuestions.fulfilled, INIT_TIMER),

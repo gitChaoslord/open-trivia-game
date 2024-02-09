@@ -26,6 +26,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
     "classnames": "^2.5.1",
+    "knip": "^4.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
@@ -40,7 +41,7 @@
     "start": "vite",
     "build": "vite build",
     "deploy": "gh-pages -d build",
-    "depcruise": "npx depcruise --config .dependency-cruiser.js src"
+    "knip": "knip"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.0.0",
@@ -48,13 +49,11 @@
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@types/react-redux": "^7.1.33",
-    "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
-    "dependency-cruiser": "^15.5.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
