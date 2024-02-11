@@ -7,7 +7,7 @@ import { resolve } from 'path';
 
 export default defineConfig(() => {
   return {
-    base: "/opentdb-trivia-game/",
+    base: "/open-trivia-game/",
     build: {
       outDir: 'build',
     },

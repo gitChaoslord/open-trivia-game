@@ -8,7 +8,7 @@
 
 
   <h2>
-    <a href="https://gitchaoslord.github.io/opentdb-trivia-game/" rel="nofollow">Play now!</a>
+    <a href="https://gitchaoslord.github.io/open-trivia-game/" rel="nofollow">Play now!</a>
   </h2>
 </div>
 

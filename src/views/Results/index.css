@@ -1,6 +1,5 @@
 .results__message {
   @apply text-2xl text-content-contrast dark:text-white;
-  @apply mb-4;
 }
 
 .results__list {
@@ -18,7 +17,13 @@
   @apply text-base;
 }
 
-.results__answer-reveal-action {
+.results__reveal-action {
   @apply mx-auto;
   @apply lg:mr-auto lg:ml-0;
+}
+
+.results__reveal-correct {
+  @apply py-2;
+  @apply font-semibold;
+  @apply lg:mr-auto lg:ml-0 mx-auto;
 }

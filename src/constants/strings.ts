@@ -6,7 +6,7 @@ export const QUIT_GAME = "Quit"
 export const GAME_OVER = "Game Over"
 export const YOU_SCORED = "Your score was "
 export const RESTART_GAME = "Restart game"
-export const CUR_SETTIGNS = "Current settings"
+export const SETTINGS = "Settings"
 
 export const QUEST_TYPE = "Type"
 export const QUEST_DIFF = "Difficulty"

@@ -1,7 +1,7 @@
 import Button from '@components/button';
 import LoadingSpinner from '@components/loading';
 import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '@constants/settings';
-import { CUR_SETTIGNS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '@constants/strings';
+import { SETTINGS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '@constants/strings';
 import type { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '@models/game';
 import { getQuestions } from '@store/features/game';
 import { useAppDispatch, useAppSelector } from '@store/index';
@@ -50,7 +50,7 @@ const InitialView: React.FC = () => {
       {loading && <LoadingSpinner />}
 
       {!loading && <React.Fragment>
-        <h2>{CUR_SETTIGNS}</h2>
+        <h2>{SETTINGS}</h2>
 
         <form
           onSubmit={handleSubmit((data) => loadQuestions(data))}

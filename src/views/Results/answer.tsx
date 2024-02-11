@@ -1,5 +1,5 @@
 import Button from '@components/button';
-import { RESULTS_REVEAL_ANSWER } from '@constants/strings';
+import { RESULTS_ANSWER_CHOICE, RESULTS_REVEAL_ANSWER } from '@constants/strings';
 import type { Answer } from '@models/game';
 import React from 'react';
 import classnames from "classnames";
@@ -20,17 +20,17 @@ const ResultsAnswer: React.FC<PropTypes> = ({ answer }) => {
       <p>
         {question}
       </p>
-      <p className={classnames({ "text-danger": !isCorrect, "text-success": isCorrect })}>
-        {answer.answer.text}
+      <p>
+        {RESULTS_ANSWER_CHOICE}{": "}<span className={classnames({ "text-danger": !isCorrect, "text-success": isCorrect })}>{answer.answer.text}</span>
       </p>
 
       {!isCorrect && <React.Fragment>
 
-        {!isRevealed && <Button className="btn-primary results__answer-reveal-action" onClick={handleRevealAnswer}>
+        {!isRevealed && <Button className="btn-primary results__reveal-action" onClick={handleRevealAnswer}>
           {RESULTS_REVEAL_ANSWER}
         </Button>}
 
-        {isRevealed && <p className="py-2 font-semibold">
+        {isRevealed && <p className="results__reveal-correct">
           {correct_answer.text}
         </p>}
 
