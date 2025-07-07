@@ -1,6 +1,5 @@
 export const GAME_TITLE = "Trivia Game"
 export const VERSION = "Version: "
-export const WIN_MESSAGES = ['']
 export const START_GAME = "Start game"
 export const QUIT_GAME = "Quit"
 export const GAME_OVER = "Game Over"
