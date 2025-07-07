@@ -3,9 +3,10 @@ import { gameDuration, gameViews } from "@constants/game";
 import { ERR_CAT_RETRIEVE, ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "@constants/strings";
 import { cleanQuestionContent, constructCategories } from "@helpers/utils";
 import type { GameSettings, GameState, GameViews, UpdatedQuestion } from "@models/game";
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createAppAsyncThunk } from "@store/extras";
 
-export const getQuestions = createAsyncThunk(
+export const getQuestions = createAppAsyncThunk(
   "quiz/getQuestions",
   async (payload: GameSettings, { rejectWithValue }) => {
     try {
@@ -21,7 +22,7 @@ export const getQuestions = createAsyncThunk(
   }
 );
 
-export const getCategories = createAsyncThunk(
+export const getCategories = createAppAsyncThunk(
   "quiz/categories",
   async (_, { rejectWithValue }) => {
     try {

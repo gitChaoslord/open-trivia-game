@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { INIT_TIMER } from "@store/actions";
 import { listenerMiddleware } from "@store/middlewares/timer";
 import rootReducer from '@store/reducer';
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { persistStore } from "redux-persist";
 
 const store = configureStore({
@@ -15,8 +15,8 @@ const store = configureStore({
 store.dispatch(INIT_TIMER());
 
 export const persistor = persistStore(store);
-export type AppDispatch = typeof store.dispatch;
-export const useAppDispatch: () => AppDispatch = useDispatch
 export type RootState = ReturnType<typeof store.getState>;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector; // Export a selector that be reused to get the state
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+export const useAppSelector = useSelector.withTypes<RootState>() // Export a selector that be reused to get the state
 export default store;
