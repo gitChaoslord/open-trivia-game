@@ -1,4 +1,4 @@
-import type { Category, TDBQuestion, UpdatedQuestion } from "@models/game";
+import type { Category, TDBQuestion, UpdatedQuestion } from "@/models/game";
 import { v4 as uuidv4 } from "uuid";
 
 export const constructCategories = (categories: {

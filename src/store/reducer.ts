@@ -1,7 +1,7 @@
-import type { GameState } from "@models/game";
-import { SettingsState } from "@models/settings";
+import type { GameState } from "@/models/game";
+import { SettingsState } from "@/models/settings";
 import { Action, combineReducers } from "@reduxjs/toolkit";
-import game from "@store/features/game";
+import game from "@/store/features/game";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import settings from "./features/settings";

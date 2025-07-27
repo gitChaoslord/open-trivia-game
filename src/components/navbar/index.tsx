@@ -1,8 +1,8 @@
-import { GAME_TITLE, PORTFOLIO_LINK } from '@constants/strings';
-import { useAppDispatch } from '@store/index';
+import { GAME_TITLE, PORTFOLIO_LINK } from '@/constants/strings';
+import { useAppDispatch } from '@/store/index';
 import React from 'react';
 import "./index.css";
-import { showSettingsModal } from '@store/features/settings';
+import { showSettingsModal } from '@/store/features/settings';
 import { IoSettingsSharp } from "react-icons/io5"
 
 export const Navbar: React.FC = () => {

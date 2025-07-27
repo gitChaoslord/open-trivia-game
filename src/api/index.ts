@@ -1,4 +1,4 @@
-import OpenTDBService from "@api/OpenTDBService";
+import OpenTDBService from "@/api/OpenTDBService";
 
 interface OpenTDBApi {
 	OpenTDBService: OpenTDBService;

@@ -1,14 +1,14 @@
-import Button from '@components/button';
-import Footer from '@components/footer';
-import LoadingSpinner from '@components/loading';
-import { Navbar } from '@components/navbar';
-import { gameViews } from '@constants/game';
-import { QUIT_GAME } from '@constants/strings';
-import { getCategories, setView } from '@store/features/game';
-import { useAppDispatch, useAppSelector } from '@store/index';
-import GamePage from '@views/Game';
-import InitialPage from '@views/Initial';
-import ScorePage from '@views/Results';
+import Button from '@/components/button';
+import Footer from '@/components/footer';
+import LoadingSpinner from '@/components/loading';
+import { Navbar } from '@/components/navbar';
+import { gameViews } from '@/constants/game';
+import { QUIT_GAME } from '@/constants/strings';
+import { getCategories, setView } from '@/store/features/game';
+import { useAppDispatch, useAppSelector } from '@/store/index';
+import GamePage from '@/views/Game';
+import InitialPage from '@/views/Initial';
+import ScorePage from '@/views/Results';
 import React from 'react';
 import { toast } from 'react-toastify';
 

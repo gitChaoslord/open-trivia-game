@@ -1,6 +1,6 @@
-import Button from '@components/button';
-import { RESULTS_ANSWER_CHOICE, RESULTS_REVEAL_ANSWER } from '@constants/strings';
-import type { Answer } from '@models/game';
+import Button from '@/components/button';
+import { RESULTS_ANSWER_CHOICE, RESULTS_REVEAL_ANSWER } from '@/constants/strings';
+import type { Answer } from '@/models/game';
 import React from 'react';
 import classnames from "classnames";
 

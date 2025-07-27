@@ -1,5 +1,5 @@
 import React from 'react';
-import { VERSION } from '@constants/strings';
+import { VERSION } from '@/constants/strings';
 
 const Footer: React.FC = () => {
   return (

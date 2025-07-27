@@ -1,4 +1,4 @@
-import { useAppSelector } from '@store/index';
+import { useAppSelector } from '@/store/index';
 import React from 'react';
 
 const Counter: React.FC = () => {

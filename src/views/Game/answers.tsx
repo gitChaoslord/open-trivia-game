@@ -1,6 +1,6 @@
-import Button from '@components/button';
-import { answerQuestion } from '@store/features/game';
-import { useAppDispatch, useAppSelector } from '@store/index';
+import Button from '@/components/button';
+import { answerQuestion } from '@/store/features/game';
+import { useAppDispatch, useAppSelector } from '@/store/index';
 import React from 'react';
 
 const answerOrder = ['A', "B", "C", "D"];

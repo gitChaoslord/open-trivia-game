@@ -1,11 +1,11 @@
-import MainLayout from '@components/layouts/Main';
-import { themeOptions } from '@constants/settings';
+import MainLayout from '@/components/layouts/Main';
+import { themeOptions } from '@/constants/settings';
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from './store';
-import { ThemeOptions } from '@models/settings';
-import ModalContainer from '@components/layouts/modalContainer';
+import { ThemeOptions } from '@/models/settings';
+import ModalContainer from '@/components/layouts/modalContainer';
 
 const darkModePref = window.matchMedia('(prefers-color-scheme: dark)');
 

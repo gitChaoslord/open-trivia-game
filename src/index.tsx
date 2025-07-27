@@ -1,5 +1,5 @@
-import { themeOptions } from '@constants/settings';
-import store, { persistor } from '@store/index';
+import { themeOptions } from '@/constants/settings';
+import store, { persistor } from '@/store/index';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';

@@ -1,5 +1,5 @@
-import { themeOptions } from "@constants/settings";
-import { SettingsState, ThemeOptions } from "@models/settings";
+import { themeOptions } from "@/constants/settings";
+import { SettingsState, ThemeOptions } from "@/models/settings";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: SettingsState = {

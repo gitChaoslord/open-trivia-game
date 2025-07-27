@@ -1,5 +1,5 @@
-import { gameViews } from "@constants/game";
-import type { ValueOf } from "@models/utilities";
+import { gameViews } from "@/constants/game";
+import type { ValueOf } from "@/models/utilities";
 
 export type GameViews = ValueOf<typeof gameViews>;
 export type QuestionNumberOptions = "10" | "15" | "20";

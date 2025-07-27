@@ -1,9 +1,9 @@
-import Modal from '@components/modal'
-import { themeOptions } from '@constants/settings';
-import { MODAL_SETTINGS_THEME, MODAL_SETTINGS_TITLE } from '@constants/strings';
-import { ThemeOptions } from '@models/settings';
-import { setTheme, hideSettingsModal } from '@store/features/settings';
-import { useAppDispatch, useAppSelector } from '@store/index'
+import Modal from '@/components/modal'
+import { themeOptions } from '@/constants/settings';
+import { MODAL_SETTINGS_THEME, MODAL_SETTINGS_TITLE } from '@/constants/strings';
+import { ThemeOptions } from '@/models/settings';
+import { setTheme, hideSettingsModal } from '@/store/features/settings';
+import { useAppDispatch, useAppSelector } from '@/store/index'
 import React from 'react';
 import classnames from 'classnames';
 

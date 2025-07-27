@@ -1,10 +1,10 @@
-import Button from '@components/button';
-import LoadingSpinner from '@components/loading';
-import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '@constants/settings';
-import { SETTINGS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '@constants/strings';
-import type { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '@models/game';
-import { getQuestions } from '@store/features/game';
-import { useAppDispatch, useAppSelector } from '@store/index';
+import Button from '@/components/button';
+import LoadingSpinner from '@/components/loading';
+import { questionDiffSetting, questionNumberSetting, questionTypeSetting } from '@/constants/settings';
+import { SETTINGS, QUEST_CAT, QUEST_DIFF, QUEST_NUM, QUEST_TYPE, START_GAME } from '@/constants/strings';
+import type { QuestionDifficultyOptions, QuestionNumberOptions, QuestionTypeOptions } from '@/models/game';
+import { getQuestions } from '@/store/features/game';
+import { useAppDispatch, useAppSelector } from '@/store/index';
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';

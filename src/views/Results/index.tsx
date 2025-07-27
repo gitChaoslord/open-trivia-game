@@ -1,8 +1,8 @@
-import Button from '@components/button';
-import { gameViews } from '@constants/game';
-import { GAME_OVER, RESTART_GAME, RESULTS_NO_ANSWERS_GIVEN, YOU_SCORED } from '@constants/strings';
-import { setView } from '@store/features/game';
-import { useAppDispatch, useAppSelector } from '@store/index';
+import Button from '@/components/button';
+import { gameViews } from '@/constants/game';
+import { GAME_OVER, RESTART_GAME, RESULTS_NO_ANSWERS_GIVEN, YOU_SCORED } from '@/constants/strings';
+import { setView } from '@/store/features/game';
+import { useAppDispatch, useAppSelector } from '@/store/index';
 import React from 'react';
 import ResultsAnswer from './answer';
 import "./index.css";

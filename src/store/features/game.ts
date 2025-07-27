@@ -1,10 +1,10 @@
-import api from "@api/index";
-import { gameDuration, gameViews } from "@constants/game";
-import { ERR_CAT_RETRIEVE, ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "@constants/strings";
-import { cleanQuestionContent, constructCategories } from "@helpers/utils";
-import type { GameSettings, GameState, GameViews, UpdatedQuestion } from "@models/game";
+import api from "@/api/index";
+import { gameDuration, gameViews } from "@/constants/game";
+import { ERR_CAT_RETRIEVE, ERR_QUEST_LOW_COUNT, ERR_QUEST_RETRIEVE } from "@/constants/strings";
+import { cleanQuestionContent, constructCategories } from "@/helpers/utils";
+import type { GameSettings, GameState, GameViews, UpdatedQuestion } from "@/models/game";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { createAppAsyncThunk } from "@store/extras";
+import { createAppAsyncThunk } from "@/store/extras";
 
 export const getQuestions = createAppAsyncThunk(
   "quiz/getQuestions",
@@ -28,7 +28,7 @@ export const getCategories = createAppAsyncThunk(
     try {
       const response = await api.OpenTDBService.retrieveCategories();
       return response.trivia_categories;
-    } catch (rejected) {
+    } catch {
       return rejectWithValue(ERR_CAT_RETRIEVE);
     }
   }

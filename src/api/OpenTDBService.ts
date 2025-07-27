@@ -1,4 +1,4 @@
-import type { GameSettings, TDBQuestion } from "@models/game";
+import type { GameSettings, TDBQuestion } from "@/models/game";
 
 interface GetQuestionsResponse {
   response_code: number;

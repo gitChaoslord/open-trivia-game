@@ -1,4 +1,4 @@
-import { themeOptions } from "@constants/settings";
+import { themeOptions } from "@/constants/settings";
 import { ValueOf } from "./utilities";
 
 

@@ -1,5 +1,5 @@
-import { gameDuration, gameEndingIndicator } from '@constants/game';
-import { useAppSelector } from '@store/index';
+import { gameDuration, gameEndingIndicator } from '@/constants/game';
+import { useAppSelector } from '@/store/index';
 import classnames from 'classnames';
 import React from 'react';
 
